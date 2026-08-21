@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
+<title>Fyn — Income &amp; Expenses</title>
+<meta name="theme-color" content="#1a0f5c">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="viewport">
+
+    <div id="splash">
+    <div class="splash-logo" id="splash-logo"><img src="assets/fyn-logo-white.png" alt="Fyn"></div>
+  </div>
+
+    <div id="setup">
+    <div class="setup-step active" id="step-name">
+      <div class="lock-title">Fyn</div>
+      <div class="lock-sub">¿Cómo te llamas?</div>
+      <input type="text" class="name-field" id="name-input" placeholder="Tu nombre" maxlength="20">
+      <button class="continue-btn" id="name-continue" disabled>Continuar</button>
+    </div>
+    <div class="setup-step" id="step-pin">
+      <div class="lock-title">Fyn</div>
+      <div class="lock-sub" id="setup-sub">Crea un código de 4 dígitos</div>
+      <div class="pin-dots" id="setup-dots">
+        <div class="pin-dot"></div><div class="pin-dot"></div><div class="pin-dot"></div><div class="pin-dot"></div>
+      </div>
+      <div class="keypad" id="setup-keypad">
+        <button class="key" data-k="1">1</button><button class="key" data-k="2">2</button><button class="key" data-k="3">3</button>
+        <button class="key" data-k="4">4</button><button class="key" data-k="5">5</button><button class="key" data-k="6">6</button>
+        <button class="key" data-k="7">7</button><button class="key" data-k="8">8</button><button class="key" data-k="9">9</button>
+        <button class="key ghost"></button><button class="key" data-k="0">0</button>
+        <button class="key" data-k="del">⌫</button>
+      </div>
+    </div>
+  </div>
+
+    <div id="lock" class="hidden">
+    <div class="lock-title">Bienvenido</div>
+    <div class="lock-sub">Introduce tu código</div>
+    <div class="pin-dots" id="lock-dots">
+      <div class="pin-dot"></div><div class="pin-dot"></div><div class="pin-dot"></div><div class="pin-dot"></div>
+    </div>
+    <div class="keypad" id="lock-keypad">
+      <button class="key" data-k="1">1</button><button class="key" data-k="2">2</button><button class="key" data-k="3">3</button>
+      <button class="key" data-k="4">4</button><button class="key" data-k="5">5</button><button class="key" data-k="6">6</button>
+      <button class="key" data-k="7">7</button><button class="key" data-k="8">8</button><button class="key" data-k="9">9</button>
+      <button class="key ghost"></button><button class="key" data-k="0">0</button>
+      <button class="key" data-k="del">⌫</button>
+    </div>
+    <div class="lock-error" id="lock-error">Código incorrecto</div>
+  </div>
+
+    <div id="app">
+
+        <div class="page active" id="page-home">
+      <div class="hero">
+        <div class="hero-top">
+          <div class="avatar" id="avatar-btn">G</div>
+          <input type="file" id="avatar-file" accept="image/*">
+          <button class="gear-btn" id="gear-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 11-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 11-2.83-2.83l.06-.06A1.65 1.65 0 004.6 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 112.83-2.83l.06.06A1.65 1.65 0 009 4.6a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 112.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+          </button>
+        </div>
+
+        <div class="greeting" id="greeting">Hola</div>
+
+        <div class="search-bar">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+          <input type="text" id="search-input" placeholder="Buscar">
+        </div>
+
+        <div class="balance-section">
+          <div class="balance-label">Saldo</div>
+          <div class="balance-amount" id="balance-amount">0,00 €</div>
+          <button class="accounts-btn" id="accounts-btn">Cuentas</button>
+        </div>
+
+        <div class="quick-actions">
+          <button class="qa-btn" id="qa-expense">
+            <div class="qa-circle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></div>
+            Añadir gasto
+          </button>
+          <button class="qa-btn" id="qa-income">
+            <div class="qa-circle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 19V5M5 12l7-7 7 7"/></svg></div>
+            Añadir ingreso
+          </button>
+          <button class="qa-btn" id="qa-details">
+            <div class="qa-circle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18M3 15v4a2 2 0 002 2h4m10-6v4a2 2 0 01-2 2h-4"/></svg></div>
+            Detalles
+          </button>
+          <button class="qa-btn" id="qa-more">
+            <div class="qa-circle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="5" cy="12" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="19" cy="12" r="1.5"/></svg></div>
+            Más
+          </button>
+        </div>
+      </div>
+
+      <div class="content-sheet">
+        <div class="sec-title"><h3>Movimientos</h3></div>
+        <div id="tx-list"></div>
+      </div>
+    </div>
+
+        <div class="page" id="page-settings">
+      <div class="settings-header">
+        <button class="back-btn" id="settings-back"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg></button>
+        <div class="page-title-inline">Ajustes</div>
+      </div>
+      <div class="settings-group">
+        <div class="settings-row"><span>Modo oscuro</span><div class="switch" id="dark-switch"></div></div>
+      </div>
+      <div class="settings-group">
+        <div class="settings-row"><span>Movimientos guardados</span><span class="hint" id="tx-count">0</span></div>
+        <div class="settings-row"><span>Cambiar código PIN</span><button id="changepin-btn">Cambiar</button></div>
+      </div>
+      <div class="settings-group">
+        <div class="settings-row"><span>Exportar datos (.json)</span><button id="export-btn">Exportar</button></div>
+        <div class="settings-row"><span>Importar datos (.json)</span><button id="import-btn">Importar</button></div>
+        <input type="file" id="import-file" accept="application/json">
+      </div>
+      <div class="settings-group">
+        <div class="settings-row"><span>Borrar todos los datos</span><button class="danger" id="reset-btn">Borrar</button></div>
+      </div>
+    </div>
+
+  </div>
+
+    <div class="sheet-backdrop" id="sheet-backdrop"></div>
+  <div class="sheet" id="add-sheet">
+    <div class="sheet-handle"></div>
+    <div class="sheet-head">
+      <h3>Nuevo movimiento</h3>
+      <button class="sheet-close" id="sheet-close">✕</button>
+    </div>
+    <div class="sheet-body">
+      <div class="type-toggle">
+        <button id="type-expense" class="active">Gasto</button>
+        <button id="type-income">Ingreso</button>
+      </div>
+
+      <div class="amount-input-wrap">
+        <input type="number" inputmode="decimal" class="amount-input" id="amount-input" placeholder="0,00 €">
+      </div>
+
+      <div class="field-label">Establecimiento</div>
+      <input type="text" class="text-field" id="merchant-input" placeholder="Ej. Mercadona, Netflix, Amazon…">
+      <div class="logo-preview" id="logo-preview"></div>
+
+      <div class="field-label">Categoría</div>
+      <div class="chip-grid" id="cat-grid"></div>
+
+      <div class="field-label">Cuenta</div>
+      <div class="pay-toggle">
+        <button class="chip" id="pay-cash">💵 Efectivo</button>
+        <button class="chip" id="pay-card">💳 Tarjeta débito</button>
+      </div>
+
+      <div class="field-label">Fecha</div>
+      <input type="date" class="text-field" id="date-input">
+
+      <button class="save-btn" id="save-tx" disabled>Guardar</button>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
