@@ -162,6 +162,17 @@
       <button class="key" data-k="del">⌫</button>
     </div>
     <div class="lock-error" id="lock-error" data-i18n="lock.error">Incorrect code</div>
+    <button class="forgot-pin-btn hidden" id="forgot-pin-btn" data-i18n="lock.forgotPin">Forgot your PIN?</button>
+  </div>
+
+  <div class="modal-backdrop" id="forgot-backdrop"></div>
+  <div class="modal danger-modal" id="forgot-modal">
+    <div class="modal-icon">🔑</div>
+    <p class="modal-text" data-i18n="lock.forgotWarning">If you forgot your PIN, you now have to clear all app data to get back in. This will delete all your transactions and accounts on this device. Export a backup first if you can.</p>
+    <div class="modal-actions">
+      <button class="modal-btn ghost" id="forgot-cancel-btn" data-i18n="delete.cancel">Cancel</button>
+      <button class="modal-btn danger" id="forgot-erase-btn" data-i18n="lock.eraseData">Clear data</button>
+    </div>
   </div>
 
     <div id="app">
