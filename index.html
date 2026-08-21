@@ -283,6 +283,33 @@
     </div>
   </div>
 
+  <div class="modal-backdrop" id="delete-backdrop"></div>
+
+  <div class="modal danger-modal" id="delete-warning-modal">
+    <div class="modal-icon">⚠️</div>
+    <p class="modal-text" data-i18n="delete.warning">When you clear all data, you will delete all activity, accounts, and everything related to Fyn in this browser. Export your data (.json) before clearing all data, just in case. To completely clear all data, clear this website's data from your browser settings.</p>
+    <div class="modal-actions">
+      <button class="modal-btn ghost" id="delete-cancel-btn" data-i18n="delete.cancel">Cancel</button>
+      <button class="modal-btn danger" id="delete-continue-btn" data-i18n="delete.continue">Continue</button>
+    </div>
+  </div>
+
+  <div class="modal pin-modal" id="delete-pin-modal">
+    <div class="lock-sub" data-i18n="delete.pinPrompt">Enter your PIN to confirm</div>
+    <div class="pin-dots" id="delete-pin-dots">
+      <div class="pin-dot"></div><div class="pin-dot"></div><div class="pin-dot"></div><div class="pin-dot"></div>
+    </div>
+    <div class="lock-error" id="delete-pin-error" data-i18n="lock.error">Incorrect code</div>
+    <div class="keypad" id="delete-pin-keypad">
+      <button class="key" data-k="1">1</button><button class="key" data-k="2">2</button><button class="key" data-k="3">3</button>
+      <button class="key" data-k="4">4</button><button class="key" data-k="5">5</button><button class="key" data-k="6">6</button>
+      <button class="key" data-k="7">7</button><button class="key" data-k="8">8</button><button class="key" data-k="9">9</button>
+      <button class="key ghost"></button><button class="key" data-k="0">0</button>
+      <button class="key" data-k="del">⌫</button>
+    </div>
+    <button class="modal-btn ghost" id="delete-pin-cancel" data-i18n="delete.cancel">Cancel</button>
+  </div>
+
   <div class="toast" id="toast"></div>
 </div>
 
