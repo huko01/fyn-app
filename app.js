@@ -37,6 +37,8 @@ const I18N = {
     'confirm.import':'This will import {n} transactions. Replace current data?',
     'error.invalidBackup':'This file is not a valid backup.',
     'confirm.reset':'This will delete all transactions saved on this device. Continue?',
+    'delete.warning':'When you clear all data, you will delete all activity, accounts, and everything related to Fyn in this browser. Export your data (.json) before clearing all data, just in case. To completely clear all data, clear this website\'s data from your browser settings.',
+    'delete.cancel':'Cancel','delete.continue':'Continue','delete.pinPrompt':'Enter your PIN to confirm',
     'cat.food':'Food','cat.transport':'Transport','cat.leisure':'Leisure','cat.shopping':'Shopping',
     'cat.health':'Health','cat.home':'Home','cat.salary':'Salary','cat.other':'Other',
   },
@@ -77,6 +79,8 @@ const I18N = {
     'confirm.import':'Se importarán {n} movimientos. ¿Reemplazar los datos actuales?',
     'error.invalidBackup':'El archivo no es un backup válido.',
     'confirm.reset':'Esto borrará todos los movimientos guardados en este dispositivo. ¿Continuar?',
+    'delete.warning':'Al borrar todos los datos, eliminarás toda la actividad, cuentas y todo lo relacionado con Fyn en este navegador. Exporta tus datos (.json) antes de borrar todo, por si acaso. Para borrar completamente todos los datos, borra los datos de este sitio web desde los ajustes de tu navegador.',
+    'delete.cancel':'Cancelar','delete.continue':'Continuar','delete.pinPrompt':'Introduce tu PIN para confirmar',
     'cat.food':'Alimentación','cat.transport':'Transporte','cat.leisure':'Ocio','cat.shopping':'Compras',
     'cat.health':'Salud','cat.home':'Hogar','cat.salary':'Nómina','cat.other':'Otros',
   }
@@ -811,7 +815,12 @@ function wireSettings(){
   $('#export-btn').addEventListener('click', exportData);
   $('#import-btn').addEventListener('click', ()=> $('#import-file').click());
   $('#import-file').addEventListener('change', importData);
-  $('#reset-btn').addEventListener('click', resetData);
+  $('#reset-btn').addEventListener('click', openDeleteWarning);
+  $('#delete-cancel-btn').addEventListener('click', closeDeleteModals);
+  $('#delete-backdrop').addEventListener('click', closeDeleteModals);
+  $('#delete-continue-btn').addEventListener('click', openDeletePinConfirm);
+  $('#delete-pin-cancel').addEventListener('click', closeDeleteModals);
+  wireKeypad('#delete-pin-keypad', onDeletePinDigit);
   $('#changepin-btn').addEventListener('click', ()=>{
     DB.set('pinHash', null);
     location.reload();
@@ -853,14 +862,51 @@ function importData(e){
   reader.readAsText(file);
   e.target.value = '';
 }
-function resetData(){
-  if (confirm(t('confirm.reset'))) {
-    state.transactions = [];
-    DB.set('transactions', []);
-    renderHome();
-    $('#tx-count').textContent = 0;
-    showToast(t('toast.dataDeleted'));
+let deletePin = '';
+
+function openDeleteWarning(){
+  $('#delete-backdrop').classList.add('show');
+  $('#delete-warning-modal').classList.add('show');
+}
+function openDeletePinConfirm(){
+  $('#delete-warning-modal').classList.remove('show');
+  deletePin = '';
+  renderDots($('#delete-pin-dots'), 0);
+  $('#delete-pin-error').classList.remove('show');
+  $('#delete-pin-modal').classList.add('show');
+}
+function closeDeleteModals(){
+  $('#delete-backdrop').classList.remove('show');
+  $('#delete-warning-modal').classList.remove('show');
+  $('#delete-pin-modal').classList.remove('show');
+  deletePin = '';
+}
+function onDeletePinDigit(d){
+  const dotsEl = $('#delete-pin-dots');
+  if (d === 'del') { deletePin = deletePin.slice(0,-1); renderDots(dotsEl, deletePin.length); return; }
+  if (deletePin.length >= 4) return;
+  deletePin += d;
+  renderDots(dotsEl, deletePin.length);
+  if (deletePin.length === 4) {
+    setTimeout(async () => {
+      const hash = await sha256(deletePin);
+      if (hash === state.pinHash) {
+        eraseAllData();
+      } else {
+        dotsEl.classList.add('shake');
+        $$('#delete-pin-dots .pin-dot').forEach(el=>el.classList.add('err'));
+        $('#delete-pin-error').classList.add('show');
+        navigator.vibrate && navigator.vibrate(80);
+        setTimeout(()=>{ dotsEl.classList.remove('shake'); deletePin=''; renderDots(dotsEl,0); }, 450);
+      }
+    }, 100);
   }
+}
+function eraseAllData(){
+  ['language','pinHash','userName','pronouns','currency','accounts','avatar','darkMode','accentHue','transactions','onboardingDone']
+    .forEach(key => localStorage.removeItem(key));
+  closeDeleteModals();
+  location.reload();
 }
 
 let toastTimer;
