@@ -14,6 +14,9 @@ const I18N = {
     'hue.title':'Choose your accent tone','hue.subtitle':'Drag to pick the shade for your gradient background.',
     'pin.create':'Create a 4-digit code','pin.repeat':'Repeat your code',
     'lock.subtitle':'Enter your code','lock.error':'Incorrect code',
+    'lock.forgotPin':'Forgot your PIN?',
+    'lock.forgotWarning':'If you forgot your PIN, you now have to clear all app data to get back in. This will permanently delete all your transactions and accounts in this browser.',
+    'lock.eraseData':'Clear data',
     'welcome.he':'Welcome','welcome.she':'Welcome','welcome.they':'Welcome','welcome.unspecified':'Welcome',
     'greeting.morning':'Good morning','greeting.afternoon':'Good afternoon','greeting.evening':'Good evening',
     'search.placeholder':'Search','balance.label':'Balance',
@@ -56,6 +59,9 @@ const I18N = {
     'hue.title':'Elige el tono de fondo','hue.subtitle':'Desliza para elegir el tono de tu fondo degradado.',
     'pin.create':'Crea un código de 4 dígitos','pin.repeat':'Repite tu código',
     'lock.subtitle':'Introduce tu código','lock.error':'Código incorrecto',
+    'lock.forgotPin':'¿Olvidaste tu PIN?',
+    'lock.forgotWarning':'Si olvidaste tu PIN, ahora tienes que borrar todos los datos de la app para poder entrar. Esto eliminará permanentemente todos tus movimientos y cuentas en este navegador.',
+    'lock.eraseData':'Borrar datos',
     'welcome.he':'Bienvenido','welcome.she':'Bienvenida','welcome.they':'Bienvenide','welcome.unspecified':'Te damos la bienvenida',
     'greeting.morning':'Buenos días','greeting.afternoon':'Buenas tardes','greeting.evening':'Buenas noches',
     'search.placeholder':'Buscar','balance.label':'Saldo',
@@ -131,6 +137,7 @@ let state = {
   transactions: DB.get('transactions', []),
 };
 let enteredPin = '';
+let lockFailCount = 0;
 let currentType = 'expense';
 let selectedCat = null;
 let selectedAccountForTx = null;
@@ -146,6 +153,7 @@ window.addEventListener('DOMContentLoaded', () => {
   applyHue(state.hue);
   buildCategoryChips();
   wireKeypad('#lock-keypad', onLockDigit);
+  wireForgotPin();
   wireKeypad('#setup-keypad', onSetupDigit);
   wireHome();
   wireSettings();
@@ -450,11 +458,14 @@ function onLockDigit(d){
     setTimeout(async () => {
       const hash = await sha256(enteredPin);
       if (hash === state.pinHash) {
+        lockFailCount = 0;
         unlockApp();
       } else {
+        lockFailCount++;
         dotsEl.classList.add('shake');
         $$('#lock-dots .pin-dot').forEach(d=>d.classList.add('err'));
         $('#lock-error').classList.add('show');
+        if (lockFailCount >= 2) $('#forgot-pin-btn').classList.remove('hidden');
         navigator.vibrate && navigator.vibrate(80);
         setTimeout(()=>{ dotsEl.classList.remove('shake'); enteredPin=''; renderDots(dotsEl,0); }, 450);
       }
@@ -903,10 +914,23 @@ function onDeletePinDigit(d){
   }
 }
 function eraseAllData(){
-  ['language','pinHash','userName','pronouns','currency','accounts','avatar','darkMode','accentHue','transactions','onboardingDone']
+  ['language','pinHash','userName','pronoun','currency','accounts','selectedAccountView','avatar','themeMode','hue','transactions','onboardingDone']
     .forEach(key => localStorage.removeItem(key));
   closeDeleteModals();
   location.reload();
+}
+function wireForgotPin(){
+  $('#forgot-pin-btn').addEventListener('click', ()=>{
+    $('#forgot-backdrop').classList.add('show');
+    $('#forgot-modal').classList.add('show');
+  });
+  $('#forgot-cancel-btn').addEventListener('click', closeForgotModal);
+  $('#forgot-backdrop').addEventListener('click', closeForgotModal);
+  $('#forgot-erase-btn').addEventListener('click', eraseAllData);
+}
+function closeForgotModal(){
+  $('#forgot-backdrop').classList.remove('show');
+  $('#forgot-modal').classList.remove('show');
 }
 
 let toastTimer;
