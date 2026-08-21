@@ -110,7 +110,7 @@ input{font-family:inherit;}
 .name-field::placeholder{color:rgba(255,255,255,.5);}
 .name-field:focus{outline:none;border-color:#fff;}
 .continue-btn{
-  width:100%;padding:15px;border-radius:999px;background:#fff;color:var(--card-b);font-weight:700;font-size:15px;
+  width:100%;padding:15px;border-radius:999px;background:#fff;color:#0a0a0a;font-weight:700;font-size:15px;
   transition:transform .1s,opacity .2s;flex-shrink:0;
 }
 .continue-btn:disabled{opacity:.35;}
@@ -133,7 +133,7 @@ input{font-family:inherit;}
 .acc-form .text-field{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:#fff;}
 .acc-form .text-field::placeholder{color:rgba(255,255,255,.4);}
 .acc-form .text-field:focus{border-color:#fff;}
-.ob-acc-save{margin-top:18px;background:#fff;color:var(--card-b);}
+.ob-acc-save{margin-top:18px;background:#fff;color:#0a0a0a;}
 #acc-list{width:100%;margin-bottom:20px;}
 .acc-item{
   display:flex;align-items:center;gap:12px;padding:12px 14px;background:rgba(255,255,255,.08);
@@ -177,6 +177,11 @@ input{font-family:inherit;}
 .key.ghost:active{background:none;transform:none;}
 .lock-error{position:absolute;bottom:calc(60px + var(--safe-b));font-size:13px;color:rgba(255,255,255,.55);opacity:0;transition:opacity .2s;}
 .lock-error.show{opacity:1;}
+.forgot-pin-btn{
+  position:absolute;bottom:calc(24px + var(--safe-b));font-size:13.5px;color:rgba(255,255,255,.75);
+  font-weight:600;text-decoration:underline;
+}
+.forgot-pin-btn.hidden{display:none;}
 .shake{animation:shake .4s;}
 @keyframes shake{
   10%,90%{transform:translateX(-2px)}
@@ -330,13 +335,13 @@ input{font-family:inherit;}
 .sheet-close{width:30px;height:30px;border-radius:50%;background:var(--row-hover);display:flex;align-items:center;justify-content:center;}
 .sheet-body{overflow-y:auto;padding:0 20px 24px;}
 
-.modal-backdrop{position:absolute;inset:0;background:rgba(10,10,15,.5);opacity:0;visibility:hidden;transition:opacity .25s var(--ease);z-index:60;}
+.modal-backdrop{position:absolute;inset:0;background:rgba(10,10,15,.5);opacity:0;visibility:hidden;transition:opacity .25s var(--ease);z-index:160;}
 .modal-backdrop.show{opacity:1;visibility:visible;}
 .modal{
   position:absolute;left:20px;right:20px;top:50%;
   transform:translate(0,-45%) scale(.94);opacity:0;visibility:hidden;
   background:var(--sheet-bg);color:var(--ink);border-radius:22px;
-  padding:26px 22px 22px;z-index:61;text-align:center;
+  padding:26px 22px 22px;z-index:161;text-align:center;
   transition:transform .25s var(--ease),opacity .25s var(--ease),visibility .25s;
   box-shadow:0 20px 60px rgba(0,0,0,.35);
 }
