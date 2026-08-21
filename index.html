@@ -1,11 +1,13 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
-<title>Fyn — Income &amp; Expenses</title>
-<meta name="theme-color" content="#1a0f5c">
+<title>Fyn. Balance</title>
+<meta name="theme-color" content="#000000">
 <link rel="manifest" href="manifest.json">
+<link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-16.png">
 <link rel="apple-touch-icon" href="icons/icon-192.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -22,15 +24,117 @@
   </div>
 
     <div id="setup">
-    <div class="setup-step active" id="step-name">
-      <div class="lock-title">Fyn</div>
-      <div class="lock-sub">¿Cómo te llamas?</div>
-      <input type="text" class="name-field" id="name-input" placeholder="Tu nombre" maxlength="20">
-      <button class="continue-btn" id="name-continue" disabled>Continuar</button>
+
+        <div class="setup-step active" id="step-lang">
+      <div class="ob-wrap">
+        <div class="ob-title" data-i18n="lang.title">Choose your language</div>
+        <div class="ob-sub" data-i18n="lang.subtitle">You can change this later in settings.</div>
+        <div class="ob-options">
+          <button class="ob-card" data-lang="en">
+            <span class="ob-card-emoji">🇬🇧</span>
+            <span class="ob-card-label">English</span>
+          </button>
+          <button class="ob-card" data-lang="es">
+            <span class="ob-card-emoji">🇪🇸</span>
+            <span class="ob-card-label">Español</span>
+          </button>
+        </div>
+      </div>
     </div>
-    <div class="setup-step" id="step-pin">
+
+        <div class="setup-step" id="step-name">
+      <div class="ob-wrap">
+        <div class="ob-title" data-i18n="name.title">What's your name?</div>
+        <input type="text" class="name-field" id="name-input" data-i18n-ph="name.placeholder" placeholder="Your name" maxlength="20">
+        <button class="continue-btn" id="name-continue" disabled data-i18n="action.continue">Continue</button>
+      </div>
+    </div>
+
+        <div class="setup-step" id="step-pronoun">
+      <div class="ob-wrap">
+        <div class="ob-title" data-i18n="pronoun.title">Which pronouns do you use?</div>
+        <div class="ob-sub" data-i18n="pronoun.subtitle">This helps Fyn address you the way you prefer.</div>
+        <div class="ob-list" id="pronoun-list"></div>
+        <button class="continue-btn" id="pronoun-continue" disabled data-i18n="action.continue">Continue</button>
+      </div>
+    </div>
+
+        <div class="setup-step" id="step-currency">
+      <div class="ob-wrap">
+        <div class="ob-title" data-i18n="currency.title">Choose your currency</div>
+        <div class="ob-list" id="currency-list"></div>
+        <button class="continue-btn" id="currency-continue" disabled data-i18n="action.continue">Continue</button>
+      </div>
+    </div>
+
+        <div class="setup-step" id="step-accounts">
+      <div class="ob-wrap ob-wrap-scroll">
+        <div class="ob-title" data-i18n="accounts.title">Add your accounts</div>
+        <div class="ob-sub" data-i18n="accounts.subtitle">Add at least one account to continue. You can add as many as you like.</div>
+
+        <div class="acc-type-row">
+          <button class="acc-type-btn" id="acc-type-cash">
+            <span class="acc-type-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="3"/></svg>
+            </span>
+            <span data-i18n="accounts.cash">Cash</span>
+          </button>
+          <button class="acc-type-btn" id="acc-type-card">
+            <span class="acc-type-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
+            </span>
+            <span data-i18n="accounts.card">Debit card</span>
+          </button>
+        </div>
+
+        <div class="acc-form" id="acc-form">
+          <div class="field-label ob-field-label" data-i18n="field.name">Name</div>
+          <input type="text" class="text-field" id="acc-name-input" maxlength="24">
+          <div class="field-label ob-field-label" data-i18n="field.description">Description (optional)</div>
+          <input type="text" class="text-field" id="acc-desc-input" maxlength="40">
+          <div class="field-label ob-field-label" data-i18n="field.initialBalance">Initial balance</div>
+          <input type="number" inputmode="decimal" class="text-field" id="acc-balance-input" placeholder="0.00">
+          <button class="save-btn ob-acc-save" id="acc-save-btn" data-i18n="action.add">Add</button>
+        </div>
+
+        <div class="ob-field-label" id="acc-list-label" style="display:none" data-i18n="accounts.yours">Your accounts</div>
+        <div id="acc-list"></div>
+
+        <button class="continue-btn" id="accounts-continue" disabled data-i18n="action.continue">Continue</button>
+      </div>
+    </div>
+
+        <div class="setup-step" id="step-theme">
+      <div class="ob-wrap">
+        <div class="ob-title" data-i18n="theme.title">Choose your theme</div>
+        <div class="ob-options">
+          <button class="ob-card" data-theme="light">
+            <span class="ob-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v3M12 20v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M1 12h3M20 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg></span>
+            <span class="ob-card-label" data-i18n="theme.light">Light</span>
+          </button>
+          <button class="ob-card" data-theme="dark">
+            <span class="ob-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z"/></svg></span>
+            <span class="ob-card-label" data-i18n="theme.dark">Dark</span>
+          </button>
+        </div>
+        <button class="continue-btn" id="theme-continue" data-i18n="action.continue">Continue</button>
+      </div>
+    </div>
+
+        <div class="setup-step" id="step-hue">
+      <div class="ob-wrap">
+        <div class="ob-title" data-i18n="hue.title">Choose your accent tone</div>
+        <div class="ob-sub" data-i18n="hue.subtitle">Drag to pick the shade for your gradient background.</div>
+        <div class="hue-preview" id="hue-preview"></div>
+        <input type="range" min="0" max="360" value="248" class="hue-slider" id="hue-slider">
+        <button class="hue-reset" id="hue-reset" data-i18n="action.resetDefault">Reset to default</button>
+        <button class="continue-btn" id="hue-continue" data-i18n="action.continue">Continue</button>
+      </div>
+    </div>
+
+        <div class="setup-step" id="step-pin">
       <div class="lock-title">Fyn</div>
-      <div class="lock-sub" id="setup-sub">Crea un código de 4 dígitos</div>
+      <div class="lock-sub" id="setup-sub" data-i18n="pin.create">Create a 4-digit code</div>
       <div class="pin-dots" id="setup-dots">
         <div class="pin-dot"></div><div class="pin-dot"></div><div class="pin-dot"></div><div class="pin-dot"></div>
       </div>
@@ -45,8 +149,8 @@
   </div>
 
     <div id="lock" class="hidden">
-    <div class="lock-title">Bienvenido</div>
-    <div class="lock-sub">Introduce tu código</div>
+    <div class="lock-title" id="lock-title">Welcome</div>
+    <div class="lock-sub" data-i18n="lock.subtitle">Enter your code</div>
     <div class="pin-dots" id="lock-dots">
       <div class="pin-dot"></div><div class="pin-dot"></div><div class="pin-dot"></div><div class="pin-dot"></div>
     </div>
@@ -57,7 +161,7 @@
       <button class="key ghost"></button><button class="key" data-k="0">0</button>
       <button class="key" data-k="del">⌫</button>
     </div>
-    <div class="lock-error" id="lock-error">Código incorrecto</div>
+    <div class="lock-error" id="lock-error" data-i18n="lock.error">Incorrect code</div>
   </div>
 
     <div id="app">
@@ -72,64 +176,74 @@
           </button>
         </div>
 
-        <div class="greeting" id="greeting">Hola</div>
+        <div class="greeting" id="greeting">Hi</div>
 
         <div class="search-bar">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
-          <input type="text" id="search-input" placeholder="Buscar">
+          <input type="text" id="search-input" data-i18n-ph="search.placeholder" placeholder="Search">
         </div>
 
         <div class="balance-section">
-          <div class="balance-label">Saldo</div>
-          <div class="balance-amount" id="balance-amount">0,00 €</div>
-          <button class="accounts-btn" id="accounts-btn">Cuentas</button>
+          <div class="balance-label" id="balance-label" data-i18n="balance.label">Balance</div>
+          <div class="balance-amount" id="balance-amount">0.00 €</div>
+          <button class="accounts-btn" id="accounts-btn" data-i18n="accounts.btn">Accounts</button>
         </div>
 
         <div class="quick-actions">
           <button class="qa-btn" id="qa-expense">
             <div class="qa-circle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></div>
-            Añadir gasto
+            <span data-i18n="qa.expense">Add expense</span>
           </button>
           <button class="qa-btn" id="qa-income">
             <div class="qa-circle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 19V5M5 12l7-7 7 7"/></svg></div>
-            Añadir ingreso
+            <span data-i18n="qa.income">Add income</span>
           </button>
           <button class="qa-btn" id="qa-details">
             <div class="qa-circle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18M3 15v4a2 2 0 002 2h4m10-6v4a2 2 0 01-2 2h-4"/></svg></div>
-            Detalles
+            <span data-i18n="qa.details">Details</span>
           </button>
           <button class="qa-btn" id="qa-more">
             <div class="qa-circle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="5" cy="12" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="19" cy="12" r="1.5"/></svg></div>
-            Más
+            <span data-i18n="qa.more">More</span>
           </button>
         </div>
       </div>
 
       <div class="content-sheet">
-        <div class="sec-title"><h3>Movimientos</h3></div>
+        <div class="sec-title"><h3 data-i18n="movements.title">Transactions</h3></div>
         <div id="tx-list"></div>
       </div>
+    </div>
+
+        <div class="sheet-backdrop" id="accsheet-backdrop"></div>
+    <div class="sheet acc-switch-sheet" id="acc-switch-sheet">
+      <div class="sheet-handle"></div>
+      <div class="sheet-head">
+        <h3 data-i18n="accounts.btn">Accounts</h3>
+        <button class="sheet-close" id="accsheet-close">✕</button>
+      </div>
+      <div class="sheet-body" id="acc-switch-list"></div>
     </div>
 
         <div class="page" id="page-settings">
       <div class="settings-header">
         <button class="back-btn" id="settings-back"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg></button>
-        <div class="page-title-inline">Ajustes</div>
+        <div class="page-title-inline" data-i18n="settings.title">Settings</div>
       </div>
       <div class="settings-group">
-        <div class="settings-row"><span>Modo oscuro</span><div class="switch" id="dark-switch"></div></div>
+        <div class="settings-row"><span data-i18n="settings.darkMode">Dark mode</span><div class="switch" id="dark-switch"></div></div>
       </div>
       <div class="settings-group">
-        <div class="settings-row"><span>Movimientos guardados</span><span class="hint" id="tx-count">0</span></div>
-        <div class="settings-row"><span>Cambiar código PIN</span><button id="changepin-btn">Cambiar</button></div>
+        <div class="settings-row"><span data-i18n="settings.savedTx">Saved transactions</span><span class="hint" id="tx-count">0</span></div>
+        <div class="settings-row"><span data-i18n="settings.changePin">Change PIN</span><button id="changepin-btn" data-i18n="settings.change">Change</button></div>
       </div>
       <div class="settings-group">
-        <div class="settings-row"><span>Exportar datos (.json)</span><button id="export-btn">Exportar</button></div>
-        <div class="settings-row"><span>Importar datos (.json)</span><button id="import-btn">Importar</button></div>
+        <div class="settings-row"><span data-i18n="settings.export">Export data (.json)</span><button id="export-btn" data-i18n="settings.exportBtn">Export</button></div>
+        <div class="settings-row"><span data-i18n="settings.import">Import data (.json)</span><button id="import-btn" data-i18n="settings.importBtn">Import</button></div>
         <input type="file" id="import-file" accept="application/json">
       </div>
       <div class="settings-group">
-        <div class="settings-row"><span>Borrar todos los datos</span><button class="danger" id="reset-btn">Borrar</button></div>
+        <div class="settings-row"><span data-i18n="settings.deleteAll">Delete all data</span><button class="danger" id="reset-btn" data-i18n="settings.deleteBtn">Delete</button></div>
       </div>
     </div>
 
@@ -139,36 +253,33 @@
   <div class="sheet" id="add-sheet">
     <div class="sheet-handle"></div>
     <div class="sheet-head">
-      <h3>Nuevo movimiento</h3>
+      <h3 data-i18n="sheet.title">New transaction</h3>
       <button class="sheet-close" id="sheet-close">✕</button>
     </div>
     <div class="sheet-body">
       <div class="type-toggle">
-        <button id="type-expense" class="active">Gasto</button>
-        <button id="type-income">Ingreso</button>
+        <button id="type-expense" class="active" data-i18n="type.expense">Expense</button>
+        <button id="type-income" data-i18n="type.income">Income</button>
       </div>
 
       <div class="amount-input-wrap">
-        <input type="number" inputmode="decimal" class="amount-input" id="amount-input" placeholder="0,00 €">
+        <input type="number" inputmode="decimal" class="amount-input" id="amount-input" placeholder="0.00">
       </div>
 
-      <div class="field-label">Establecimiento</div>
-      <input type="text" class="text-field" id="merchant-input" placeholder="Ej. Mercadona, Netflix, Amazon…">
+      <div class="field-label" data-i18n="field.merchant">Merchant</div>
+      <input type="text" class="text-field" id="merchant-input" data-i18n-ph="merchant.placeholder" placeholder="e.g. Mercadona, Netflix, Amazon…">
       <div class="logo-preview" id="logo-preview"></div>
 
-      <div class="field-label">Categoría</div>
+      <div class="field-label" data-i18n="field.category">Category</div>
       <div class="chip-grid" id="cat-grid"></div>
 
-      <div class="field-label">Cuenta</div>
-      <div class="pay-toggle">
-        <button class="chip" id="pay-cash">💵 Efectivo</button>
-        <button class="chip" id="pay-card">💳 Tarjeta débito</button>
-      </div>
+      <div class="field-label" data-i18n="field.account">Account</div>
+      <div class="chip-grid" id="account-grid"></div>
 
-      <div class="field-label">Fecha</div>
+      <div class="field-label" data-i18n="field.date">Date</div>
       <input type="date" class="text-field" id="date-input">
 
-      <button class="save-btn" id="save-tx" disabled>Guardar</button>
+      <button class="save-btn" id="save-tx" disabled data-i18n="action.save">Save</button>
     </div>
   </div>
 
@@ -178,4 +289,3 @@
 <script src="app.js"></script>
 </body>
 </html>
-<!-- fyn -->
