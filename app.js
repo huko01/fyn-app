@@ -7,7 +7,7 @@ const I18N = {
     'pronoun.title':'Which pronouns do you use?','pronoun.subtitle':'This helps Fyn address you the way you prefer.',
     'pronoun.he':'He/him','pronoun.she':'She/her','pronoun.they':'They/them','pronoun.unspecified':'Prefer not to say',
     'currency.title':'Choose your currency','currency.usd':'US Dollar (USD)','currency.eur':'Euro (EUR)',
-    'accounts.title':'Add your accounts','accounts.subtitle':'Add at least one account to continue. You can add as many as you like.',
+    'accounts.title':'Add your accounts','accounts.subtitle':'Add at least one account to continue. You can add as many as you like. You can also add more accounts later.',
     'accounts.cash':'Cash','accounts.card':'Debit card','accounts.yours':'Your accounts','accounts.btn':'Accounts','accounts.networth':'Net worth',
     'field.name':'Name','field.description':'Description (optional)','field.initialBalance':'Initial balance',
     'theme.title':'Choose your theme','theme.light':'Light','theme.dark':'Dark',
@@ -53,7 +53,7 @@ const I18N = {
     'pronoun.title':'¿Qué pronombres usas?','pronoun.subtitle':'Esto ayuda a Fyn a dirigirse a ti como prefieras.',
     'pronoun.he':'Él','pronoun.she':'Ella','pronoun.they':'Elle','pronoun.unspecified':'Prefiero no decirlo',
     'currency.title':'Elige tu moneda','currency.usd':'Dólar estadounidense (USD)','currency.eur':'Euro (EUR)',
-    'accounts.title':'Añade tus cuentas','accounts.subtitle':'Añade al menos una cuenta para continuar. Puedes añadir las que quieras.',
+    'accounts.title':'Añade tus cuentas','accounts.subtitle':'Añade al menos una cuenta para continuar. Puedes añadir las que quieras. También puedes añadir más cuentas más tarde.',
     'accounts.cash':'Efectivo','accounts.card':'Tarjeta de débito','accounts.yours':'Tus cuentas','accounts.btn':'Cuentas','accounts.networth':'Patrimonio neto',
     'field.name':'Nombre','field.description':'Descripción (opcional)','field.initialBalance':'Saldo inicial',
     'theme.title':'Elige el tema','theme.light':'Claro','theme.dark':'Oscuro',
@@ -197,6 +197,9 @@ function applyTheme(){
   let mode = state.themeMode;
   if (!mode) mode = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
   document.body.classList.toggle('dark', mode === 'dark');
+  const isLight = mode === 'light';
+  $('#setup').classList.toggle('light-mode', isLight);
+  $('#lock').classList.toggle('light-mode', isLight);
 }
 function toggleTheme(){
   const isDark = document.body.classList.contains('dark');
@@ -222,6 +225,14 @@ function applyHue(h){
 const OB_STEPS = ['step-lang','step-name','step-pronoun','step-currency','step-accounts','step-theme','step-hue','step-pin'];
 function goToStep(id){
   OB_STEPS.forEach(s => $('#'+s).classList.toggle('active', s===id));
+  const idx = OB_STEPS.indexOf(id);
+  const total = OB_STEPS.length - 1;
+  if (idx <= 0) {
+    $('#ob-progress').classList.remove('show');
+  } else {
+    $('#ob-progress').classList.add('show');
+    $('#ob-progress-fill').style.width = (idx / total * 100) + '%';
+  }
 }
 function startOnboarding(){
   wireLangStep();

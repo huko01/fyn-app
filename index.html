@@ -24,11 +24,12 @@
   </div>
 
     <div id="setup">
+      <div class="ob-progress" id="ob-progress"><div class="ob-progress-fill" id="ob-progress-fill"></div></div>
 
         <div class="setup-step active" id="step-lang">
       <div class="ob-wrap">
-        <div class="ob-title" data-i18n="lang.title">Choose your language</div>
-        <div class="ob-sub" data-i18n="lang.subtitle">You can change this later in settings.</div>
+        <div class="ob-title">Choose your language</div>
+        <div class="ob-sub">You can change this later in settings.</div>
         <div class="ob-options">
           <button class="ob-card" data-lang="en">
             <span class="ob-card-emoji">🇬🇧</span>
@@ -39,14 +40,14 @@
             <span class="ob-card-label">Español</span>
           </button>
         </div>
-        <button type="button" class="ob-import-btn" id="ob-import-btn" data-i18n="settings.import">Import data (.json)</button>
+        <button type="button" class="ob-import-btn" id="ob-import-btn">Import data (.json)</button>
         <input type="file" id="ob-import-file" accept="application/json">
       </div>
     </div>
 
         <div class="setup-step" id="step-name">
       <div class="ob-wrap">
-        <div class="ob-title" data-i18n="name.title">What's your name?</div>
+        <div class="ob-title solo" data-i18n="name.title">What's your name?</div>
         <input type="text" class="name-field" id="name-input" data-i18n-ph="name.placeholder" placeholder="Your name" maxlength="20">
         <button class="continue-btn" id="name-continue" disabled data-i18n="action.continue">Continue</button>
       </div>
@@ -63,7 +64,7 @@
 
         <div class="setup-step" id="step-currency">
       <div class="ob-wrap">
-        <div class="ob-title" data-i18n="currency.title">Choose your currency</div>
+        <div class="ob-title solo" data-i18n="currency.title">Choose your currency</div>
         <div class="ob-list" id="currency-list"></div>
         <button class="continue-btn" id="currency-continue" disabled data-i18n="action.continue">Continue</button>
       </div>
@@ -108,7 +109,7 @@
 
         <div class="setup-step" id="step-theme">
       <div class="ob-wrap">
-        <div class="ob-title" data-i18n="theme.title">Choose your theme</div>
+        <div class="ob-title solo" data-i18n="theme.title">Choose your theme</div>
         <div class="ob-options">
           <button class="ob-card" data-theme="light">
             <span class="ob-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v3M12 20v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M1 12h3M20 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg></span>
