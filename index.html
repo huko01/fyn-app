@@ -40,7 +40,7 @@
             <span class="ob-card-label">Español</span>
           </button>
         </div>
-        <button type="button" class="ob-import-btn" id="ob-import-btn">Import data (.json)</button>
+        <button type="button" class="ob-import-btn" id="ob-import-btn">Import data directly (.json)</button>
         <input type="file" id="ob-import-file" accept="application/json">
       </div>
     </div>
@@ -198,7 +198,7 @@
         </div>
 
         <div class="balance-section">
-          <div class="balance-label" id="balance-label" data-i18n="balance.label">Balance</div>
+          <div class="balance-label" id="balance-label"><span class="balance-label-icon" id="balance-label-icon"></span><span id="balance-label-text" data-i18n="balance.label">Balance</span></div>
           <div class="balance-amount" id="balance-amount">0.00 €</div>
           <button class="accounts-btn" id="accounts-btn" data-i18n="accounts.btn">Accounts</button>
         </div>
@@ -294,8 +294,10 @@
           <span data-i18n="settings.language">Language</span>
           <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
         </button>
-        <button type="button" class="settings-row settings-nav" id="pronoun-open-btn">
-          <span data-i18n="settings.pronoun">Pronouns</span>
+      </div>
+      <div class="settings-group">
+        <button type="button" class="settings-row settings-nav" id="profile-open-btn">
+          <span data-i18n="settings.profile">Profile settings</span>
           <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
         </button>
       </div>
@@ -313,10 +315,37 @@
       <div class="settings-group">
         <div class="settings-row"><span data-i18n="settings.export">Export data (.json)</span><button id="export-btn" data-i18n="settings.exportBtn">Export</button></div>
         <div class="settings-row"><span data-i18n="settings.import">Import data (.json)</span><button id="import-btn" data-i18n="settings.importBtn">Import</button></div>
-        <input type="file" id="import-file" accept="application/json">
       </div>
+      <input type="file" id="import-file" accept="application/json">
       <div class="settings-group">
         <div class="settings-row"><span data-i18n="settings.deleteAll">Delete all data</span><button class="danger" id="reset-btn" data-i18n="settings.deleteBtn">Delete</button></div>
+      </div>
+    </div>
+
+    <div class="page" id="page-profile">
+      <div class="settings-header">
+        <button class="back-btn" id="profile-back"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg></button>
+        <div class="page-title-inline" data-i18n="profile.title">Profile</div>
+      </div>
+      <div class="profile-avatar-section">
+        <div class="profile-avatar-wrap">
+          <div class="avatar profile-avatar-big" id="profile-avatar-preview">F</div>
+          <button type="button" class="avatar-edit-btn" id="profile-avatar-edit">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+          </button>
+        </div>
+      </div>
+      <div class="settings-group">
+        <div class="settings-row profile-name-row">
+          <span data-i18n="profile.name">Name</span>
+          <input type="text" id="profile-name-input" class="profile-inline-input" maxlength="20">
+        </div>
+      </div>
+      <div class="settings-group">
+        <button type="button" class="settings-row settings-nav" id="profile-pronoun-open-btn">
+          <span data-i18n="settings.pronoun">Pronouns</span>
+          <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
+        </button>
       </div>
     </div>
 

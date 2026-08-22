@@ -33,6 +33,7 @@ const I18N = {
     'confirm.delete':'Delete this transaction?',
     'settings.title':'Settings','settings.darkMode':'Dark mode',
     'settings.language':'Language','settings.pronoun':'Pronouns','settings.accentTone':'Accent tone',
+    'settings.profile':'Profile settings','profile.title':'Profile','profile.name':'Name',
     'settings.changePin':'Change PIN','settings.change':'Change','settings.createPin':'Create password','settings.createBtn':'Create','settings.deletePin':'Delete password',
     'settings.export':'Export data (.json)','settings.exportBtn':'Export',
     'settings.import':'Import data (.json)','settings.importBtn':'Import',
@@ -79,6 +80,7 @@ const I18N = {
     'confirm.delete':'¿Eliminar este movimiento?',
     'settings.title':'Ajustes','settings.darkMode':'Modo oscuro',
     'settings.language':'Idioma','settings.pronoun':'Pronombres','settings.accentTone':'Tono de acento',
+    'settings.profile':'Ajustes de perfil','profile.title':'Perfil','profile.name':'Nombre',
     'settings.changePin':'Cambiar código PIN','settings.change':'Cambiar','settings.createPin':'Crear contraseña','settings.createBtn':'Crear','settings.deletePin':'Borrar contraseña',
     'settings.export':'Exportar datos (.json)','settings.exportBtn':'Exportar',
     'settings.import':'Importar datos (.json)','settings.importBtn':'Importar',
@@ -162,6 +164,7 @@ window.addEventListener('DOMContentLoaded', () => {
   wireKeypad('#importverify-keypad', onImportVerifyDigit);
   wireImportVerify();
   wireHome();
+  wireProfile();
   wireSettings();
   wireSettingsSheets();
   wireSheet();
@@ -696,17 +699,20 @@ function renderGreeting(){
   $('#greeting').innerHTML = `${t(key)}${name}`;
 }
 function renderAvatar(){
-  const el = $('#avatar-btn');
-  if (state.avatar) {
-    el.style.backgroundImage = `url(${state.avatar})`;
-    el.textContent = '';
-  } else {
-    el.style.backgroundImage = '';
-    el.textContent = state.userName ? state.userName.trim()[0].toUpperCase() : 'F';
-  }
+  const initial = state.userName ? state.userName.trim()[0].toUpperCase() : 'F';
+  [$('#avatar-btn'), $('#profile-avatar-preview')].forEach(el=>{
+    if (!el) return;
+    if (state.avatar) {
+      el.style.backgroundImage = `url(${state.avatar})`;
+      el.textContent = '';
+    } else {
+      el.style.backgroundImage = '';
+      el.textContent = initial;
+    }
+  });
 }
 function wireHome(){
-  $('#avatar-btn').addEventListener('click', ()=> $('#avatar-file').click());
+  $('#avatar-btn').addEventListener('click', ()=> openProfile(false));
   $('#avatar-file').addEventListener('change', onAvatarChange);
   $('#gear-btn').addEventListener('click', ()=> openSettings());
   $('#settings-back').addEventListener('click', ()=> closeSettings());
@@ -718,6 +724,31 @@ function wireHome(){
   $('#search-input').addEventListener('input', (e)=>{
     searchQuery = e.target.value.trim().toLowerCase();
     renderHome();
+  });
+}
+let profileReturnPage = 'page-home';
+function openProfile(fromSettings){
+  profileReturnPage = fromSettings ? 'page-settings' : 'page-home';
+  $('#profile-name-input').value = state.userName || '';
+  renderAvatar();
+  $('#page-home').classList.remove('active');
+  $('#page-settings').classList.remove('active');
+  $('#page-profile').classList.add('active');
+}
+function closeProfile(){
+  $('#page-profile').classList.remove('active');
+  $('#'+profileReturnPage).classList.add('active');
+}
+function wireProfile(){
+  $('#profile-back').addEventListener('click', closeProfile);
+  $('#profile-open-btn').addEventListener('click', ()=> openProfile(true));
+  $('#profile-avatar-edit').addEventListener('click', ()=> $('#avatar-file').click());
+  $('#profile-pronoun-open-btn').addEventListener('click', openPronounSheet);
+  $('#profile-name-input').addEventListener('input', (e)=>{
+    state.userName = e.target.value.trim();
+    DB.set('userName', state.userName);
+    renderAvatar();
+    renderGreeting();
   });
 }
 function onAvatarChange(e){
@@ -751,7 +782,6 @@ function refreshPinRows(){
 }
 function wireSettingsSheets(){
   $('#lang-open-btn').addEventListener('click', openLangSheet);
-  $('#pronoun-open-btn').addEventListener('click', openPronounSheet);
   $('#lang-sheet-close').addEventListener('click', closeSettingsSheets);
   $('#pronoun-sheet-close').addEventListener('click', closeSettingsSheets);
   $('#settings-sheet-backdrop').addEventListener('click', closeSettingsSheets);
@@ -1022,12 +1052,17 @@ function accInfo(id){ return state.accounts.find(a=>a.id===id); }
 
 function renderHome(){
   let balance;
+  const iconEl = $('#balance-label-icon');
   if (state.selectedAccountView === 'networth' || !accInfo(state.selectedAccountView)) {
     balance = netWorth();
-    $('#balance-label').textContent = t('accounts.networth');
+    $('#balance-label-text').textContent = t('accounts.networth');
+    iconEl.innerHTML = '';
+    iconEl.classList.remove('show');
   } else {
     balance = accountBalance(state.selectedAccountView);
-    $('#balance-label').textContent = accInfo(state.selectedAccountView).name;
+    $('#balance-label-text').textContent = accInfo(state.selectedAccountView).name;
+    iconEl.innerHTML = accountIcon(accInfo(state.selectedAccountView).type);
+    iconEl.classList.add('show');
   }
   $('#balance-amount').textContent = fmt(balance);
 
