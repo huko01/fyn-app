@@ -7,7 +7,7 @@ Try it now on the [GitHub page](https://huko01.github.io/fyn-app/).
 🚧 Still in development.
 
 # spanish 
-Una aplicación web sencilla y clara para llevar un control de tus gastos, ingresos y patrimonio neto. Diseñada para dispositivos móviles. Fyn.
+Una aplicación web sencilla y clara para llevar un control de tus gastos, ingresos y patrimonio neto. Diseñada para dispositivos móviles. Fyn.\
 Pruébalo ahora en la [página de GitHub](https://huko01.github.io/fyn-app/).
 
 🚧 Todavía en desarrollo.
