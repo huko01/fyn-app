@@ -227,7 +227,23 @@
       </div>
     </div>
 
-        <div class="setup-step-standalone" id="changepin-screen">
+        <div class="setup-step-standalone" id="import-verify-screen">
+      <button type="button" class="chpin-cancel" id="importverify-cancel">✕</button>
+      <div class="lock-sub" data-i18n="pin.enterImport">Enter this backup's code</div>
+      <div class="pin-dots" id="importverify-dots">
+        <div class="pin-dot"></div><div class="pin-dot"></div><div class="pin-dot"></div><div class="pin-dot"></div>
+      </div>
+      <div class="lock-error" id="importverify-error" data-i18n="lock.error">Incorrect code</div>
+      <div class="keypad" id="importverify-keypad">
+        <button class="key" data-k="1">1</button><button class="key" data-k="2">2</button><button class="key" data-k="3">3</button>
+        <button class="key" data-k="4">4</button><button class="key" data-k="5">5</button><button class="key" data-k="6">6</button>
+        <button class="key" data-k="7">7</button><button class="key" data-k="8">8</button><button class="key" data-k="9">9</button>
+        <button class="key ghost"></button><button class="key" data-k="0">0</button>
+        <button class="key" data-k="del">⌫</button>
+      </div>
+    </div>
+
+    <div class="setup-step-standalone" id="changepin-screen">
       <button type="button" class="chpin-cancel" id="chpin-cancel">✕</button>
       <div class="lock-sub" id="chpin-sub" data-i18n="pin.enterCurrent">Enter your current code</div>
       <div class="pin-dots" id="chpin-dots">

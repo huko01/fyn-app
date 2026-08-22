@@ -12,7 +12,7 @@ const I18N = {
     'field.name':'Name','field.description':'Description (optional)','field.initialBalance':'Initial balance',
     'theme.title':'Choose your theme','theme.light':'Light','theme.dark':'Dark',
     'hue.title':'Choose your accent tone','hue.subtitle':'Drag to pick the shade for your gradient background.',
-    'pin.create':'Create a 4-digit code','pin.repeat':'Repeat your code','pin.enterCurrent':'Enter your current code',
+    'pin.create':'Create a 4-digit code','pin.repeat':'Repeat your code','pin.enterCurrent':'Enter your current code','pin.enterImport':'Enter this backup\'s code',
     'lock.subtitle':'Enter your code','lock.error':'Incorrect code',
     'lock.forgotPin':'Forgot your PIN?',
     'lock.forgotWarning':'If you forgot your PIN, you now have to clear all app data to get back in. This will permanently delete all your transactions and accounts in this browser.',
@@ -58,7 +58,7 @@ const I18N = {
     'field.name':'Nombre','field.description':'Descripción (opcional)','field.initialBalance':'Saldo inicial',
     'theme.title':'Elige el tema','theme.light':'Claro','theme.dark':'Oscuro',
     'hue.title':'Elige el tono de fondo','hue.subtitle':'Desliza para elegir el tono de tu fondo degradado.',
-    'pin.create':'Crea un código de 4 dígitos','pin.repeat':'Repite tu código','pin.enterCurrent':'Introduce tu código actual',
+    'pin.create':'Crea un código de 4 dígitos','pin.repeat':'Repite tu código','pin.enterCurrent':'Introduce tu código actual','pin.enterImport':'Introduce el código de esta copia',
     'lock.subtitle':'Introduce tu código','lock.error':'Código incorrecto',
     'lock.forgotPin':'¿Olvidaste tu PIN?',
     'lock.forgotWarning':'Si olvidaste tu PIN, ahora tienes que borrar todos los datos de la app para poder entrar. Esto eliminará permanentemente todos tus movimientos y cuentas en este navegador.',
@@ -158,6 +158,8 @@ window.addEventListener('DOMContentLoaded', () => {
   wireForgotPin();
   wireKeypad('#setup-keypad', onSetupDigit);
   wireKeypad('#chpin-keypad', onChangePinDigit);
+  wireKeypad('#importverify-keypad', onImportVerifyDigit);
+  wireImportVerify();
   wireHome();
   wireSettings();
   wireSettingsSheets();
@@ -248,17 +250,21 @@ function onObImportFile(e){
     try {
       const data = JSON.parse(reader.result);
       if (!Array.isArray(data.transactions)) throw new Error('formato inválido');
-      applyImportedData(data);
-      applyTranslations();
-      applyTheme();
-      applyHue(state.hue);
-      buildAccountChips();
-      renderGreeting();
-      renderHome();
-      setupStage = 1; firstPin = ''; enteredPin = '';
-      $('#setup-sub').textContent = t('pin.create');
-      renderDots($('#setup-dots'), 0);
-      goToStep('step-pin');
+      if (data.pinHash) {
+        beginImportVerify(data, 'onboarding');
+      } else {
+        applyImportedData(data);
+        applyTranslations();
+        applyTheme();
+        applyHue(state.hue);
+        buildAccountChips();
+        renderGreeting();
+        renderHome();
+        setupStage = 1; firstPin = ''; enteredPin = '';
+        $('#setup-sub').textContent = t('pin.create');
+        renderDots($('#setup-dots'), 0);
+        goToStep('step-pin');
+      }
     } catch(err){
       alert(t('error.invalidBackup'));
     }
@@ -510,6 +516,66 @@ function unlockApp(){
   $('#app').classList.add('show');
   renderGreeting();
   buildAccountChips();
+}
+let pendingImportData = null;
+let pendingImportContext = null;
+let importVerifyPin = '';
+function wireImportVerify(){
+  $('#importverify-cancel').addEventListener('click', closeImportVerify);
+}
+function beginImportVerify(data, context){
+  pendingImportData = data;
+  pendingImportContext = context;
+  importVerifyPin = '';
+  $('#importverify-error').classList.remove('show');
+  renderDots($('#importverify-dots'), 0);
+  $('#import-verify-screen').classList.add('show');
+}
+function closeImportVerify(){
+  $('#import-verify-screen').classList.remove('show');
+  pendingImportData = null; pendingImportContext = null; importVerifyPin = '';
+}
+function finishImport(data, context){
+  applyImportedData(data);
+  applyTranslations();
+  applyTheme();
+  applyHue(state.hue);
+  buildAccountChips();
+  renderGreeting();
+  renderHome();
+  if (context === 'onboarding') {
+    state.onboardingDone = true;
+    DB.set('onboardingDone', true);
+    $('#setup').classList.remove('show');
+    $('#lock').classList.add('hidden');
+    $('#app').classList.add('show');
+  } else {
+    showToast(t('toast.imported'));
+  }
+}
+function onImportVerifyDigit(d){
+  const dotsEl = $('#importverify-dots');
+  if (d === 'del') { importVerifyPin = importVerifyPin.slice(0,-1); renderDots(dotsEl, importVerifyPin.length); return; }
+  if (importVerifyPin.length >= 4) return;
+  importVerifyPin += d;
+  renderDots(dotsEl, importVerifyPin.length);
+  if (importVerifyPin.length === 4) {
+    setTimeout(async () => {
+      const hash = await sha256(importVerifyPin);
+      if (hash === pendingImportData.pinHash) {
+        const data = pendingImportData;
+        const context = pendingImportContext;
+        closeImportVerify();
+        finishImport(data, context);
+      } else {
+        dotsEl.classList.add('shake');
+        $$('#importverify-dots .pin-dot').forEach(el=>el.classList.add('err'));
+        $('#importverify-error').classList.add('show');
+        navigator.vibrate && navigator.vibrate(80);
+        setTimeout(()=>{ dotsEl.classList.remove('shake'); importVerifyPin=''; renderDots(dotsEl,0); }, 450);
+      }
+    }, 100);
+  }
 }
 function renderDots(container, count){
   const dots = container.querySelectorAll('.pin-dot');
@@ -1018,6 +1084,7 @@ function exportData(){
     currency: state.currency,
     themeMode: state.themeMode,
     hue: state.hue,
+    pinHash: state.pinHash,
     accounts: state.accounts,
     transactions: state.transactions,
     exportedAt: new Date().toISOString()
@@ -1040,6 +1107,7 @@ function applyImportedData(data){
   if (typeof data.currency === 'string') state.currency = data.currency;
   if (typeof data.themeMode === 'string') state.themeMode = data.themeMode;
   if (typeof data.hue === 'number') state.hue = data.hue;
+  if (typeof data.pinHash === 'string') state.pinHash = data.pinHash;
   DB.set('transactions', state.transactions);
   DB.set('accounts', state.accounts);
   DB.set('language', state.language);
@@ -1048,6 +1116,7 @@ function applyImportedData(data){
   DB.set('currency', state.currency);
   DB.set('themeMode', state.themeMode);
   DB.set('hue', state.hue);
+  if (typeof data.pinHash === 'string') DB.set('pinHash', state.pinHash);
 }
 function importData(e){
   const file = e.target.files[0];
@@ -1057,7 +1126,9 @@ function importData(e){
     try {
       const data = JSON.parse(reader.result);
       if (!Array.isArray(data.transactions)) throw new Error('formato inválido');
-      if (confirm(t('confirm.import',{n:data.transactions.length}))) {
+      if (data.pinHash) {
+        beginImportVerify(data, 'settings');
+      } else if (confirm(t('confirm.import',{n:data.transactions.length}))) {
         applyImportedData(data);
         applyTranslations();
         applyTheme();
