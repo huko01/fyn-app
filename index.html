@@ -39,6 +39,8 @@
             <span class="ob-card-label">Español</span>
           </button>
         </div>
+        <button type="button" class="ob-import-btn" id="ob-import-btn" data-i18n="settings.import">Import data (.json)</button>
+        <input type="file" id="ob-import-file" accept="application/json">
       </div>
     </div>
 
@@ -133,7 +135,6 @@
     </div>
 
         <div class="setup-step" id="step-pin">
-      <div class="lock-title">Fyn</div>
       <div class="lock-sub" id="setup-sub" data-i18n="pin.create">Create a 4-digit code</div>
       <div class="pin-dots" id="setup-dots">
         <div class="pin-dot"></div><div class="pin-dot"></div><div class="pin-dot"></div><div class="pin-dot"></div>
@@ -226,7 +227,34 @@
       </div>
     </div>
 
-        <div class="sheet-backdrop" id="accsheet-backdrop"></div>
+        <div class="setup-step-standalone" id="changepin-screen">
+      <button type="button" class="chpin-cancel" id="chpin-cancel">✕</button>
+      <div class="lock-sub" id="chpin-sub" data-i18n="pin.enterCurrent">Enter your current code</div>
+      <div class="pin-dots" id="chpin-dots">
+        <div class="pin-dot"></div><div class="pin-dot"></div><div class="pin-dot"></div><div class="pin-dot"></div>
+      </div>
+      <div class="lock-error" id="chpin-error" data-i18n="lock.error">Incorrect code</div>
+      <div class="keypad" id="chpin-keypad">
+        <button class="key" data-k="1">1</button><button class="key" data-k="2">2</button><button class="key" data-k="3">3</button>
+        <button class="key" data-k="4">4</button><button class="key" data-k="5">5</button><button class="key" data-k="6">6</button>
+        <button class="key" data-k="7">7</button><button class="key" data-k="8">8</button><button class="key" data-k="9">9</button>
+        <button class="key ghost"></button><button class="key" data-k="0">0</button>
+        <button class="key" data-k="del">⌫</button>
+      </div>
+    </div>
+
+    <div class="setup-step-standalone" id="hue-editor">
+      <div class="ob-wrap">
+        <div class="ob-title" data-i18n="hue.title">Choose your accent tone</div>
+        <div class="ob-sub" data-i18n="hue.subtitle">Drag to pick the shade for your gradient background.</div>
+        <div class="hue-preview" id="accent-hue-preview"></div>
+        <input type="range" min="0" max="360" value="248" class="hue-slider" id="accent-hue-slider">
+        <button type="button" class="hue-reset" id="accent-hue-reset" data-i18n="action.resetDefault">Reset to default</button>
+        <button type="button" class="continue-btn" id="accent-hue-done" data-i18n="action.done">Done</button>
+      </div>
+    </div>
+
+    <div class="sheet-backdrop" id="accsheet-backdrop"></div>
     <div class="sheet acc-switch-sheet" id="acc-switch-sheet">
       <div class="sheet-handle"></div>
       <div class="sheet-head">
@@ -236,16 +264,47 @@
       <div class="sheet-body" id="acc-switch-list"></div>
     </div>
 
+    <div class="sheet-backdrop" id="settings-sheet-backdrop"></div>
+    <div class="sheet" id="lang-sheet">
+      <div class="sheet-handle"></div>
+      <div class="sheet-head">
+        <h3 data-i18n="settings.language">Language</h3>
+        <button class="sheet-close" id="lang-sheet-close">✕</button>
+      </div>
+      <div class="sheet-body" id="lang-sheet-list"></div>
+    </div>
+    <div class="sheet" id="pronoun-sheet">
+      <div class="sheet-handle"></div>
+      <div class="sheet-head">
+        <h3 data-i18n="settings.pronoun">Pronouns</h3>
+        <button class="sheet-close" id="pronoun-sheet-close">✕</button>
+      </div>
+      <div class="sheet-body" id="pronoun-sheet-list"></div>
+    </div>
+
         <div class="page" id="page-settings">
       <div class="settings-header">
         <button class="back-btn" id="settings-back"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg></button>
         <div class="page-title-inline" data-i18n="settings.title">Settings</div>
       </div>
       <div class="settings-group">
-        <div class="settings-row"><span data-i18n="settings.darkMode">Dark mode</span><div class="switch" id="dark-switch"></div></div>
+        <button type="button" class="settings-row settings-nav" id="lang-open-btn">
+          <span data-i18n="settings.language">Language</span>
+          <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
+        </button>
+        <button type="button" class="settings-row settings-nav" id="pronoun-open-btn">
+          <span data-i18n="settings.pronoun">Pronouns</span>
+          <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
+        </button>
       </div>
       <div class="settings-group">
-        <div class="settings-row"><span data-i18n="settings.savedTx">Saved transactions</span><span class="hint" id="tx-count">0</span></div>
+        <div class="settings-row"><span data-i18n="settings.darkMode">Dark mode</span><div class="switch" id="dark-switch"></div></div>
+        <button type="button" class="settings-row settings-nav" id="hue-open-btn">
+          <span data-i18n="settings.accentTone">Accent tone</span>
+          <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
+        </button>
+      </div>
+      <div class="settings-group">
         <div class="settings-row"><span data-i18n="settings.changePin">Change PIN</span><button id="changepin-btn" data-i18n="settings.change">Change</button></div>
       </div>
       <div class="settings-group">

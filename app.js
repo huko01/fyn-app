@@ -2,7 +2,7 @@
 const I18N = {
   en: {
     'lang.title':'Choose your language','lang.subtitle':'You can change this later in settings.',
-    'action.continue':'Continue','action.add':'Add','action.save':'Save','action.resetDefault':'Reset to default',
+    'action.continue':'Continue','action.add':'Add','action.save':'Save','action.resetDefault':'Reset to default','action.done':'Done',
     'name.title':"What's your name?",'name.placeholder':'Your name',
     'pronoun.title':'Which pronouns do you use?','pronoun.subtitle':'This helps Fyn address you the way you prefer.',
     'pronoun.he':'He/him','pronoun.she':'She/her','pronoun.they':'They/them','pronoun.unspecified':'Prefer not to say',
@@ -12,7 +12,7 @@ const I18N = {
     'field.name':'Name','field.description':'Description (optional)','field.initialBalance':'Initial balance',
     'theme.title':'Choose your theme','theme.light':'Light','theme.dark':'Dark',
     'hue.title':'Choose your accent tone','hue.subtitle':'Drag to pick the shade for your gradient background.',
-    'pin.create':'Create a 4-digit code','pin.repeat':'Repeat your code',
+    'pin.create':'Create a 4-digit code','pin.repeat':'Repeat your code','pin.enterCurrent':'Enter your current code',
     'lock.subtitle':'Enter your code','lock.error':'Incorrect code',
     'lock.forgotPin':'Forgot your PIN?',
     'lock.forgotWarning':'If you forgot your PIN, you now have to clear all app data to get back in. This will permanently delete all your transactions and accounts in this browser.',
@@ -31,12 +31,13 @@ const I18N = {
     'logo.searching':'Searching logo…','logo.found':'Logo found for {d}','logo.notfound':'No logo found — initials will be used',
     'toast.expenseAdded':'Expense added','toast.incomeAdded':'Income added','toast.deleted':'Transaction deleted','toast.comingSoon':'Coming soon',
     'confirm.delete':'Delete this transaction?',
-    'settings.title':'Settings','settings.darkMode':'Dark mode','settings.savedTx':'Saved transactions',
+    'settings.title':'Settings','settings.darkMode':'Dark mode',
+    'settings.language':'Language','settings.pronoun':'Pronouns','settings.accentTone':'Accent tone',
     'settings.changePin':'Change PIN','settings.change':'Change',
     'settings.export':'Export data (.json)','settings.exportBtn':'Export',
     'settings.import':'Import data (.json)','settings.importBtn':'Import',
     'settings.deleteAll':'Delete all data','settings.deleteBtn':'Delete',
-    'toast.exported':'Data exported','toast.imported':'Data imported','toast.dataDeleted':'Data deleted',
+    'toast.exported':'Data exported','toast.imported':'Data imported','toast.dataDeleted':'Data deleted','toast.pinChanged':'PIN changed',
     'confirm.import':'This will import {n} transactions. Replace current data?',
     'error.invalidBackup':'This file is not a valid backup.',
     'confirm.reset':'This will delete all transactions saved on this device. Continue?',
@@ -47,7 +48,7 @@ const I18N = {
   },
   es: {
     'lang.title':'Elige tu idioma','lang.subtitle':'Podrás cambiarlo más tarde en ajustes.',
-    'action.continue':'Continuar','action.add':'Añadir','action.save':'Guardar','action.resetDefault':'Restaurar por defecto',
+    'action.continue':'Continuar','action.add':'Añadir','action.save':'Guardar','action.resetDefault':'Restaurar por defecto','action.done':'Listo',
     'name.title':'¿Cómo te llamas?','name.placeholder':'Tu nombre',
     'pronoun.title':'¿Qué pronombres usas?','pronoun.subtitle':'Esto ayuda a Fyn a dirigirse a ti como prefieras.',
     'pronoun.he':'Él','pronoun.she':'Ella','pronoun.they':'Elle','pronoun.unspecified':'Prefiero no decirlo',
@@ -57,7 +58,7 @@ const I18N = {
     'field.name':'Nombre','field.description':'Descripción (opcional)','field.initialBalance':'Saldo inicial',
     'theme.title':'Elige el tema','theme.light':'Claro','theme.dark':'Oscuro',
     'hue.title':'Elige el tono de fondo','hue.subtitle':'Desliza para elegir el tono de tu fondo degradado.',
-    'pin.create':'Crea un código de 4 dígitos','pin.repeat':'Repite tu código',
+    'pin.create':'Crea un código de 4 dígitos','pin.repeat':'Repite tu código','pin.enterCurrent':'Introduce tu código actual',
     'lock.subtitle':'Introduce tu código','lock.error':'Código incorrecto',
     'lock.forgotPin':'¿Olvidaste tu PIN?',
     'lock.forgotWarning':'Si olvidaste tu PIN, ahora tienes que borrar todos los datos de la app para poder entrar. Esto eliminará permanentemente todos tus movimientos y cuentas en este navegador.',
@@ -76,12 +77,13 @@ const I18N = {
     'logo.searching':'Buscando logo…','logo.found':'Logo encontrado para {d}','logo.notfound':'Sin logo — se usarán las iniciales',
     'toast.expenseAdded':'Gasto añadido','toast.incomeAdded':'Ingreso añadido','toast.deleted':'Movimiento eliminado','toast.comingSoon':'Próximamente',
     'confirm.delete':'¿Eliminar este movimiento?',
-    'settings.title':'Ajustes','settings.darkMode':'Modo oscuro','settings.savedTx':'Movimientos guardados',
+    'settings.title':'Ajustes','settings.darkMode':'Modo oscuro',
+    'settings.language':'Idioma','settings.pronoun':'Pronombres','settings.accentTone':'Tono de acento',
     'settings.changePin':'Cambiar código PIN','settings.change':'Cambiar',
     'settings.export':'Exportar datos (.json)','settings.exportBtn':'Exportar',
     'settings.import':'Importar datos (.json)','settings.importBtn':'Importar',
     'settings.deleteAll':'Borrar todos los datos','settings.deleteBtn':'Borrar',
-    'toast.exported':'Datos exportados','toast.imported':'Datos importados','toast.dataDeleted':'Datos borrados',
+    'toast.exported':'Datos exportados','toast.imported':'Datos importados','toast.dataDeleted':'Datos borrados','toast.pinChanged':'PIN actualizado',
     'confirm.import':'Se importarán {n} movimientos. ¿Reemplazar los datos actuales?',
     'error.invalidBackup':'El archivo no es un backup válido.',
     'confirm.reset':'Esto borrará todos los movimientos guardados en este dispositivo. ¿Continuar?',
@@ -155,8 +157,10 @@ window.addEventListener('DOMContentLoaded', () => {
   wireKeypad('#lock-keypad', onLockDigit);
   wireForgotPin();
   wireKeypad('#setup-keypad', onSetupDigit);
+  wireKeypad('#chpin-keypad', onChangePinDigit);
   wireHome();
   wireSettings();
+  wireSettingsSheets();
   wireSheet();
   wireAccountSwitch();
   renderAvatar();
@@ -233,6 +237,34 @@ function wireLangStep(){
       setTimeout(()=> goToStep('step-name'), 280);
     });
   });
+  $('#ob-import-btn').addEventListener('click', ()=> $('#ob-import-file').click());
+  $('#ob-import-file').addEventListener('change', onObImportFile);
+}
+function onObImportFile(e){
+  const file = e.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = () => {
+    try {
+      const data = JSON.parse(reader.result);
+      if (!Array.isArray(data.transactions)) throw new Error('formato inválido');
+      applyImportedData(data);
+      applyTranslations();
+      applyTheme();
+      applyHue(state.hue);
+      buildAccountChips();
+      renderGreeting();
+      renderHome();
+      setupStage = 1; firstPin = ''; enteredPin = '';
+      $('#setup-sub').textContent = t('pin.create');
+      renderDots($('#setup-dots'), 0);
+      goToStep('step-pin');
+    } catch(err){
+      alert(t('error.invalidBackup'));
+    }
+  };
+  reader.readAsText(file);
+  e.target.value = '';
 }
 
 function wireNameStep(){
@@ -486,6 +518,79 @@ function renderDots(container, count){
     el.classList.remove('err');
   });
 }
+
+let chPinStage = 'current';
+let chPinCurrent = '';
+let chPinNew = '';
+let chPinConfirm = '';
+function openChangePinScreen(){
+  chPinStage = 'current';
+  chPinCurrent = ''; chPinNew = ''; chPinConfirm = '';
+  $('#chpin-sub').textContent = t('pin.enterCurrent');
+  $('#chpin-error').classList.remove('show');
+  renderDots($('#chpin-dots'), 0);
+  $('#changepin-screen').classList.add('show');
+}
+function closeChangePinScreen(){
+  $('#changepin-screen').classList.remove('show');
+  chPinStage = 'current';
+  chPinCurrent = ''; chPinNew = ''; chPinConfirm = '';
+}
+function onChangePinDigit(d){
+  const dotsEl = $('#chpin-dots');
+  const getBuf = () => chPinStage === 'current' ? chPinCurrent : chPinStage === 'new' ? chPinNew : chPinConfirm;
+  const setBuf = (v) => {
+    if (chPinStage === 'current') chPinCurrent = v;
+    else if (chPinStage === 'new') chPinNew = v;
+    else chPinConfirm = v;
+  };
+  if (d === 'del') { setBuf(getBuf().slice(0,-1)); renderDots(dotsEl, getBuf().length); return; }
+  let buf = getBuf();
+  if (buf.length >= 4) return;
+  buf += d;
+  setBuf(buf);
+  renderDots(dotsEl, buf.length);
+  if (buf.length === 4) {
+    setTimeout(async () => {
+      if (chPinStage === 'current') {
+        const hash = await sha256(chPinCurrent);
+        if (hash === state.pinHash) {
+          chPinStage = 'new';
+          chPinCurrent = '';
+          $('#chpin-error').classList.remove('show');
+          $('#chpin-sub').textContent = t('pin.create');
+          renderDots(dotsEl, 0);
+        } else {
+          dotsEl.classList.add('shake');
+          $$('#chpin-dots .pin-dot').forEach(el=>el.classList.add('err'));
+          $('#chpin-error').classList.add('show');
+          navigator.vibrate && navigator.vibrate(80);
+          setTimeout(()=>{ dotsEl.classList.remove('shake'); chPinCurrent=''; renderDots(dotsEl,0); }, 450);
+        }
+      } else if (chPinStage === 'new') {
+        chPinStage = 'confirm';
+        $('#chpin-sub').textContent = t('pin.repeat');
+        renderDots(dotsEl, 0);
+      } else {
+        if (chPinConfirm === chPinNew) {
+          state.pinHash = await sha256(chPinNew);
+          DB.set('pinHash', state.pinHash);
+          closeChangePinScreen();
+          showToast(t('toast.pinChanged'));
+        } else {
+          dotsEl.classList.add('shake');
+          $$('#chpin-dots .pin-dot').forEach(el=>el.classList.add('err'));
+          setTimeout(()=>{
+            dotsEl.classList.remove('shake');
+            chPinStage = 'new'; chPinNew=''; chPinConfirm='';
+            $('#chpin-sub').textContent = t('pin.create');
+            renderDots(dotsEl, 0);
+          }, 500);
+        }
+      }
+    }, 120);
+  }
+}
 function wireKeypad(sel, handler){
   $(sel).querySelectorAll('.key').forEach(k=>{
     k.addEventListener('click', ()=> {
@@ -542,9 +647,79 @@ function onAvatarChange(e){
 }
 function openSettings(){
   $('#dark-switch').classList.toggle('on', document.body.classList.contains('dark'));
-  $('#tx-count').textContent = state.transactions.length;
   $('#page-home').classList.remove('active');
   $('#page-settings').classList.add('active');
+}
+function wireSettingsSheets(){
+  $('#lang-open-btn').addEventListener('click', openLangSheet);
+  $('#pronoun-open-btn').addEventListener('click', openPronounSheet);
+  $('#lang-sheet-close').addEventListener('click', closeSettingsSheets);
+  $('#pronoun-sheet-close').addEventListener('click', closeSettingsSheets);
+  $('#settings-sheet-backdrop').addEventListener('click', closeSettingsSheets);
+  $('#hue-open-btn').addEventListener('click', openHueEditor);
+  $('#accent-hue-done').addEventListener('click', closeHueEditor);
+}
+function closeSettingsSheets(){
+  $('#settings-sheet-backdrop').classList.remove('show');
+  $('#lang-sheet').classList.remove('show');
+  $('#pronoun-sheet').classList.remove('show');
+}
+function openLangSheet(){
+  const opts = [['en','English'],['es','Español']];
+  $('#lang-sheet-list').innerHTML = opts.map(([code,label])=>
+    `<button type="button" class="sheet-option-row${state.language===code?' active':''}" data-lang="${code}"><span>${label}</span><span class="check"></span></button>`
+  ).join('');
+  $$('#lang-sheet-list .sheet-option-row').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      if (state.language !== btn.dataset.lang) {
+        state.language = btn.dataset.lang;
+        DB.set('language', state.language);
+        applyTranslations();
+        renderHome();
+      }
+      closeSettingsSheets();
+    });
+  });
+  $('#settings-sheet-backdrop').classList.add('show');
+  $('#lang-sheet').classList.add('show');
+}
+function openPronounSheet(){
+  const opts = ['he','she','they','unspecified'];
+  $('#pronoun-sheet-list').innerHTML = opts.map(p=>
+    `<button type="button" class="sheet-option-row${state.pronoun===p?' active':''}" data-p="${p}"><span>${t('pronoun.'+p)}</span><span class="check"></span></button>`
+  ).join('');
+  $$('#pronoun-sheet-list .sheet-option-row').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      state.pronoun = btn.dataset.p;
+      DB.set('pronoun', state.pronoun);
+      renderGreeting();
+      closeSettingsSheets();
+    });
+  });
+  $('#settings-sheet-backdrop').classList.add('show');
+  $('#pronoun-sheet').classList.add('show');
+}
+function openHueEditor(){
+  const slider = $('#accent-hue-slider');
+  const preview = $('#accent-hue-preview');
+  const update = (h)=>{
+    const c = hueColors(h);
+    preview.style.background = `linear-gradient(150deg,${c.a},${c.b} 55%,${c.c})`;
+    applyHue(h);
+  };
+  slider.value = state.hue;
+  update(state.hue);
+  slider.oninput = ()=>{ state.hue = parseInt(slider.value,10); update(state.hue); };
+  $('#accent-hue-reset').onclick = ()=>{
+    state.hue = DEFAULT_HUE;
+    slider.value = DEFAULT_HUE;
+    update(DEFAULT_HUE);
+  };
+  $('#hue-editor').classList.add('show');
+}
+function closeHueEditor(){
+  DB.set('hue', state.hue);
+  $('#hue-editor').classList.remove('show');
 }
 function closeSettings(){
   $('#page-settings').classList.remove('active');
@@ -832,13 +1007,21 @@ function wireSettings(){
   $('#delete-continue-btn').addEventListener('click', openDeletePinConfirm);
   $('#delete-pin-cancel').addEventListener('click', closeDeleteModals);
   wireKeypad('#delete-pin-keypad', onDeletePinDigit);
-  $('#changepin-btn').addEventListener('click', ()=>{
-    DB.set('pinHash', null);
-    location.reload();
-  });
+  $('#changepin-btn').addEventListener('click', openChangePinScreen);
+  $('#chpin-cancel').addEventListener('click', closeChangePinScreen);
 }
 function exportData(){
-  const payload = { transactions: state.transactions, accounts: state.accounts, exportedAt: new Date().toISOString() };
+  const payload = {
+    language: state.language,
+    userName: state.userName,
+    pronoun: state.pronoun,
+    currency: state.currency,
+    themeMode: state.themeMode,
+    hue: state.hue,
+    accounts: state.accounts,
+    transactions: state.transactions,
+    exportedAt: new Date().toISOString()
+  };
   const blob = new Blob([JSON.stringify(payload, null, 2)], {type:'application/json'});
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
@@ -847,6 +1030,24 @@ function exportData(){
   a.click();
   URL.revokeObjectURL(url);
   showToast(t('toast.exported'));
+}
+function applyImportedData(data){
+  state.transactions = Array.isArray(data.transactions) ? data.transactions : [];
+  if (Array.isArray(data.accounts)) state.accounts = data.accounts;
+  if (typeof data.language === 'string') state.language = data.language;
+  if (typeof data.userName === 'string') state.userName = data.userName;
+  if (typeof data.pronoun === 'string') state.pronoun = data.pronoun;
+  if (typeof data.currency === 'string') state.currency = data.currency;
+  if (typeof data.themeMode === 'string') state.themeMode = data.themeMode;
+  if (typeof data.hue === 'number') state.hue = data.hue;
+  DB.set('transactions', state.transactions);
+  DB.set('accounts', state.accounts);
+  DB.set('language', state.language);
+  DB.set('userName', state.userName);
+  DB.set('pronoun', state.pronoun);
+  DB.set('currency', state.currency);
+  DB.set('themeMode', state.themeMode);
+  DB.set('hue', state.hue);
 }
 function importData(e){
   const file = e.target.files[0];
@@ -857,13 +1058,13 @@ function importData(e){
       const data = JSON.parse(reader.result);
       if (!Array.isArray(data.transactions)) throw new Error('formato inválido');
       if (confirm(t('confirm.import',{n:data.transactions.length}))) {
-        state.transactions = data.transactions;
-        if (Array.isArray(data.accounts)) state.accounts = data.accounts;
-        DB.set('transactions', state.transactions);
-        DB.set('accounts', state.accounts);
+        applyImportedData(data);
+        applyTranslations();
+        applyTheme();
+        applyHue(state.hue);
         buildAccountChips();
+        renderGreeting();
         renderHome();
-        $('#tx-count').textContent = state.transactions.length;
         showToast(t('toast.imported'));
       }
     } catch(err){
