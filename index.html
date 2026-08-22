@@ -146,6 +146,7 @@
         <button class="key ghost"></button><button class="key" data-k="0">0</button>
         <button class="key" data-k="del">⌫</button>
       </div>
+      <button type="button" class="skip-pin-btn" id="skip-pin-btn" data-i18n="action.skip">Skip</button>
     </div>
   </div>
 
@@ -321,7 +322,8 @@
         </button>
       </div>
       <div class="settings-group">
-        <div class="settings-row"><span data-i18n="settings.changePin">Change PIN</span><button id="changepin-btn" data-i18n="settings.change">Change</button></div>
+        <div class="settings-row" id="pin-row"><span id="pin-row-label" data-i18n="settings.changePin">Change PIN</span><button id="changepin-btn" data-i18n="settings.change">Change</button></div>
+        <div class="settings-row" id="deletepin-row"><span data-i18n="settings.deletePin">Delete password</span><button class="danger" id="deletepin-btn" data-i18n="settings.deleteBtn">Delete</button></div>
       </div>
       <div class="settings-group">
         <div class="settings-row"><span data-i18n="settings.export">Export data (.json)</span><button id="export-btn" data-i18n="settings.exportBtn">Export</button></div>
@@ -394,6 +396,22 @@
       <button class="key" data-k="del">⌫</button>
     </div>
     <button class="modal-btn ghost" id="delete-pin-cancel" data-i18n="delete.cancel">Cancel</button>
+  </div>
+
+  <div class="modal pin-modal" id="deletepin-pin-modal">
+    <div class="lock-sub" data-i18n="delete.pinPrompt">Enter your PIN to confirm</div>
+    <div class="pin-dots" id="deletepin-pin-dots">
+      <div class="pin-dot"></div><div class="pin-dot"></div><div class="pin-dot"></div><div class="pin-dot"></div>
+    </div>
+    <div class="lock-error" id="deletepin-pin-error" data-i18n="lock.error">Incorrect code</div>
+    <div class="keypad" id="deletepin-pin-keypad">
+      <button class="key" data-k="1">1</button><button class="key" data-k="2">2</button><button class="key" data-k="3">3</button>
+      <button class="key" data-k="4">4</button><button class="key" data-k="5">5</button><button class="key" data-k="6">6</button>
+      <button class="key" data-k="7">7</button><button class="key" data-k="8">8</button><button class="key" data-k="9">9</button>
+      <button class="key ghost"></button><button class="key" data-k="0">0</button>
+      <button class="key" data-k="del">⌫</button>
+    </div>
+    <button class="modal-btn ghost" id="deletepin-pin-cancel" data-i18n="delete.cancel">Cancel</button>
   </div>
 
   <div class="toast" id="toast"></div>

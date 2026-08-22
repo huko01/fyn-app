@@ -2,7 +2,7 @@
 const I18N = {
   en: {
     'lang.title':'Choose your language','lang.subtitle':'You can change this later in settings.',
-    'action.continue':'Continue','action.add':'Add','action.save':'Save','action.resetDefault':'Reset to default','action.done':'Done',
+    'action.continue':'Continue','action.add':'Add','action.save':'Save','action.resetDefault':'Reset to default','action.done':'Done','action.skip':'Skip',
     'name.title':"What's your name?",'name.placeholder':'Your name',
     'pronoun.title':'Which pronouns do you use?','pronoun.subtitle':'This helps Fyn address you the way you prefer.',
     'pronoun.he':'He/him','pronoun.she':'She/her','pronoun.they':'They/them','pronoun.unspecified':'Prefer not to say',
@@ -33,11 +33,11 @@ const I18N = {
     'confirm.delete':'Delete this transaction?',
     'settings.title':'Settings','settings.darkMode':'Dark mode',
     'settings.language':'Language','settings.pronoun':'Pronouns','settings.accentTone':'Accent tone',
-    'settings.changePin':'Change PIN','settings.change':'Change',
+    'settings.changePin':'Change PIN','settings.change':'Change','settings.createPin':'Create password','settings.createBtn':'Create','settings.deletePin':'Delete password',
     'settings.export':'Export data (.json)','settings.exportBtn':'Export',
     'settings.import':'Import data (.json)','settings.importBtn':'Import',
     'settings.deleteAll':'Delete all data','settings.deleteBtn':'Delete',
-    'toast.exported':'Data exported','toast.imported':'Data imported','toast.dataDeleted':'Data deleted','toast.pinChanged':'PIN changed',
+    'toast.exported':'Data exported','toast.imported':'Data imported','toast.dataDeleted':'Data deleted','toast.pinChanged':'PIN changed','toast.pinCreated':'Password created','toast.pinDeleted':'Password deleted',
     'confirm.import':'This will import {n} transactions. Replace current data?',
     'error.invalidBackup':'This file is not a valid backup.',
     'confirm.reset':'This will delete all transactions saved on this device. Continue?',
@@ -48,7 +48,7 @@ const I18N = {
   },
   es: {
     'lang.title':'Elige tu idioma','lang.subtitle':'Podrás cambiarlo más tarde en ajustes.',
-    'action.continue':'Continuar','action.add':'Añadir','action.save':'Guardar','action.resetDefault':'Restaurar por defecto','action.done':'Listo',
+    'action.continue':'Continuar','action.add':'Añadir','action.save':'Guardar','action.resetDefault':'Restaurar por defecto','action.done':'Listo','action.skip':'Omitir',
     'name.title':'¿Cómo te llamas?','name.placeholder':'Tu nombre',
     'pronoun.title':'¿Qué pronombres usas?','pronoun.subtitle':'Esto ayuda a Fyn a dirigirse a ti como prefieras.',
     'pronoun.he':'Él','pronoun.she':'Ella','pronoun.they':'Elle','pronoun.unspecified':'Prefiero no decirlo',
@@ -79,11 +79,11 @@ const I18N = {
     'confirm.delete':'¿Eliminar este movimiento?',
     'settings.title':'Ajustes','settings.darkMode':'Modo oscuro',
     'settings.language':'Idioma','settings.pronoun':'Pronombres','settings.accentTone':'Tono de acento',
-    'settings.changePin':'Cambiar código PIN','settings.change':'Cambiar',
+    'settings.changePin':'Cambiar código PIN','settings.change':'Cambiar','settings.createPin':'Crear contraseña','settings.createBtn':'Crear','settings.deletePin':'Borrar contraseña',
     'settings.export':'Exportar datos (.json)','settings.exportBtn':'Exportar',
     'settings.import':'Importar datos (.json)','settings.importBtn':'Importar',
     'settings.deleteAll':'Borrar todos los datos','settings.deleteBtn':'Borrar',
-    'toast.exported':'Datos exportados','toast.imported':'Datos importados','toast.dataDeleted':'Datos borrados','toast.pinChanged':'PIN actualizado',
+    'toast.exported':'Datos exportados','toast.imported':'Datos importados','toast.dataDeleted':'Datos borrados','toast.pinChanged':'PIN actualizado','toast.pinCreated':'Contraseña creada','toast.pinDeleted':'Contraseña borrada',
     'confirm.import':'Se importarán {n} movimientos. ¿Reemplazar los datos actuales?',
     'error.invalidBackup':'El archivo no es un backup válido.',
     'confirm.reset':'Esto borrará todos los movimientos guardados en este dispositivo. ¿Continuar?',
@@ -157,6 +157,7 @@ window.addEventListener('DOMContentLoaded', () => {
   wireKeypad('#lock-keypad', onLockDigit);
   wireForgotPin();
   wireKeypad('#setup-keypad', onSetupDigit);
+  $('#skip-pin-btn').addEventListener('click', skipPinSetup);
   wireKeypad('#chpin-keypad', onChangePinDigit);
   wireKeypad('#importverify-keypad', onImportVerifyDigit);
   wireImportVerify();
@@ -168,12 +169,17 @@ window.addEventListener('DOMContentLoaded', () => {
   renderAvatar();
   renderGreeting();
   renderHome();
+  refreshPinRows();
 
   setTimeout(()=>{
     $('#splash').classList.add('hidden');
     if (!state.onboardingDone) {
       $('#setup').classList.add('show');
       startOnboarding();
+    } else if (!state.pinHash) {
+      $('#app').classList.add('show');
+      renderGreeting();
+      buildAccountChips();
     } else {
       $('#lock-title').textContent = t('welcome.' + (state.pronoun || 'unspecified'));
       $('#lock').classList.remove('hidden');
@@ -253,17 +259,7 @@ function onObImportFile(e){
       if (data.pinHash) {
         beginImportVerify(data, 'onboarding');
       } else {
-        applyImportedData(data);
-        applyTranslations();
-        applyTheme();
-        applyHue(state.hue);
-        buildAccountChips();
-        renderGreeting();
-        renderHome();
-        setupStage = 1; firstPin = ''; enteredPin = '';
-        $('#setup-sub').textContent = t('pin.create');
-        renderDots($('#setup-dots'), 0);
-        goToStep('step-pin');
+        finishImport(data, 'onboarding');
       }
     } catch(err){
       alert(t('error.invalidBackup'));
@@ -440,6 +436,16 @@ function wireHueStep(){
   });
 }
 
+function skipPinSetup(){
+  state.pinHash = null;
+  DB.set('pinHash', null);
+  state.onboardingDone = true;
+  DB.set('onboardingDone', true);
+  $('#setup').classList.remove('show');
+  renderHome();
+  buildAccountChips();
+  unlockApp();
+}
 let setupStage = 1;
 let firstPin = '';
 function onSetupDigit(d){
@@ -589,10 +595,12 @@ let chPinStage = 'current';
 let chPinCurrent = '';
 let chPinNew = '';
 let chPinConfirm = '';
-function openChangePinScreen(){
-  chPinStage = 'current';
+let chPinMode = 'change';
+function openChangePinScreen(mode){
+  chPinMode = state.pinHash ? (mode || 'change') : 'create';
+  chPinStage = chPinMode === 'create' ? 'new' : 'current';
   chPinCurrent = ''; chPinNew = ''; chPinConfirm = '';
-  $('#chpin-sub').textContent = t('pin.enterCurrent');
+  $('#chpin-sub').textContent = chPinStage === 'current' ? t('pin.enterCurrent') : t('pin.create');
   $('#chpin-error').classList.remove('show');
   renderDots($('#chpin-dots'), 0);
   $('#changepin-screen').classList.add('show');
@@ -641,8 +649,10 @@ function onChangePinDigit(d){
         if (chPinConfirm === chPinNew) {
           state.pinHash = await sha256(chPinNew);
           DB.set('pinHash', state.pinHash);
+          const wasCreate = chPinMode === 'create';
           closeChangePinScreen();
-          showToast(t('toast.pinChanged'));
+          refreshPinRows();
+          showToast(wasCreate ? t('toast.pinCreated') : t('toast.pinChanged'));
         } else {
           dotsEl.classList.add('shake');
           $$('#chpin-dots .pin-dot').forEach(el=>el.classList.add('err'));
@@ -713,8 +723,20 @@ function onAvatarChange(e){
 }
 function openSettings(){
   $('#dark-switch').classList.toggle('on', document.body.classList.contains('dark'));
+  refreshPinRows();
   $('#page-home').classList.remove('active');
   $('#page-settings').classList.add('active');
+}
+function refreshPinRows(){
+  const hasPin = !!state.pinHash;
+  const labelKey = hasPin ? 'settings.changePin' : 'settings.createPin';
+  const btnKey = hasPin ? 'settings.change' : 'settings.createBtn';
+  $('#pin-row-label').dataset.i18n = labelKey;
+  $('#pin-row-label').textContent = t(labelKey);
+  $('#changepin-btn').dataset.i18n = btnKey;
+  $('#changepin-btn').textContent = t(btnKey);
+  $('#deletepin-row').classList.toggle('hidden', !hasPin);
+  $('#pin-row').style.borderBottom = hasPin ? '' : 'none';
 }
 function wireSettingsSheets(){
   $('#lang-open-btn').addEventListener('click', openLangSheet);
@@ -1073,7 +1095,10 @@ function wireSettings(){
   $('#delete-continue-btn').addEventListener('click', openDeletePinConfirm);
   $('#delete-pin-cancel').addEventListener('click', closeDeleteModals);
   wireKeypad('#delete-pin-keypad', onDeletePinDigit);
-  $('#changepin-btn').addEventListener('click', openChangePinScreen);
+  $('#deletepin-btn').addEventListener('click', openDeletePinPasswordConfirm);
+  $('#deletepin-pin-cancel').addEventListener('click', closeDeletePinPasswordModal);
+  wireKeypad('#deletepin-pin-keypad', onDeletePinPasswordDigit);
+  $('#changepin-btn').addEventListener('click', ()=> openChangePinScreen());
   $('#chpin-cancel').addEventListener('click', closeChangePinScreen);
 }
 function exportData(){
@@ -1107,7 +1132,7 @@ function applyImportedData(data){
   if (typeof data.currency === 'string') state.currency = data.currency;
   if (typeof data.themeMode === 'string') state.themeMode = data.themeMode;
   if (typeof data.hue === 'number') state.hue = data.hue;
-  if (typeof data.pinHash === 'string') state.pinHash = data.pinHash;
+  if ('pinHash' in data) state.pinHash = (typeof data.pinHash === 'string') ? data.pinHash : null;
   DB.set('transactions', state.transactions);
   DB.set('accounts', state.accounts);
   DB.set('language', state.language);
@@ -1116,7 +1141,7 @@ function applyImportedData(data){
   DB.set('currency', state.currency);
   DB.set('themeMode', state.themeMode);
   DB.set('hue', state.hue);
-  if (typeof data.pinHash === 'string') DB.set('pinHash', state.pinHash);
+  if ('pinHash' in data) DB.set('pinHash', state.pinHash);
 }
 function importData(e){
   const file = e.target.files[0];
@@ -1190,6 +1215,45 @@ function eraseAllData(){
     .forEach(key => localStorage.removeItem(key));
   closeDeleteModals();
   location.reload();
+}
+
+let deletePinPassword = '';
+function openDeletePinPasswordConfirm(){
+  deletePinPassword = '';
+  $('#delete-backdrop').classList.add('show');
+  $('#deletepin-pin-modal').classList.add('show');
+  $('#deletepin-pin-error').classList.remove('show');
+  renderDots($('#deletepin-pin-dots'), 0);
+}
+function closeDeletePinPasswordModal(){
+  $('#delete-backdrop').classList.remove('show');
+  $('#deletepin-pin-modal').classList.remove('show');
+  deletePinPassword = '';
+}
+function onDeletePinPasswordDigit(d){
+  const dotsEl = $('#deletepin-pin-dots');
+  if (d === 'del') { deletePinPassword = deletePinPassword.slice(0,-1); renderDots(dotsEl, deletePinPassword.length); return; }
+  if (deletePinPassword.length >= 4) return;
+  deletePinPassword += d;
+  renderDots(dotsEl, deletePinPassword.length);
+  if (deletePinPassword.length === 4) {
+    setTimeout(async () => {
+      const hash = await sha256(deletePinPassword);
+      if (hash === state.pinHash) {
+        state.pinHash = null;
+        DB.set('pinHash', null);
+        closeDeletePinPasswordModal();
+        refreshPinRows();
+        showToast(t('toast.pinDeleted'));
+      } else {
+        dotsEl.classList.add('shake');
+        $$('#deletepin-pin-dots .pin-dot').forEach(el=>el.classList.add('err'));
+        $('#deletepin-pin-error').classList.add('show');
+        navigator.vibrate && navigator.vibrate(80);
+        setTimeout(()=>{ dotsEl.classList.remove('shake'); deletePinPassword=''; renderDots(dotsEl,0); }, 450);
+      }
+    }, 100);
+  }
 }
 function wireForgotPin(){
   $('#forgot-pin-btn').addEventListener('click', ()=>{
