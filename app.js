@@ -432,8 +432,6 @@ function wireBottomNav(){
         updateBottomNav();
         renderHome();
       } else if (nav === 'movements') {
-        $$('.bottom-nav-btn').forEach(b=>b.classList.remove('active'));
-        btn.classList.add('active');
         openMovementsPage();
       } else {
         showToast(t('toast.comingSoon'));
@@ -832,6 +830,7 @@ function wireHome(){
     searchQuery = e.target.value.trim().toLowerCase();
     renderHome();
   });
+  $('#tx-show-all-btn').addEventListener('click', openMovementsPage);
 }
 let profileReturnPage = 'page-home';
 function updateBottomNav(){
@@ -1377,6 +1376,11 @@ function wireTxRows(container){
   });
 }
 
+function compareTxDesc(a, b){
+  const ka = a.date + a.time, kb = b.date + b.time;
+  if (ka !== kb) return kb.localeCompare(ka);
+  return (b.id || '').localeCompare(a.id || '');
+}
 function renderHome(){
   let balance;
   const iconEl = $('#balance-label-icon');
@@ -1410,7 +1414,7 @@ function renderHome(){
     $('#tx-show-all-btn').classList.remove('show');
     return;
   }
-  items.sort((a,b)=> (b.date+b.time).localeCompare(a.date+a.time));
+  items.sort(compareTxDesc);
   const previewItems = items.slice(0, 5);
   $('#tx-widget-fade').classList.toggle('show', previewItems.length >= 4);
   $('#tx-show-all-btn').classList.add('show');
@@ -1462,7 +1466,7 @@ function renderMovements(){
     </div>`;
     return;
   }
-  items.sort((a,b)=> (b.date+b.time).localeCompare(a.date+a.time));
+  items.sort(compareTxDesc);
   list.innerHTML = items.map(txRowHTML).join('');
   wireTxRows(list);
 }
@@ -1518,12 +1522,11 @@ function closeMvFilter(){
 }
 function wireMovements(){
   $('#mv-avatar-btn').addEventListener('click', ()=> openProfile(false));
-  $('#mv-gear-btn').addEventListener('click', ()=> openSettings());
+  $('#mv-gear-btn').addEventListener('click', openMvFilter);
   $('#mv-search-input').addEventListener('input', (e)=>{
     mvSearchQuery = e.target.value.trim().toLowerCase();
     renderMovements();
   });
-  $('#mv-filter-btn').addEventListener('click', openMvFilter);
   $('#mv-filter-close').addEventListener('click', closeMvFilter);
   $('#mv-filter-backdrop').addEventListener('click', closeMvFilter);
   $('#mv-filter-apply').addEventListener('click', ()=>{
@@ -1542,6 +1545,8 @@ function wireMovements(){
   });
 }
 function openMovementsPage(){
+  $$('.bottom-nav-btn').forEach(b=>b.classList.remove('active'));
+  $('#nav-movements').classList.add('active');
   $$('.page').forEach(p=>p.classList.remove('active'));
   $('#page-movements').classList.add('active');
   updateBottomNav();
