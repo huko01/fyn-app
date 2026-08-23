@@ -9,6 +9,7 @@ const I18N = {
     'currency.title':'Choose your currency','currency.usd':'US Dollar (USD)','currency.eur':'Euro (EUR)',
     'accounts.title':'Add your accounts','accounts.subtitle':'Add at least one account to continue. You can add as many as you like. You can also add more accounts later.',
     'accounts.cash':'Cash','accounts.card':'Debit card','accounts.yours':'Your accounts','accounts.btn':'Accounts','accounts.networth':'Net worth',
+    'accounts.addEdit':'Add or edit accounts','accounts.manageTitle':'Add or edit accounts','accounts.manageSub':'Manage your Fyn accounts.',
     'field.name':'Name','field.description':'Description (optional)','field.initialBalance':'Initial balance',
     'theme.title':'Choose your theme','theme.light':'Light','theme.dark':'Dark',
     'hue.title':'Choose your accent tone','hue.subtitle':'Drag to pick the shade for your gradient background.',
@@ -26,13 +27,18 @@ const I18N = {
     'empty.noResults':'No results for your search.',
     'day.today':'Today','day.yesterday':'Yesterday',
     'sheet.title':'New transaction','type.expense':'Expense','type.income':'Income',
-    'field.merchant':'Merchant','merchant.placeholder':'e.g. Mercadona, Netflix, Amazon…',
+    'field.merchant':'Name','merchant.placeholder':'e.g. Mercadona, Netflix, Amazon…',
+    'desc.placeholder':'Add a note (optional)','cat.search':'Search categories',
     'field.category':'Category','field.account':'Account','field.date':'Date','action.save2':'Save',
     'logo.searching':'Searching logo…','logo.found':'Logo found for {d}','logo.notfound':'No logo found — initials will be used',
     'toast.expenseAdded':'Expense added','toast.incomeAdded':'Income added','toast.deleted':'Transaction deleted','toast.comingSoon':'Coming soon',
     'confirm.delete':'Delete this transaction?',
+    'confirm.deleteAccount':'Are you sure you want to delete this account?',
+    'accounts.needAtLeastOne':'You must have at least one account to continue.',
     'settings.title':'Settings','settings.darkMode':'Dark mode',
     'settings.language':'Language','settings.pronoun':'Pronouns','settings.accentTone':'Accent tone',
+    'settings.languageHint':'To fully apply the language change, reload the web page.',
+    'nav.home':'Home','nav.stats':'Statistics',
     'settings.profile':'Profile settings','profile.title':'Profile','profile.name':'Name',
     'settings.changePin':'Change PIN','settings.change':'Change','settings.createPin':'Create password','settings.createBtn':'Create','settings.deletePin':'Delete password',
     'settings.export':'Export data (.json)','settings.exportBtn':'Export',
@@ -44,8 +50,10 @@ const I18N = {
     'confirm.reset':'This will delete all transactions saved on this device. Continue?',
     'delete.warning':'When you clear all data, you will delete all activity, accounts, and everything related to Fyn in this browser. Export your data (.json) before clearing all data, just in case. To completely clear all data, clear this website\'s data from your browser settings.',
     'delete.cancel':'Cancel','delete.continue':'Continue','delete.pinPrompt':'Enter your PIN to confirm',
-    'cat.food':'Food','cat.transport':'Transport','cat.leisure':'Leisure','cat.shopping':'Shopping',
-    'cat.health':'Health','cat.home':'Home','cat.salary':'Salary','cat.other':'Other',
+    'cat.supermarket':'Supermarket','cat.restaurant':'Restaurant','cat.salary':'Salary','cat.transport':'Transport',
+    'cat.leisure':'Leisure','cat.housing':'Housing','cat.shopping':'Shopping','cat.clothing':'Clothing',
+    'cat.car':'Car','cat.subscriptions':'Subscriptions','cat.health':'Health','cat.travel':'Travel',
+    'cat.gifts':'Gifts','cat.food':'Food','cat.vacation':'Vacation','cat.other':'Other',
   },
   es: {
     'lang.title':'Elige tu idioma','lang.subtitle':'Podrás cambiarlo más tarde en ajustes.',
@@ -56,6 +64,7 @@ const I18N = {
     'currency.title':'Elige tu moneda','currency.usd':'Dólar estadounidense (USD)','currency.eur':'Euro (EUR)',
     'accounts.title':'Añade tus cuentas','accounts.subtitle':'Añade al menos una cuenta para continuar. Puedes añadir las que quieras. También puedes añadir más cuentas más tarde.',
     'accounts.cash':'Efectivo','accounts.card':'Tarjeta de débito','accounts.yours':'Tus cuentas','accounts.btn':'Cuentas','accounts.networth':'Patrimonio neto',
+    'accounts.addEdit':'Añadir o editar cuentas','accounts.manageTitle':'Añadir o editar cuentas','accounts.manageSub':'Gestiona tus cuentas de Fyn.',
     'field.name':'Nombre','field.description':'Descripción (opcional)','field.initialBalance':'Saldo inicial',
     'theme.title':'Elige el tema','theme.light':'Claro','theme.dark':'Oscuro',
     'hue.title':'Elige el tono de fondo','hue.subtitle':'Desliza para elegir el tono de tu fondo degradado.',
@@ -73,13 +82,18 @@ const I18N = {
     'empty.noResults':'Sin resultados para tu búsqueda.',
     'day.today':'Hoy','day.yesterday':'Ayer',
     'sheet.title':'Nuevo movimiento','type.expense':'Gasto','type.income':'Ingreso',
-    'field.merchant':'Establecimiento','merchant.placeholder':'Ej. Mercadona, Netflix, Amazon…',
+    'field.merchant':'Nombre','merchant.placeholder':'Ej. Mercadona, Netflix, Amazon…',
+    'desc.placeholder':'Añade una nota (opcional)','cat.search':'Buscar categorías',
     'field.category':'Categoría','field.account':'Cuenta','field.date':'Fecha','action.save2':'Guardar',
     'logo.searching':'Buscando logo…','logo.found':'Logo encontrado para {d}','logo.notfound':'Sin logo — se usarán las iniciales',
     'toast.expenseAdded':'Gasto añadido','toast.incomeAdded':'Ingreso añadido','toast.deleted':'Movimiento eliminado','toast.comingSoon':'Próximamente',
     'confirm.delete':'¿Eliminar este movimiento?',
+    'confirm.deleteAccount':'¿Seguro que quieres eliminar esta cuenta?',
+    'accounts.needAtLeastOne':'Debes tener al menos una cuenta para continuar.',
     'settings.title':'Ajustes','settings.darkMode':'Modo oscuro',
     'settings.language':'Idioma','settings.pronoun':'Pronombres','settings.accentTone':'Tono de acento',
+    'settings.languageHint':'Para aplicar completamente el cambio de idioma, recarga la web.',
+    'nav.home':'Inicio','nav.stats':'Estadísticas',
     'settings.profile':'Ajustes de perfil','profile.title':'Perfil','profile.name':'Nombre',
     'settings.changePin':'Cambiar código PIN','settings.change':'Cambiar','settings.createPin':'Crear contraseña','settings.createBtn':'Crear','settings.deletePin':'Borrar contraseña',
     'settings.export':'Exportar datos (.json)','settings.exportBtn':'Exportar',
@@ -91,8 +105,10 @@ const I18N = {
     'confirm.reset':'Esto borrará todos los movimientos guardados en este dispositivo. ¿Continuar?',
     'delete.warning':'Al borrar todos los datos, eliminarás toda la actividad, cuentas y todo lo relacionado con Fyn en este navegador. Exporta tus datos (.json) antes de borrar todo, por si acaso. Para borrar completamente todos los datos, borra los datos de este sitio web desde los ajustes de tu navegador.',
     'delete.cancel':'Cancelar','delete.continue':'Continuar','delete.pinPrompt':'Introduce tu PIN para confirmar',
-    'cat.food':'Alimentación','cat.transport':'Transporte','cat.leisure':'Ocio','cat.shopping':'Compras',
-    'cat.health':'Salud','cat.home':'Hogar','cat.salary':'Nómina','cat.other':'Otros',
+    'cat.supermarket':'Supermercado','cat.restaurant':'Restaurante','cat.salary':'Salario','cat.transport':'Transporte',
+    'cat.leisure':'Ocio','cat.housing':'Vivienda','cat.shopping':'Compras','cat.clothing':'Ropa',
+    'cat.car':'Coche','cat.subscriptions':'Suscripciones','cat.health':'Salud','cat.travel':'Viajes',
+    'cat.gifts':'Regalos','cat.food':'Comida','cat.vacation':'Vacaciones','cat.other':'Otros',
   }
 };
 function t(key, vars){
@@ -110,14 +126,22 @@ const DB = {
 };
 
 const CATS = [
-  { id:'alimentacion', key:'cat.food',      color:'#1ec87a', icon:'🛒' },
-  { id:'transporte',   key:'cat.transport', color:'#4436e2', icon:'🚗' },
-  { id:'ocio',         key:'cat.leisure',   color:'#ff8a3d', icon:'🎬' },
-  { id:'compras',      key:'cat.shopping',  color:'#ff4d8f', icon:'🛍️' },
-  { id:'salud',        key:'cat.health',    color:'#00b8d9', icon:'💊' },
-  { id:'hogar',        key:'cat.home',      color:'#8b5cf6', icon:'🏠' },
-  { id:'nomina',       key:'cat.salary',    color:'#1ec87a', icon:'💼' },
-  { id:'otros',        key:'cat.other',     color:'#8b8b93', icon:'⋯' },
+  { id:'supermercado',    key:'cat.supermarket',    color:'#1ec87a', icon:'🛒' },
+  { id:'restaurante',     key:'cat.restaurant',     color:'#ff8a3d', icon:'🍽️' },
+  { id:'salario',         key:'cat.salary',         color:'#1ec87a', icon:'💼' },
+  { id:'transporte',      key:'cat.transport',      color:'#4436e2', icon:'🚌' },
+  { id:'ocio',            key:'cat.leisure',        color:'#ff6bd6', icon:'🎬' },
+  { id:'vivienda',        key:'cat.housing',        color:'#8b5cf6', icon:'🏠' },
+  { id:'compras',         key:'cat.shopping',       color:'#ff4d8f', icon:'🛍️' },
+  { id:'ropa',            key:'cat.clothing',       color:'#e879f9', icon:'👕' },
+  { id:'coche',           key:'cat.car',            color:'#0ea5e9', icon:'🚗' },
+  { id:'suscripciones',   key:'cat.subscriptions',  color:'#f43f5e', icon:'🔁' },
+  { id:'salud',           key:'cat.health',         color:'#00b8d9', icon:'💊' },
+  { id:'viajes',          key:'cat.travel',         color:'#06b6d4', icon:'✈️' },
+  { id:'regalos',         key:'cat.gifts',          color:'#f97316', icon:'🎁' },
+  { id:'comida',          key:'cat.food',           color:'#eab308', icon:'🍔' },
+  { id:'vacaciones',      key:'cat.vacation',       color:'#22c55e', icon:'🏖️' },
+  { id:'otros',           key:'cat.other',          color:'#8b8b93', icon:'⋯' },
 ];
 const DEFAULT_HUE = 248;
 
@@ -165,6 +189,9 @@ window.addEventListener('DOMContentLoaded', () => {
   wireImportVerify();
   wireHome();
   wireProfile();
+  wireAccountsEditor();
+  wireConfirmModal();
+  wireBottomNav();
   wireSettings();
   wireSettingsSheets();
   wireSheet();
@@ -338,6 +365,37 @@ function wireCurrencyStep(){
   });
 }
 
+let confirmModalCallback = null;
+function showConfirmModal(message, onConfirm){
+  $('#confirm-modal-text').textContent = message;
+  confirmModalCallback = onConfirm;
+  $('#confirm-backdrop').classList.add('show');
+  $('#confirm-modal').classList.add('show');
+}
+function closeConfirmModal(){
+  $('#confirm-backdrop').classList.remove('show');
+  $('#confirm-modal').classList.remove('show');
+  confirmModalCallback = null;
+}
+function wireConfirmModal(){
+  $('#confirm-modal-cancel').addEventListener('click', closeConfirmModal);
+  $('#confirm-backdrop').addEventListener('click', closeConfirmModal);
+  $('#confirm-modal-ok').addEventListener('click', ()=>{
+    const cb = confirmModalCallback;
+    closeConfirmModal();
+    if (cb) cb();
+  });
+}
+
+function wireBottomNav(){
+  $$('.bottom-nav-btn').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      $$('.bottom-nav-btn').forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+    });
+  });
+}
+
 let obAccType = null;
 function wireAccountsStep(){
   $('#acc-type-cash').addEventListener('click', ()=> setObAccType('cash'));
@@ -400,8 +458,11 @@ function renderObAccountList(){
   `).join('');
   list.querySelectorAll('[data-del]').forEach(btn=>{
     btn.addEventListener('click', ()=>{
-      state.accounts = state.accounts.filter(a=>a.id !== btn.dataset.del);
-      renderObAccountList();
+      if (state.accounts.length <= 1) { showToast(t('accounts.needAtLeastOne')); return; }
+      showConfirmModal(t('confirm.deleteAccount'), ()=>{
+        state.accounts = state.accounts.filter(a=>a.id !== btn.dataset.del);
+        renderObAccountList();
+      });
     });
   });
 }
@@ -727,6 +788,10 @@ function wireHome(){
   });
 }
 let profileReturnPage = 'page-home';
+function updateBottomNav(){
+  const homeActive = $('#page-home').classList.contains('active');
+  $('#bottom-nav').classList.toggle('hidden', !homeActive);
+}
 function openProfile(fromSettings){
   profileReturnPage = fromSettings ? 'page-settings' : 'page-home';
   $('#profile-name-input').value = state.userName || '';
@@ -734,10 +799,12 @@ function openProfile(fromSettings){
   $('#page-home').classList.remove('active');
   $('#page-settings').classList.remove('active');
   $('#page-profile').classList.add('active');
+  updateBottomNav();
 }
 function closeProfile(){
   $('#page-profile').classList.remove('active');
   $('#'+profileReturnPage).classList.add('active');
+  updateBottomNav();
 }
 function wireProfile(){
   $('#profile-back').addEventListener('click', closeProfile);
@@ -768,6 +835,7 @@ function openSettings(){
   refreshPinRows();
   $('#page-home').classList.remove('active');
   $('#page-settings').classList.add('active');
+  updateBottomNav();
 }
 function refreshPinRows(){
   const hasPin = !!state.pinHash;
@@ -853,6 +921,7 @@ function closeHueEditor(){
 function closeSettings(){
   $('#page-settings').classList.remove('active');
   $('#page-home').classList.add('active');
+  updateBottomNav();
 }
 
 function wireAccountSwitch(){
@@ -884,14 +953,17 @@ function openAccountSwitch(){
       <div class="accsw-check"></div>
     </div>`);
   });
+  rows.push(`<div class="accsw-row accsw-add" id="accsw-add-row">
+      <div class="accsw-icon accsw-icon-add"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></div>
+      <div class="accsw-info"><div class="accsw-name">${t('accounts.addEdit')}</div></div>
+    </div>`);
   list.innerHTML = rows.join('');
-  list.querySelectorAll('.accsw-row').forEach(row=>{
-    row.addEventListener('click', ()=>{
-      state.selectedAccountView = row.dataset.v;
-      DB.set('selectedAccountView', state.selectedAccountView);
-      renderHome();
-      closeAccountSwitch();
-    });
+  list.querySelectorAll('.accsw-row[data-v]').forEach(row=>{
+    row.addEventListener('click', ()=> switchAccountView(row.dataset.v));
+  });
+  $('#accsw-add-row').addEventListener('click', ()=>{
+    closeAccountSwitch();
+    openAccountsEditor();
   });
   $('#accsheet-backdrop').classList.add('show');
   $('#acc-switch-sheet').classList.add('show');
@@ -900,11 +972,108 @@ function closeAccountSwitch(){
   $('#accsheet-backdrop').classList.remove('show');
   $('#acc-switch-sheet').classList.remove('show');
 }
+function switchAccountView(v){
+  closeAccountSwitch();
+  if (v === state.selectedAccountView) return;
+  const label = $('#balance-label');
+  const amount = $('#balance-amount');
+  label.classList.add('balance-switching');
+  amount.classList.add('balance-switching');
+  setTimeout(()=>{
+    state.selectedAccountView = v;
+    DB.set('selectedAccountView', v);
+    renderHome();
+    requestAnimationFrame(()=>{
+      label.classList.remove('balance-switching');
+      amount.classList.remove('balance-switching');
+    });
+  }, 170);
+}
 
-function buildCategoryChips(){
+let acceAccType = null;
+function openAccountsEditor(){
+  acceAccType = null;
+  $('#acce-form').classList.remove('show');
+  $$('#accounts-editor .acc-type-btn').forEach(b=>b.classList.remove('active'));
+  renderAcceList();
+  $('#accounts-editor').classList.add('show');
+}
+function closeAccountsEditor(){
+  $('#accounts-editor').classList.remove('show');
+  if (state.selectedAccountView !== 'networth' && !accInfo(state.selectedAccountView)) {
+    state.selectedAccountView = 'networth';
+    DB.set('selectedAccountView', state.selectedAccountView);
+  }
+  renderHome();
+}
+function setAcceAccType(type){
+  acceAccType = type;
+  $('#acce-type-cash').classList.toggle('active', type==='cash');
+  $('#acce-type-card').classList.toggle('active', type==='card');
+  $('#acce-name-input').value = '';
+  $('#acce-desc-input').value = '';
+  $('#acce-balance-input').value = '';
+  $('#acce-form').classList.add('show');
+}
+function saveAcceAccount(){
+  const name = $('#acce-name-input').value.trim();
+  if (!name || !acceAccType) return;
+  const bal = parseFloat($('#acce-balance-input').value) || 0;
+  const acc = {
+    id: 'acc' + Date.now().toString(36) + Math.random().toString(36).slice(2,5),
+    type: acceAccType,
+    name,
+    description: $('#acce-desc-input').value.trim(),
+    initialBalance: bal,
+  };
+  state.accounts.push(acc);
+  DB.set('accounts', state.accounts);
+  $('#acce-form').classList.remove('show');
+  $$('#accounts-editor .acc-type-btn').forEach(b=>b.classList.remove('active'));
+  acceAccType = null;
+  renderAcceList();
+}
+function renderAcceList(){
+  const list = $('#acce-list');
+  const label = $('#acce-list-label');
+  if (state.accounts.length === 0) { list.innerHTML=''; label.style.display='none'; return; }
+  label.style.display='block';
+  list.innerHTML = state.accounts.map(a=>`
+    <div class="acc-item" data-id="${a.id}">
+      <div class="acc-item-icon">${accountIcon(a.type)}</div>
+      <div class="acc-item-info">
+        <div class="acc-item-name">${escapeHtml(a.name)}</div>
+        ${a.description ? `<div class="acc-item-desc">${escapeHtml(a.description)}</div>` : ''}
+      </div>
+      <div class="acc-item-balance">${fmt(a.initialBalance)}</div>
+      <button type="button" class="acc-item-del" data-del="${a.id}">✕</button>
+    </div>
+  `).join('');
+  list.querySelectorAll('[data-del]').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      if (state.accounts.length <= 1) { showToast(t('accounts.needAtLeastOne')); return; }
+      showConfirmModal(t('confirm.deleteAccount'), ()=>{
+        state.accounts = state.accounts.filter(a=>a.id !== btn.dataset.del);
+        DB.set('accounts', state.accounts);
+        renderAcceList();
+      });
+    });
+  });
+}
+function wireAccountsEditor(){
+  $('#acce-type-cash').addEventListener('click', ()=> setAcceAccType('cash'));
+  $('#acce-type-card').addEventListener('click', ()=> setAcceAccType('card'));
+  $('#acce-save-btn').addEventListener('click', saveAcceAccount);
+  $('#acce-done-btn').addEventListener('click', closeAccountsEditor);
+  $('#acce-cancel').addEventListener('click', closeAccountsEditor);
+}
+
+function buildCategoryChips(filterText){
   const grid = $('#cat-grid');
-  grid.innerHTML = CATS.map(c=>
-    `<button type="button" class="chip" data-cat="${c.id}"><span>${c.icon}</span>${t(c.key)}</button>`
+  const q = (filterText || '').trim().toLowerCase();
+  const list = q ? CATS.filter(c => t(c.key).toLowerCase().includes(q)) : CATS;
+  grid.innerHTML = list.map(c=>
+    `<button type="button" class="chip ${c.id===selectedCat?'active':''}" data-cat="${c.id}"><span>${c.icon}</span>${t(c.key)}</button>`
   ).join('');
   grid.querySelectorAll('.chip').forEach(chip=>{
     chip.addEventListener('click', ()=>{
@@ -919,7 +1088,7 @@ function buildAccountChips(){
   const grid = $('#account-grid');
   if (!grid) return;
   grid.innerHTML = state.accounts.map(a=>
-    `<button type="button" class="chip" data-acc="${a.id}"><span>${a.type==='cash'?'💵':'💳'}</span>${escapeHtml(a.name)}</button>`
+    `<button type="button" class="chip" data-acc="${a.id}"><span>${accountIcon(a.type)}</span>${escapeHtml(a.name)}</button>`
   ).join('');
   grid.querySelectorAll('.chip').forEach(chip=>{
     chip.addEventListener('click', ()=>{
@@ -941,6 +1110,7 @@ function wireSheet(){
     debounceLogo(e.target.value);
     validateForm();
   });
+  $('#cat-search-input').addEventListener('input', (e)=> buildCategoryChips(e.target.value));
   $('#save-tx').addEventListener('click', saveTransaction);
 }
 function setType(t){
@@ -953,12 +1123,18 @@ function openSheet(type){
   buildAccountChips();
   $('#amount-input').value = '';
   $('#merchant-input').value = '';
-  $('#date-input').value = new Date().toISOString().slice(0,10);
+  $('#desc-input').value = '';
+  $('#cat-search-input').value = '';
+  const now = new Date();
+  $('#date-input').value = now.toISOString().slice(0,10);
+  $('#time-input').value = now.toTimeString().slice(0,5);
   $('#logo-preview').innerHTML = '';
-  $$('#cat-grid .chip').forEach(c=>c.classList.remove('active'));
-  $$('#account-grid .chip').forEach(c=>c.classList.remove('active'));
   selectedCat = null;
-  selectedAccountForTx = state.accounts.length === 1 ? state.accounts[0].id : null;
+  buildCategoryChips();
+  $$('#account-grid .chip').forEach(c=>c.classList.remove('active'));
+  const viewAcc = (state.selectedAccountView && state.selectedAccountView !== 'networth' && accInfo(state.selectedAccountView))
+    ? state.selectedAccountView : null;
+  selectedAccountForTx = viewAcc;
   if (selectedAccountForTx) {
     $$('#account-grid .chip').forEach(c=> c.classList.toggle('active', c.dataset.acc===selectedAccountForTx));
   }
@@ -1011,17 +1187,19 @@ async function fetchLogo(name, previewEl){
 function saveTransaction(){
   const amt = parseFloat($('#amount-input').value);
   const merchant = $('#merchant-input').value.trim();
+  const description = $('#desc-input').value.trim();
   const date = $('#date-input').value || new Date().toISOString().slice(0,10);
-  const now = new Date();
+  const time = $('#time-input').value || new Date().toTimeString().slice(0,5);
   const tx = {
     id: Date.now().toString(36) + Math.random().toString(36).slice(2,6),
     type: currentType,
     amount: Math.abs(amt),
     merchant,
+    description,
     category: selectedCat,
     account: selectedAccountForTx,
     date,
-    time: now.toTimeString().slice(0,5),
+    time,
     logo: logoUrlCache[merchant] || null,
   };
   state.transactions.unshift(tx);
@@ -1088,11 +1266,18 @@ function renderHome(){
     const logo = tx.logo
       ? `<img src="${tx.logo}" onerror="this.parentElement.textContent='${initials(tx.merchant)}'">`
       : initials(tx.merchant);
+    const badgeIcon = tx.type==='income'
+      ? '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M12 19V5M5 12l7-7 7 7"/></svg>'
+      : '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M12 5v14M5 12l7 7 7-7"/></svg>';
     return `<div class="tx-row" data-id="${tx.id}">
-      <div class="tx-logo">${logo}</div>
+      <div class="tx-logo-wrap">
+        <div class="tx-logo">${logo}</div>
+        <div class="tx-badge ${tx.type==='income'?'income':'expense'}">${badgeIcon}</div>
+      </div>
       <div class="tx-info">
         <div class="tx-name">${escapeHtml(tx.merchant)}</div>
         <div class="tx-meta">${formatDay(tx.date)}, ${tx.time} · ${t(c.key)}</div>
+        ${tx.description ? `<div class="tx-desc">${escapeHtml(tx.description)}</div>` : ''}
       </div>
       <div class="tx-right">
         <div class="tx-amount ${tx.type==='income'?'pos':'neg'}">${tx.type==='income'?'+':'-'}${fmt(tx.amount)}</div>
