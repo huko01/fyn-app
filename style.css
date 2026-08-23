@@ -275,6 +275,14 @@ input{font-family:inherit;}
 }
 .page.active{opacity:1;visibility:visible;transform:translateX(0);}
 
+.bottom-nav-fade{
+  position:absolute;left:0;right:0;
+  bottom:calc(58px + var(--safe-b));
+  height:90px;z-index:29;pointer-events:none;
+  background:linear-gradient(to bottom, transparent, var(--sheet-bg));
+  transition:opacity .22s var(--ease);
+}
+.bottom-nav-fade.hidden{opacity:0;}
 .bottom-nav{
   position:absolute;left:0;right:0;bottom:0;z-index:30;
   display:flex;justify-content:center;align-items:center;gap:48px;

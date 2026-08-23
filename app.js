@@ -836,6 +836,7 @@ let profileReturnPage = 'page-home';
 function updateBottomNav(){
   const navActive = $('#page-home').classList.contains('active') || $('#page-movements').classList.contains('active');
   $('#bottom-nav').classList.toggle('hidden', !navActive);
+  $('#bottom-nav-fade').classList.toggle('hidden', !navActive);
 }
 function openProfile(fromSettings){
   profileReturnPage = fromSettings ? 'page-settings' : ($('#page-movements').classList.contains('active') ? 'page-movements' : 'page-home');
