@@ -22,16 +22,21 @@ const I18N = {
     'greeting.morning':'Good morning','greeting.afternoon':'Good afternoon','greeting.evening':'Good evening',
     'search.placeholder':'Search','balance.label':'Balance',
     'qa.expense':'Add expense','qa.income':'Add income','qa.details':'Details','qa.more':'More',
-    'movements.title':'Transactions',
+    'movements.title':'Transactions','movements.showAll':'Show all','movements.all':'All movements',
+    'filter.title':'Filters','filter.period':'Period','filter.all':'All','filter.day':'Day','filter.week':'Week','filter.month':'Month','filter.year':'Year',
+    'filter.merchant':'Establishment','filter.category':'Category','filter.allCategories':'All categories',
+    'filter.account':'Account','filter.allAccounts':'All accounts',
+    'filter.apply':'Apply filters','filter.clear':'Clear filters',
     'empty.noMovements':'No transactions yet.<br>Tap a button above to add your first one.',
     'empty.noResults':'No results for your search.',
     'day.today':'Today','day.yesterday':'Yesterday',
-    'sheet.title':'New transaction','type.expense':'Expense','type.income':'Income',
+    'sheet.title':'New transaction','sheet.editTitle':'Edit movement','type.expense':'Expense','type.income':'Income',
+    'action.edit':'Edit','txdetail.date':'Date & time',
     'field.merchant':'Name','merchant.placeholder':'e.g. Mercadona, Netflix, Amazon…',
-    'desc.placeholder':'Add a note (optional)','cat.search':'Search categories',
+    'desc.placeholder':'Note','cat.search':'Search categories',
     'field.category':'Category','field.account':'Account','field.date':'Date','action.save2':'Save',
     'logo.searching':'Searching logo…','logo.found':'Logo found for {d}','logo.notfound':'No logo found — initials will be used',
-    'toast.expenseAdded':'Expense added','toast.incomeAdded':'Income added','toast.deleted':'Transaction deleted','toast.comingSoon':'Coming soon',
+    'toast.expenseAdded':'Expense added','toast.incomeAdded':'Income added','toast.updated':'Movement updated','toast.deleted':'Transaction deleted','toast.comingSoon':'Coming soon',
     'confirm.delete':'Delete this transaction?',
     'confirm.deleteAccount':'Are you sure you want to delete this account?',
     'accounts.needAtLeastOne':'You must have at least one account to continue.',
@@ -52,8 +57,10 @@ const I18N = {
     'delete.cancel':'Cancel','delete.continue':'Continue','delete.pinPrompt':'Enter your PIN to confirm',
     'cat.supermarket':'Supermarket','cat.restaurant':'Restaurant','cat.salary':'Salary','cat.transport':'Transport',
     'cat.leisure':'Leisure','cat.housing':'Housing','cat.shopping':'Shopping','cat.clothing':'Clothing',
-    'cat.car':'Car','cat.subscriptions':'Subscriptions','cat.health':'Health','cat.travel':'Travel',
-    'cat.gifts':'Gifts','cat.food':'Food','cat.vacation':'Vacation','cat.other':'Other',
+    'cat.subscriptions':'Subscriptions','cat.health':'Health','cat.travel':'Travel',
+    'cat.gifts':'Gifts','cat.food':'Food','cat.other':'Other','cat.bills':'Bills','cat.personalCare':'Personal care',
+    'cat.education':'Education','cat.donations':'Donations','cat.sideJob':'Side job','cat.refunds':'Refunds',
+    'cat.aid':'Benefits','cat.sales':'Sales','cat.transfersIn':'Transfers received',
   },
   es: {
     'lang.title':'Elige tu idioma','lang.subtitle':'Podrás cambiarlo más tarde en ajustes.',
@@ -77,16 +84,21 @@ const I18N = {
     'greeting.morning':'Buenos días','greeting.afternoon':'Buenas tardes','greeting.evening':'Buenas noches',
     'search.placeholder':'Buscar','balance.label':'Saldo',
     'qa.expense':'Añadir gasto','qa.income':'Añadir ingreso','qa.details':'Detalles','qa.more':'Más',
-    'movements.title':'Movimientos',
+    'movements.title':'Movimientos','movements.showAll':'Mostrar todos','movements.all':'Todos los movimientos',
+    'filter.title':'Filtros','filter.period':'Periodo','filter.all':'Todo','filter.day':'Día','filter.week':'Semana','filter.month':'Mes','filter.year':'Año',
+    'filter.merchant':'Establecimiento','filter.category':'Categoría','filter.allCategories':'Todas las categorías',
+    'filter.account':'Cuenta','filter.allAccounts':'Todas las cuentas',
+    'filter.apply':'Aplicar filtros','filter.clear':'Borrar filtros',
     'empty.noMovements':'Aún no hay movimientos.<br>Toca un botón de arriba para añadir el primero.',
     'empty.noResults':'Sin resultados para tu búsqueda.',
     'day.today':'Hoy','day.yesterday':'Ayer',
-    'sheet.title':'Nuevo movimiento','type.expense':'Gasto','type.income':'Ingreso',
+    'sheet.title':'Nuevo movimiento','sheet.editTitle':'Editar movimiento','type.expense':'Gasto','type.income':'Ingreso',
+    'action.edit':'Editar','txdetail.date':'Fecha y hora',
     'field.merchant':'Nombre','merchant.placeholder':'Ej. Mercadona, Netflix, Amazon…',
-    'desc.placeholder':'Añade una nota (opcional)','cat.search':'Buscar categorías',
+    'desc.placeholder':'Nota','cat.search':'Buscar categorías',
     'field.category':'Categoría','field.account':'Cuenta','field.date':'Fecha','action.save2':'Guardar',
     'logo.searching':'Buscando logo…','logo.found':'Logo encontrado para {d}','logo.notfound':'Sin logo — se usarán las iniciales',
-    'toast.expenseAdded':'Gasto añadido','toast.incomeAdded':'Ingreso añadido','toast.deleted':'Movimiento eliminado','toast.comingSoon':'Próximamente',
+    'toast.expenseAdded':'Gasto añadido','toast.incomeAdded':'Ingreso añadido','toast.updated':'Movimiento actualizado','toast.deleted':'Movimiento eliminado','toast.comingSoon':'Próximamente',
     'confirm.delete':'¿Eliminar este movimiento?',
     'confirm.deleteAccount':'¿Seguro que quieres eliminar esta cuenta?',
     'accounts.needAtLeastOne':'Debes tener al menos una cuenta para continuar.',
@@ -107,8 +119,10 @@ const I18N = {
     'delete.cancel':'Cancelar','delete.continue':'Continuar','delete.pinPrompt':'Introduce tu PIN para confirmar',
     'cat.supermarket':'Supermercado','cat.restaurant':'Restaurante','cat.salary':'Salario','cat.transport':'Transporte',
     'cat.leisure':'Ocio','cat.housing':'Vivienda','cat.shopping':'Compras','cat.clothing':'Ropa',
-    'cat.car':'Coche','cat.subscriptions':'Suscripciones','cat.health':'Salud','cat.travel':'Viajes',
-    'cat.gifts':'Regalos','cat.food':'Comida','cat.vacation':'Vacaciones','cat.other':'Otros',
+    'cat.subscriptions':'Suscripciones','cat.health':'Salud','cat.travel':'Viajes',
+    'cat.gifts':'Regalos','cat.food':'Alimentación','cat.other':'Otros','cat.bills':'Facturas','cat.personalCare':'Cuidado personal',
+    'cat.education':'Educación','cat.donations':'Donaciones','cat.sideJob':'Trabajo extra','cat.refunds':'Reembolsos',
+    'cat.aid':'Ayudas','cat.sales':'Ventas','cat.transfersIn':'Transferencias recibidas',
   }
 };
 function t(key, vars){
@@ -126,22 +140,33 @@ const DB = {
 };
 
 const CATS = [
-  { id:'supermercado',    key:'cat.supermarket',    color:'#1ec87a', icon:'🛒' },
-  { id:'restaurante',     key:'cat.restaurant',     color:'#ff8a3d', icon:'🍽️' },
-  { id:'salario',         key:'cat.salary',         color:'#1ec87a', icon:'💼' },
-  { id:'transporte',      key:'cat.transport',      color:'#4436e2', icon:'🚌' },
-  { id:'ocio',            key:'cat.leisure',        color:'#ff6bd6', icon:'🎬' },
-  { id:'vivienda',        key:'cat.housing',        color:'#8b5cf6', icon:'🏠' },
-  { id:'compras',         key:'cat.shopping',       color:'#ff4d8f', icon:'🛍️' },
-  { id:'ropa',            key:'cat.clothing',       color:'#e879f9', icon:'👕' },
-  { id:'coche',           key:'cat.car',            color:'#0ea5e9', icon:'🚗' },
-  { id:'suscripciones',   key:'cat.subscriptions',  color:'#f43f5e', icon:'🔁' },
-  { id:'salud',           key:'cat.health',         color:'#00b8d9', icon:'💊' },
-  { id:'viajes',          key:'cat.travel',         color:'#06b6d4', icon:'✈️' },
-  { id:'regalos',         key:'cat.gifts',          color:'#f97316', icon:'🎁' },
-  { id:'comida',          key:'cat.food',           color:'#eab308', icon:'🍔' },
-  { id:'vacaciones',      key:'cat.vacation',       color:'#22c55e', icon:'🏖️' },
-  { id:'otros',           key:'cat.other',          color:'#8b8b93', icon:'⋯' },
+  // Gastos
+  { id:'supermercado',       type:'expense', key:'cat.supermarket',      color:'#1ec87a', icon:'🛒' },
+  { id:'restaurante',        type:'expense', key:'cat.restaurant',       color:'#ff8a3d', icon:'🍽️' },
+  { id:'alimentacion',       type:'expense', key:'cat.food',             color:'#eab308', icon:'🍎' },
+  { id:'transporte',         type:'expense', key:'cat.transport',        color:'#4436e2', icon:'🚌' },
+  { id:'vivienda',           type:'expense', key:'cat.housing',          color:'#8b5cf6', icon:'🏠' },
+  { id:'compras',            type:'expense', key:'cat.shopping',         color:'#ff4d8f', icon:'🛍️' },
+  { id:'ocio',               type:'expense', key:'cat.leisure',          color:'#ff6bd6', icon:'🎬' },
+  { id:'suscripciones',      type:'expense', key:'cat.subscriptions',    color:'#f43f5e', icon:'🔁' },
+  { id:'facturas',           type:'expense', key:'cat.bills',            color:'#0ea5e9', icon:'🧾' },
+  { id:'salud',              type:'expense', key:'cat.health',           color:'#00b8d9', icon:'💊' },
+  { id:'ropa',               type:'expense', key:'cat.clothing',         color:'#e879f9', icon:'👕' },
+  { id:'cuidado-personal',   type:'expense', key:'cat.personalCare',     color:'#f472b6', icon:'🧴' },
+  { id:'educacion',          type:'expense', key:'cat.education',        color:'#22c55e', icon:'🎓' },
+  { id:'viajes',             type:'expense', key:'cat.travel',           color:'#06b6d4', icon:'✈️' },
+  { id:'regalos-gasto',      type:'expense', key:'cat.gifts',            color:'#f97316', icon:'🎁' },
+  { id:'donaciones',         type:'expense', key:'cat.donations',        color:'#ef4444', icon:'🎗️' },
+  { id:'otros-gasto',        type:'expense', key:'cat.other',            color:'#8b8b93', icon:'⋯' },
+  // Ingresos
+  { id:'salario',            type:'income',  key:'cat.salary',           color:'#1ec87a', icon:'💼' },
+  { id:'trabajo-extra',      type:'income',  key:'cat.sideJob',          color:'#0ea5e9', icon:'🛠️' },
+  { id:'regalos-ingreso',    type:'income',  key:'cat.gifts',            color:'#f97316', icon:'🎁' },
+  { id:'reembolsos',         type:'income',  key:'cat.refunds',          color:'#f43f5e', icon:'💸' },
+  { id:'ayudas',             type:'income',  key:'cat.aid',              color:'#8b5cf6', icon:'🤲' },
+  { id:'ventas',             type:'income',  key:'cat.sales',            color:'#eab308', icon:'🏷️' },
+  { id:'transferencias',     type:'income',  key:'cat.transfersIn',      color:'#4436e2', icon:'📥' },
+  { id:'otros-ingreso',      type:'income',  key:'cat.other',            color:'#8b8b93', icon:'⋯' },
 ];
 const DEFAULT_HUE = 248;
 
@@ -170,7 +195,12 @@ let currentType = 'expense';
 let selectedCat = null;
 let selectedAccountForTx = null;
 let logoUrlCache = {};
+let editingTxId = null;
+let sheetReturnPage = 'page-home';
+let settingsReturnPage = 'page-home';
 let searchQuery = '';
+let mvSearchQuery = '';
+let mvFilter = { period:'all', category:'all', account:'all' };
 
 const $ = sel => document.querySelector(sel);
 const $$ = sel => document.querySelectorAll(sel);
@@ -195,6 +225,8 @@ window.addEventListener('DOMContentLoaded', () => {
   wireSettings();
   wireSettingsSheets();
   wireSheet();
+  wireTxDetail();
+  wireMovements();
   wireAccountSwitch();
   renderAvatar();
   renderGreeting();
@@ -221,6 +253,7 @@ function applyTranslations(){
   document.documentElement.lang = state.language;
   $$('[data-i18n]').forEach(el=>{ el.innerHTML = t(el.dataset.i18n); });
   $$('[data-i18n-ph]').forEach(el=>{ el.placeholder = t(el.dataset.i18nPh); });
+  $$('[data-i18n-title]').forEach(el=>{ el.title = t(el.dataset.i18nTitle); });
 }
 
 function applyTheme(){
@@ -390,8 +423,21 @@ function wireConfirmModal(){
 function wireBottomNav(){
   $$('.bottom-nav-btn').forEach(btn=>{
     btn.addEventListener('click', ()=>{
-      $$('.bottom-nav-btn').forEach(b=>b.classList.remove('active'));
-      btn.classList.add('active');
+      const nav = btn.dataset.nav;
+      if (nav === 'home') {
+        $$('.bottom-nav-btn').forEach(b=>b.classList.remove('active'));
+        btn.classList.add('active');
+        $$('.page').forEach(p=>p.classList.remove('active'));
+        $('#page-home').classList.add('active');
+        updateBottomNav();
+        renderHome();
+      } else if (nav === 'movements') {
+        $$('.bottom-nav-btn').forEach(b=>b.classList.remove('active'));
+        btn.classList.add('active');
+        openMovementsPage();
+      } else {
+        showToast(t('toast.comingSoon'));
+      }
     });
   });
 }
@@ -761,7 +807,7 @@ function renderGreeting(){
 }
 function renderAvatar(){
   const initial = state.userName ? state.userName.trim()[0].toUpperCase() : 'F';
-  [$('#avatar-btn'), $('#profile-avatar-preview')].forEach(el=>{
+  [$('#avatar-btn'), $('#mv-avatar-btn'), $('#profile-avatar-preview')].forEach(el=>{
     if (!el) return;
     if (state.avatar) {
       el.style.backgroundImage = `url(${state.avatar})`;
@@ -789,14 +835,15 @@ function wireHome(){
 }
 let profileReturnPage = 'page-home';
 function updateBottomNav(){
-  const homeActive = $('#page-home').classList.contains('active');
-  $('#bottom-nav').classList.toggle('hidden', !homeActive);
+  const navActive = $('#page-home').classList.contains('active') || $('#page-movements').classList.contains('active');
+  $('#bottom-nav').classList.toggle('hidden', !navActive);
 }
 function openProfile(fromSettings){
-  profileReturnPage = fromSettings ? 'page-settings' : 'page-home';
+  profileReturnPage = fromSettings ? 'page-settings' : ($('#page-movements').classList.contains('active') ? 'page-movements' : 'page-home');
   $('#profile-name-input').value = state.userName || '';
   renderAvatar();
   $('#page-home').classList.remove('active');
+  $('#page-movements').classList.remove('active');
   $('#page-settings').classList.remove('active');
   $('#page-profile').classList.add('active');
   updateBottomNav();
@@ -805,6 +852,7 @@ function closeProfile(){
   $('#page-profile').classList.remove('active');
   $('#'+profileReturnPage).classList.add('active');
   updateBottomNav();
+  if (profileReturnPage === 'page-movements') renderMovements();
 }
 function wireProfile(){
   $('#profile-back').addEventListener('click', closeProfile);
@@ -831,9 +879,11 @@ function onAvatarChange(e){
   e.target.value = '';
 }
 function openSettings(){
+  settingsReturnPage = $('#page-movements').classList.contains('active') ? 'page-movements' : 'page-home';
   $('#dark-switch').classList.toggle('on', document.body.classList.contains('dark'));
   refreshPinRows();
   $('#page-home').classList.remove('active');
+  $('#page-movements').classList.remove('active');
   $('#page-settings').classList.add('active');
   updateBottomNav();
 }
@@ -920,8 +970,9 @@ function closeHueEditor(){
 }
 function closeSettings(){
   $('#page-settings').classList.remove('active');
-  $('#page-home').classList.add('active');
+  $('#'+settingsReturnPage).classList.add('active');
   updateBottomNav();
+  if (settingsReturnPage === 'page-movements') renderMovements();
 }
 
 function wireAccountSwitch(){
@@ -1071,7 +1122,8 @@ function wireAccountsEditor(){
 function buildCategoryChips(filterText){
   const grid = $('#cat-grid');
   const q = (filterText || '').trim().toLowerCase();
-  const list = q ? CATS.filter(c => t(c.key).toLowerCase().includes(q)) : CATS;
+  const byType = CATS.filter(c => c.type === currentType);
+  const list = q ? byType.filter(c => t(c.key).toLowerCase().includes(q)) : byType;
   grid.innerHTML = list.map(c=>
     `<button type="button" class="chip ${c.id===selectedCat?'active':''}" data-cat="${c.id}"><span>${c.icon}</span>${t(c.key)}</button>`
   ).join('');
@@ -1101,8 +1153,7 @@ function buildAccountChips(){
 }
 
 function wireSheet(){
-  $('#sheet-close').addEventListener('click', closeSheet);
-  $('#sheet-backdrop').addEventListener('click', closeSheet);
+  $('#addtx-back').addEventListener('click', closeSheet);
   $('#type-expense').addEventListener('click', ()=> setType('expense'));
   $('#type-income').addEventListener('click', ()=> setType('income'));
   $('#amount-input').addEventListener('input', validateForm);
@@ -1112,41 +1163,69 @@ function wireSheet(){
   });
   $('#cat-search-input').addEventListener('input', (e)=> buildCategoryChips(e.target.value));
   $('#save-tx').addEventListener('click', saveTransaction);
+  $('#cat-grid').addEventListener('wheel', (e)=>{
+    if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+      e.preventDefault();
+      $('#cat-grid').scrollLeft += e.deltaY;
+    }
+  }, {passive:false});
 }
 function setType(t){
   currentType = t;
   $('#type-expense').classList.toggle('active', t==='expense');
   $('#type-income').classList.toggle('active', t==='income');
+  selectedCat = null;
+  $('#cat-search-input').value = '';
+  buildCategoryChips();
   validateForm();
 }
-function openSheet(type){
+function openSheet(type, editId){
   buildAccountChips();
-  $('#amount-input').value = '';
-  $('#merchant-input').value = '';
-  $('#desc-input').value = '';
+  editingTxId = editId || null;
+  sheetReturnPage = $('#page-movements').classList.contains('active') ? 'page-movements' : 'page-home';
+  const tx = editingTxId ? state.transactions.find(x=>x.id===editingTxId) : null;
+
+  $('#addtx-title').textContent = tx ? t('sheet.editTitle') : t('sheet.title');
+
+  $('#amount-input').value = tx ? tx.amount : '';
+  $('#merchant-input').value = tx ? tx.merchant : '';
+  $('#desc-input').value = tx ? (tx.description || '') : '';
   $('#cat-search-input').value = '';
   const now = new Date();
-  $('#date-input').value = now.toISOString().slice(0,10);
-  $('#time-input').value = now.toTimeString().slice(0,5);
-  $('#logo-preview').innerHTML = '';
-  selectedCat = null;
-  buildCategoryChips();
+  $('#date-input').value = tx ? tx.date : now.toISOString().slice(0,10);
+  $('#time-input').value = tx ? tx.time : now.toTimeString().slice(0,5);
+
+  if (tx && tx.logo) {
+    logoUrlCache[tx.merchant] = tx.logo;
+    $('#logo-preview').innerHTML = `<img src="${tx.logo}"><span>${t('logo.found',{d:guessDomain(tx.merchant)})}</span>`;
+  } else {
+    $('#logo-preview').innerHTML = '';
+  }
+
   $$('#account-grid .chip').forEach(c=>c.classList.remove('active'));
   const viewAcc = (state.selectedAccountView && state.selectedAccountView !== 'networth' && accInfo(state.selectedAccountView))
     ? state.selectedAccountView : null;
-  selectedAccountForTx = viewAcc;
+  selectedAccountForTx = tx ? tx.account : viewAcc;
   if (selectedAccountForTx) {
     $$('#account-grid .chip').forEach(c=> c.classList.toggle('active', c.dataset.acc===selectedAccountForTx));
   }
-  setType(type || 'expense');
+
+  setType(tx ? tx.type : (type || 'expense'));
+  if (tx) {
+    selectedCat = tx.category;
+    buildCategoryChips();
+  }
   validateForm();
-  $('#sheet-backdrop').classList.add('show');
-  $('#add-sheet').classList.add('show');
+  $('#page-home').classList.remove('active');
+  $('#page-addtx').classList.add('active');
+  updateBottomNav();
   setTimeout(()=> $('#amount-input').focus(), 350);
 }
 function closeSheet(){
-  $('#sheet-backdrop').classList.remove('show');
-  $('#add-sheet').classList.remove('show');
+  editingTxId = null;
+  $('#page-addtx').classList.remove('active');
+  $('#'+sheetReturnPage).classList.add('active');
+  updateBottomNav();
 }
 function validateForm(){
   const amt = parseFloat($('#amount-input').value);
@@ -1190,6 +1269,31 @@ function saveTransaction(){
   const description = $('#desc-input').value.trim();
   const date = $('#date-input').value || new Date().toISOString().slice(0,10);
   const time = $('#time-input').value || new Date().toTimeString().slice(0,5);
+
+  if (editingTxId) {
+    const idx = state.transactions.findIndex(x=>x.id===editingTxId);
+    if (idx !== -1) {
+      state.transactions[idx] = {
+        ...state.transactions[idx],
+        type: currentType,
+        amount: Math.abs(amt),
+        merchant,
+        description,
+        category: selectedCat,
+        account: selectedAccountForTx,
+        date,
+        time,
+        logo: logoUrlCache[merchant] || null,
+      };
+    }
+    DB.set('transactions', state.transactions);
+    closeSheet();
+    renderHome();
+    renderMovements();
+    showToast(t('toast.updated'));
+    return;
+  }
+
   const tx = {
     id: Date.now().toString(36) + Math.random().toString(36).slice(2,6),
     type: currentType,
@@ -1206,6 +1310,7 @@ function saveTransaction(){
   DB.set('transactions', state.transactions);
   closeSheet();
   renderHome();
+  renderMovements();
   showToast(currentType==='expense' ? t('toast.expenseAdded') : t('toast.incomeAdded'));
 }
 
@@ -1213,6 +1318,7 @@ function deleteTransaction(id){
   state.transactions = state.transactions.filter(t=>t.id!==id);
   DB.set('transactions', state.transactions);
   renderHome();
+  renderMovements();
   showToast(t('toast.deleted'));
 }
 
@@ -1227,6 +1333,49 @@ function fmt(n){
 }
 function catInfo(id){ return CATS.find(c=>c.id===id) || CATS[CATS.length-1]; }
 function accInfo(id){ return state.accounts.find(a=>a.id===id); }
+
+function txRowHTML(tx){
+  const c = catInfo(tx.category);
+  const acc = accInfo(tx.account);
+  const logo = tx.logo
+    ? `<img src="${tx.logo}" onerror="this.parentElement.textContent='${initials(tx.merchant)}'">`
+    : initials(tx.merchant);
+  const badgeIcon = tx.type==='income'
+    ? '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M12 19V5M5 12l7-7 7 7"/></svg>'
+    : '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M12 5v14M5 12l7 7 7-7"/></svg>';
+  return `<div class="tx-row" data-id="${tx.id}">
+      <div class="tx-logo-wrap">
+        <div class="tx-logo">${logo}</div>
+        <div class="tx-badge ${tx.type==='income'?'income':'expense'}">${badgeIcon}</div>
+      </div>
+      <div class="tx-info">
+        <div class="tx-name">${escapeHtml(tx.merchant)}</div>
+        <div class="tx-meta">${formatDay(tx.date)}, ${tx.time} · ${t(c.key)}</div>
+      </div>
+      <div class="tx-right">
+        <div class="tx-amount ${tx.type==='income'?'pos':'neg'}">${tx.type==='income'?'+':'-'}${fmt(tx.amount)}</div>
+        <div class="tx-account">${acc ? `<span class="tx-account-icon">${accountIcon(acc.type)}</span>${escapeHtml(acc.name)}` : ''}</div>
+      </div>
+    </div>`;
+}
+function wireTxRows(container){
+  container.querySelectorAll('.tx-row').forEach(row=>{
+    let pressTimer;
+    let longPressed = false;
+    const start = ()=>{
+      longPressed = false;
+      pressTimer = setTimeout(()=>{ longPressed = true; confirmDelete(row.dataset.id); }, 550);
+    };
+    const cancel = ()=> clearTimeout(pressTimer);
+    row.addEventListener('touchstart', start);
+    row.addEventListener('touchend', cancel);
+    row.addEventListener('mousedown', start);
+    row.addEventListener('mouseup', cancel);
+    row.addEventListener('click', ()=>{
+      if (!longPressed) openTxDetail(row.dataset.id);
+    });
+  });
+}
 
 function renderHome(){
   let balance;
@@ -1257,47 +1406,195 @@ function renderHome(){
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 10h18M7 15h2m4 0h4M5 6h14a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2z"/></svg>
       <p>${searchQuery ? t('empty.noResults') : t('empty.noMovements')}</p>
     </div>`;
+    $('#tx-widget-fade').classList.remove('show');
+    $('#tx-show-all-btn').classList.remove('show');
     return;
   }
   items.sort((a,b)=> (b.date+b.time).localeCompare(a.date+a.time));
-  list.innerHTML = items.map(tx=>{
-    const c = catInfo(tx.category);
-    const acc = accInfo(tx.account);
-    const logo = tx.logo
-      ? `<img src="${tx.logo}" onerror="this.parentElement.textContent='${initials(tx.merchant)}'">`
-      : initials(tx.merchant);
-    const badgeIcon = tx.type==='income'
-      ? '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M12 19V5M5 12l7-7 7 7"/></svg>'
-      : '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M12 5v14M5 12l7 7 7-7"/></svg>';
-    return `<div class="tx-row" data-id="${tx.id}">
-      <div class="tx-logo-wrap">
-        <div class="tx-logo">${logo}</div>
-        <div class="tx-badge ${tx.type==='income'?'income':'expense'}">${badgeIcon}</div>
-      </div>
-      <div class="tx-info">
-        <div class="tx-name">${escapeHtml(tx.merchant)}</div>
-        <div class="tx-meta">${formatDay(tx.date)}, ${tx.time} · ${t(c.key)}</div>
-        ${tx.description ? `<div class="tx-desc">${escapeHtml(tx.description)}</div>` : ''}
-      </div>
-      <div class="tx-right">
-        <div class="tx-amount ${tx.type==='income'?'pos':'neg'}">${tx.type==='income'?'+':'-'}${fmt(tx.amount)}</div>
-        <div class="tx-account">${acc ? escapeHtml(acc.name) : ''}</div>
-      </div>
-    </div>`;
-  }).join('');
+  const previewItems = items.slice(0, 5);
+  $('#tx-widget-fade').classList.toggle('show', previewItems.length >= 4);
+  $('#tx-show-all-btn').classList.add('show');
+  list.innerHTML = previewItems.map(txRowHTML).join('');
+  wireTxRows(list);
+}
 
-  list.querySelectorAll('.tx-row').forEach(row=>{
-    let pressTimer;
-    const start = ()=>{ pressTimer = setTimeout(()=> confirmDelete(row.dataset.id), 550); };
-    const cancel = ()=> clearTimeout(pressTimer);
-    row.addEventListener('touchstart', start);
-    row.addEventListener('touchend', cancel);
-    row.addEventListener('mousedown', start);
-    row.addEventListener('mouseup', cancel);
+function matchesPeriod(tx, period){
+  if (period === 'all') return true;
+  const d = new Date(tx.date + 'T00:00:00');
+  const now = new Date(); now.setHours(0,0,0,0);
+  if (period === 'day') {
+    return tx.date === now.toISOString().slice(0,10);
+  }
+  if (period === 'week') {
+    const dow = (now.getDay() + 6) % 7; // Monday = 0
+    const monday = new Date(now); monday.setDate(now.getDate() - dow);
+    const sunday = new Date(monday); sunday.setDate(monday.getDate() + 6);
+    return d >= monday && d <= sunday;
+  }
+  if (period === 'month') {
+    return d.getFullYear() === now.getFullYear() && d.getMonth() === now.getMonth();
+  }
+  if (period === 'year') {
+    return d.getFullYear() === now.getFullYear();
+  }
+  return true;
+}
+
+function renderMovements(){
+  const list = $('#mv-tx-list');
+  let items = state.transactions.slice();
+
+  if (mvSearchQuery) {
+    items = items.filter(tx => tx.merchant.toLowerCase().includes(mvSearchQuery));
+  }
+  items = items.filter(tx => matchesPeriod(tx, mvFilter.period));
+  if (mvFilter.category !== 'all') {
+    items = items.filter(tx => tx.category === mvFilter.category);
+  }
+  if (mvFilter.account !== 'all') {
+    items = items.filter(tx => tx.account === mvFilter.account);
+  }
+
+  if (items.length === 0) {
+    list.innerHTML = `<div class="empty-state">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 10h18M7 15h2m4 0h4M5 6h14a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2z"/></svg>
+      <p>${(mvSearchQuery || mvFilter.period!=='all' || mvFilter.category!=='all' || mvFilter.account!=='all') ? t('empty.noResults') : t('empty.noMovements')}</p>
+    </div>`;
+    return;
+  }
+  items.sort((a,b)=> (b.date+b.time).localeCompare(a.date+a.time));
+  list.innerHTML = items.map(txRowHTML).join('');
+  wireTxRows(list);
+}
+
+function buildMvFilterChips(){
+  const periods = ['all','day','week','month','year'];
+  $('#mv-filter-period').innerHTML = periods.map(p=>
+    `<button type="button" class="chip ${mvFilter.period===p?'active':''}" data-p="${p}">${t('filter.'+p)}</button>`
+  ).join('');
+  $$('#mv-filter-period .chip').forEach(chip=>{
+    chip.addEventListener('click', ()=>{
+      $$('#mv-filter-period .chip').forEach(c=>c.classList.remove('active'));
+      chip.classList.add('active');
+      mvFilter.period = chip.dataset.p;
+    });
   });
+
+  const catOpts = [{id:'all', label:t('filter.allCategories'), icon:'✦'}]
+    .concat(CATS.map(c=>({id:c.id, label:t(c.key), icon:c.icon})));
+  $('#mv-filter-category').innerHTML = catOpts.map(c=>
+    `<button type="button" class="chip ${mvFilter.category===c.id?'active':''}" data-cat="${c.id}"><span>${c.icon}</span>${escapeHtml(c.label)}</button>`
+  ).join('');
+  $$('#mv-filter-category .chip').forEach(chip=>{
+    chip.addEventListener('click', ()=>{
+      $$('#mv-filter-category .chip').forEach(c=>c.classList.remove('active'));
+      chip.classList.add('active');
+      mvFilter.category = chip.dataset.cat;
+    });
+  });
+
+  const accOpts = [{id:'all', label:t('filter.allAccounts'), icon:''}]
+    .concat(state.accounts.map(a=>({id:a.id, label:a.name, icon:accountIcon(a.type)})));
+  $('#mv-filter-account').innerHTML = accOpts.map(a=>
+    `<button type="button" class="chip ${mvFilter.account===a.id?'active':''}" data-acc="${a.id}">${a.icon?`<span>${a.icon}</span>`:''}${escapeHtml(a.label)}</button>`
+  ).join('');
+  $$('#mv-filter-account .chip').forEach(chip=>{
+    chip.addEventListener('click', ()=>{
+      $$('#mv-filter-account .chip').forEach(c=>c.classList.remove('active'));
+      chip.classList.add('active');
+      mvFilter.account = chip.dataset.acc;
+    });
+  });
+}
+function openMvFilter(){
+  $('#mv-filter-merchant-input').value = mvSearchQuery;
+  buildMvFilterChips();
+  $('#mv-filter-backdrop').classList.add('show');
+  $('#mv-filter-sheet').classList.add('show');
+}
+function closeMvFilter(){
+  $('#mv-filter-backdrop').classList.remove('show');
+  $('#mv-filter-sheet').classList.remove('show');
+}
+function wireMovements(){
+  $('#mv-avatar-btn').addEventListener('click', ()=> openProfile(false));
+  $('#mv-gear-btn').addEventListener('click', ()=> openSettings());
+  $('#mv-search-input').addEventListener('input', (e)=>{
+    mvSearchQuery = e.target.value.trim().toLowerCase();
+    renderMovements();
+  });
+  $('#mv-filter-btn').addEventListener('click', openMvFilter);
+  $('#mv-filter-close').addEventListener('click', closeMvFilter);
+  $('#mv-filter-backdrop').addEventListener('click', closeMvFilter);
+  $('#mv-filter-apply').addEventListener('click', ()=>{
+    mvSearchQuery = $('#mv-filter-merchant-input').value.trim().toLowerCase();
+    $('#mv-search-input').value = $('#mv-filter-merchant-input').value;
+    closeMvFilter();
+    renderMovements();
+  });
+  $('#mv-filter-clear').addEventListener('click', ()=>{
+    mvFilter = { period:'all', category:'all', account:'all' };
+    mvSearchQuery = '';
+    $('#mv-search-input').value = '';
+    $('#mv-filter-merchant-input').value = '';
+    closeMvFilter();
+    renderMovements();
+  });
+}
+function openMovementsPage(){
+  $$('.page').forEach(p=>p.classList.remove('active'));
+  $('#page-movements').classList.add('active');
+  updateBottomNav();
+  renderMovements();
 }
 function confirmDelete(id){
   if (confirm(t('confirm.delete'))) deleteTransaction(id);
+}
+
+function openTxDetail(id){
+  const tx = state.transactions.find(x=>x.id===id);
+  if (!tx) return;
+  const c = catInfo(tx.category);
+  const acc = accInfo(tx.account);
+  const logo = tx.logo
+    ? `<img src="${tx.logo}" onerror="this.parentElement.textContent='${initials(tx.merchant)}'">`
+    : initials(tx.merchant);
+  const badgeIcon = tx.type==='income'
+    ? '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M12 19V5M5 12l7-7 7 7"/></svg>'
+    : '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M12 5v14M5 12l7 7 7-7"/></svg>';
+
+  $('#txdetail-title').textContent = tx.merchant;
+  $('#txdetail-logo').innerHTML = logo;
+  $('#txdetail-badge').innerHTML = badgeIcon;
+  $('#txdetail-badge').className = 'tx-badge ' + (tx.type==='income' ? 'income' : 'expense');
+  $('#txdetail-amount').textContent = (tx.type==='income'?'+':'-') + fmt(tx.amount);
+  $('#txdetail-amount').className = 'txdetail-amount ' + (tx.type==='income'?'pos':'neg');
+  $('#txdetail-date').textContent = `${formatDay(tx.date)}, ${tx.time}`;
+  if (tx.description) {
+    $('#txdetail-desc-row').style.display = '';
+    $('#txdetail-desc').textContent = tx.description;
+  } else {
+    $('#txdetail-desc-row').style.display = 'none';
+  }
+  $('#txdetail-cat').textContent = t(c.key);
+  $('#txdetail-acc').textContent = acc ? acc.name : '';
+  $('#txdetail-edit-btn').dataset.id = tx.id;
+
+  $('#txdetail-backdrop').classList.add('show');
+  $('#txdetail-sheet').classList.add('show');
+}
+function closeTxDetail(){
+  $('#txdetail-backdrop').classList.remove('show');
+  $('#txdetail-sheet').classList.remove('show');
+}
+function wireTxDetail(){
+  $('#txdetail-close').addEventListener('click', closeTxDetail);
+  $('#txdetail-backdrop').addEventListener('click', closeTxDetail);
+  $('#txdetail-edit-btn').addEventListener('click', ()=>{
+    const id = $('#txdetail-edit-btn').dataset.id;
+    closeTxDetail();
+    openSheet(null, id);
+  });
 }
 function initials(name){
   return name.trim().split(/\s+/).slice(0,2).map(w=>w[0]).join('').toUpperCase();
@@ -1409,6 +1706,10 @@ function openDeleteWarning(){
 }
 function openDeletePinConfirm(){
   $('#delete-warning-modal').classList.remove('show');
+  if (!state.pinHash) {
+    eraseAllData();
+    return;
+  }
   deletePin = '';
   renderDots($('#delete-pin-dots'), 0);
   $('#delete-pin-error').classList.remove('show');

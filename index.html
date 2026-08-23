@@ -21,6 +21,7 @@
 
     <div id="splash">
     <div class="splash-logo" id="splash-logo"><img src="assets/fyn-logo-white.png" alt="Fyn"></div>
+    <div class="splash-copyright">© 2026 Huko. All rights reserved.</div>
   </div>
 
     <div id="setup">
@@ -40,7 +41,10 @@
             <span class="ob-card-label">Español</span>
           </button>
         </div>
-        <button type="button" class="ob-import-btn" id="ob-import-btn">Import data directly (.json)</button>
+        <button type="button" class="ob-import-btn" id="ob-import-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 21h16"/></svg>
+          <span id="ob-import-btn-label">Import data directly (.json)</span>
+        </button>
         <input type="file" id="ob-import-file" accept="application/json">
       </div>
     </div>
@@ -225,7 +229,63 @@
 
       <div class="content-sheet">
         <div class="sec-title"><h3 data-i18n="movements.title">Transactions</h3></div>
-        <div id="tx-list"></div>
+        <div class="tx-widget" id="tx-widget">
+          <div id="tx-list"></div>
+          <div class="tx-widget-fade" id="tx-widget-fade"></div>
+        </div>
+        <button type="button" class="tx-show-all-btn" id="tx-show-all-btn" data-i18n="movements.showAll">Show all</button>
+      </div>
+    </div>
+
+    <div class="page" id="page-movements">
+      <div class="hero plain">
+        <div class="hero-top">
+          <div class="avatar" id="mv-avatar-btn">G</div>
+          <button class="gear-btn" id="mv-gear-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 11-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 11-2.83-2.83l.06-.06A1.65 1.65 0 004.6 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 112.83-2.83l.06.06A1.65 1.65 0 009 4.6a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 112.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+          </button>
+        </div>
+
+        <div class="mv-title-row">
+          <h2 class="mv-title" data-i18n="movements.all">All movements</h2>
+          <button type="button" class="mv-filter-btn" id="mv-filter-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16"/><circle cx="9" cy="6" r="2" fill="currentColor" stroke="none"/><path d="M4 12h16"/><circle cx="16" cy="12" r="2" fill="currentColor" stroke="none"/><path d="M4 18h16"/><circle cx="11" cy="18" r="2" fill="currentColor" stroke="none"/></svg>
+          </button>
+        </div>
+
+        <div class="search-bar">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+          <input type="text" id="mv-search-input" data-i18n-ph="search.placeholder" placeholder="Search">
+        </div>
+      </div>
+
+      <div class="content-sheet mv-content-sheet">
+        <div id="mv-tx-list"></div>
+      </div>
+    </div>
+
+    <div class="sheet-backdrop" id="mv-filter-backdrop"></div>
+    <div class="sheet" id="mv-filter-sheet">
+      <div class="sheet-handle"></div>
+      <div class="sheet-head">
+        <h3 data-i18n="filter.title">Filters</h3>
+        <button class="sheet-close" id="mv-filter-close">✕</button>
+      </div>
+      <div class="sheet-body">
+        <div class="field-label" data-i18n="filter.period">Period</div>
+        <div class="chip-grid" id="mv-filter-period"></div>
+
+        <div class="field-label" data-i18n="filter.merchant">Establishment</div>
+        <input type="text" class="text-field" id="mv-filter-merchant-input" data-i18n-ph="merchant.placeholder" placeholder="e.g. Mercadona, Netflix, Amazon…">
+
+        <div class="field-label" data-i18n="filter.category">Category</div>
+        <div class="chip-grid chip-row-scroll" id="mv-filter-category"></div>
+
+        <div class="field-label" data-i18n="filter.account">Account</div>
+        <div class="chip-grid" id="mv-filter-account"></div>
+
+        <button type="button" class="save-btn" id="mv-filter-apply" data-i18n="filter.apply">Apply filters</button>
+        <button type="button" class="tx-show-all-btn show" id="mv-filter-clear" data-i18n="filter.clear">Clear filters</button>
       </div>
     </div>
 
@@ -323,6 +383,46 @@
       <div class="sheet-body" id="pronoun-sheet-list"></div>
     </div>
 
+    <div class="sheet-backdrop" id="txdetail-backdrop"></div>
+    <div class="sheet" id="txdetail-sheet">
+      <div class="sheet-handle"></div>
+      <div class="sheet-head">
+        <h3 id="txdetail-title"></h3>
+        <button class="sheet-close" id="txdetail-close">✕</button>
+      </div>
+      <div class="sheet-body">
+        <div class="txdetail-top">
+          <div class="tx-logo-wrap large">
+            <div class="tx-logo" id="txdetail-logo"></div>
+            <div class="tx-badge" id="txdetail-badge"></div>
+          </div>
+          <div class="txdetail-amount" id="txdetail-amount"></div>
+        </div>
+        <div class="txdetail-rows">
+          <div class="txdetail-row">
+            <span class="txdetail-label" data-i18n="txdetail.date">Date & time</span>
+            <span class="txdetail-value" id="txdetail-date"></span>
+          </div>
+          <div class="txdetail-row" id="txdetail-desc-row" style="display:none">
+            <span class="txdetail-label" data-i18n="field.description">Description</span>
+            <span class="txdetail-value" id="txdetail-desc"></span>
+          </div>
+          <div class="txdetail-row">
+            <span class="txdetail-label" data-i18n="field.category">Category</span>
+            <span class="txdetail-value" id="txdetail-cat"></span>
+          </div>
+          <div class="txdetail-row">
+            <span class="txdetail-label" data-i18n="field.account">Account</span>
+            <span class="txdetail-value" id="txdetail-acc"></span>
+          </div>
+        </div>
+        <button type="button" class="edit-tx-btn" id="txdetail-edit-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+          <span data-i18n="action.edit">Edit</span>
+        </button>
+      </div>
+    </div>
+
         <div class="page" id="page-settings">
       <div class="settings-header">
         <button class="back-btn" id="settings-back"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg></button>
@@ -388,6 +488,58 @@
       </div>
     </div>
 
+    <div class="page" id="page-addtx">
+      <div class="settings-header">
+        <button class="back-btn" id="addtx-back"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg></button>
+        <div class="page-title-inline" id="addtx-title" data-i18n="sheet.title">New transaction</div>
+      </div>
+      <div class="sheet-body">
+        <div class="type-toggle">
+          <button id="type-expense" class="active" data-i18n="type.expense">Expense</button>
+          <button id="type-income" data-i18n="type.income">Income</button>
+        </div>
+
+        <div class="amount-input-wrap">
+          <input type="number" inputmode="decimal" class="amount-input" id="amount-input" placeholder="0.00">
+        </div>
+
+        <div class="field-label" data-i18n="field.merchant">Merchant</div>
+        <input type="text" class="text-field" id="merchant-input" data-i18n-ph="merchant.placeholder" placeholder="e.g. Mercadona, Netflix, Amazon…">
+        <div class="logo-preview" id="logo-preview"></div>
+
+        <div class="field-label" data-i18n="field.description">Description (optional)</div>
+        <input type="text" class="text-field" id="desc-input" data-i18n-ph="desc.placeholder" placeholder="Add a note (optional)" maxlength="60">
+
+        <div class="field-label" data-i18n="field.category">Category</div>
+        <div class="cat-search-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+          <input type="text" id="cat-search-input" data-i18n-ph="cat.search" placeholder="Search categories">
+        </div>
+        <div class="chip-grid chip-row-scroll" id="cat-grid"></div>
+
+        <div class="field-label" data-i18n="field.account">Account</div>
+        <div class="chip-grid" id="account-grid"></div>
+
+        <div class="field-label" data-i18n="field.date">Date</div>
+        <div class="date-time-row">
+          <div class="date-time-field">
+            <input type="date" class="text-field" id="date-input">
+            <svg class="dt-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="5" width="18" height="16" rx="3"/><path d="M8 3v4M16 3v4M3 10h18"/>
+            </svg>
+          </div>
+          <div class="date-time-field">
+            <input type="time" class="text-field" id="time-input">
+            <svg class="dt-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="8.5"/><path d="M12 7.5v5l3.2 2"/>
+            </svg>
+          </div>
+        </div>
+
+        <button class="save-btn" id="save-tx" disabled data-i18n="action.save">Save</button>
+      </div>
+    </div>
+
     <div class="bottom-nav" id="bottom-nav">
       <button type="button" class="bottom-nav-btn active" id="nav-home" data-nav="home">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11.5L12 4l9 7.5"/><path d="M5 10v10a1 1 0 001 1h4v-6h4v6h4a1 1 0 001-1V10"/></svg>
@@ -421,49 +573,7 @@
       </div>
     </div>
 
-    <div class="sheet-backdrop" id="sheet-backdrop"></div>
-  <div class="sheet" id="add-sheet">
-    <div class="sheet-handle"></div>
-    <div class="sheet-head">
-      <h3 data-i18n="sheet.title">New transaction</h3>
-      <button class="sheet-close" id="sheet-close">✕</button>
     </div>
-    <div class="sheet-body">
-      <div class="type-toggle">
-        <button id="type-expense" class="active" data-i18n="type.expense">Expense</button>
-        <button id="type-income" data-i18n="type.income">Income</button>
-      </div>
-
-      <div class="amount-input-wrap">
-        <input type="number" inputmode="decimal" class="amount-input" id="amount-input" placeholder="0.00">
-      </div>
-
-      <div class="field-label" data-i18n="field.merchant">Merchant</div>
-      <input type="text" class="text-field" id="merchant-input" data-i18n-ph="merchant.placeholder" placeholder="e.g. Mercadona, Netflix, Amazon…">
-      <div class="logo-preview" id="logo-preview"></div>
-
-      <div class="field-label" data-i18n="field.description">Description (optional)</div>
-      <input type="text" class="text-field" id="desc-input" data-i18n-ph="desc.placeholder" placeholder="Add a note (optional)" maxlength="60">
-
-      <div class="field-label" data-i18n="field.category">Category</div>
-      <div class="cat-search-wrap">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
-        <input type="text" id="cat-search-input" data-i18n-ph="cat.search" placeholder="Search categories">
-      </div>
-      <div class="chip-grid chip-row-scroll" id="cat-grid"></div>
-
-      <div class="field-label" data-i18n="field.account">Account</div>
-      <div class="chip-grid" id="account-grid"></div>
-
-      <div class="field-label" data-i18n="field.date">Date</div>
-      <div class="date-time-row">
-        <input type="date" class="text-field" id="date-input">
-        <input type="time" class="text-field" id="time-input">
-      </div>
-
-      <button class="save-btn" id="save-tx" disabled data-i18n="action.save">Save</button>
-    </div>
-  </div>
 
   <div class="modal-backdrop" id="delete-backdrop"></div>
 
