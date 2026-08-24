@@ -10,7 +10,7 @@ const I18N = {
     'accounts.title':'Add your accounts','accounts.subtitle':'Add at least one account to continue. You can add as many as you like. You can also add more accounts later.',
     'accounts.cash':'Cash','accounts.card':'Debit card','accounts.yours':'Your accounts','accounts.btn':'Accounts','accounts.networth':'Net worth',
     'accounts.addEdit':'Add or edit accounts','accounts.manageTitle':'Add or edit accounts','accounts.manageSub':'Manage your Fyn accounts.',
-    'field.name':'Name','field.description':'Description (optional)','field.initialBalance':'Initial balance',
+    'field.name':'Name','field.description':'Description (optional)','field.descriptionPlain':'Description','field.initialBalance':'Initial balance',
     'theme.title':'Choose your theme','theme.light':'Light','theme.dark':'Dark',
     'hue.title':'Choose your accent tone','hue.subtitle':'Drag to pick the shade for your gradient background.',
     'pin.create':'Create a 4-digit code','pin.repeat':'Repeat your code','pin.enterCurrent':'Enter your current code','pin.enterImport':'Enter this backup\'s code',
@@ -72,7 +72,7 @@ const I18N = {
     'accounts.title':'Añade tus cuentas','accounts.subtitle':'Añade al menos una cuenta para continuar. Puedes añadir las que quieras. También puedes añadir más cuentas más tarde.',
     'accounts.cash':'Efectivo','accounts.card':'Tarjeta de débito','accounts.yours':'Tus cuentas','accounts.btn':'Cuentas','accounts.networth':'Patrimonio neto',
     'accounts.addEdit':'Añadir o editar cuentas','accounts.manageTitle':'Añadir o editar cuentas','accounts.manageSub':'Gestiona tus cuentas de Fyn.',
-    'field.name':'Nombre','field.description':'Descripción (opcional)','field.initialBalance':'Saldo inicial',
+    'field.name':'Nombre','field.description':'Descripción (opcional)','field.descriptionPlain':'Descripción','field.initialBalance':'Saldo inicial',
     'theme.title':'Elige el tema','theme.light':'Claro','theme.dark':'Oscuro',
     'hue.title':'Elige el tono de fondo','hue.subtitle':'Desliza para elegir el tono de tu fondo degradado.',
     'pin.create':'Crea un código de 4 dígitos','pin.repeat':'Repite tu código','pin.enterCurrent':'Introduce tu código actual','pin.enterImport':'Introduce el código de esta copia',
@@ -1583,7 +1583,7 @@ function openTxDetail(id){
     $('#txdetail-desc-row').style.display = 'none';
   }
   $('#txdetail-cat').textContent = t(c.key);
-  $('#txdetail-acc').textContent = acc ? acc.name : '';
+  $('#txdetail-acc').innerHTML = acc ? `<span class="txdetail-acc-icon">${accountIcon(acc.type)}</span>${escapeHtml(acc.name)}` : '';
   $('#txdetail-edit-btn').dataset.id = tx.id;
 
   $('#txdetail-backdrop').classList.add('show');
