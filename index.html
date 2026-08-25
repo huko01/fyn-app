@@ -560,50 +560,70 @@
         <button class="back-btn" id="addtx-back"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg></button>
         <div class="page-title-inline" id="addtx-title" data-i18n="sheet.title">New transaction</div>
       </div>
-      <div class="sheet-body">
-        <div class="type-toggle">
-          <button id="type-expense" class="active" data-i18n="type.expense">Expense</button>
-          <button id="type-income" data-i18n="type.income">Income</button>
-        </div>
+      <div class="addtx-progress-row">
+        <div class="addtx-progress" id="addtx-progress"><div class="addtx-progress-fill" id="addtx-progress-fill"></div></div>
+        <span class="addtx-progress-count" id="addtx-progress-count">1/6</span>
+      </div>
+      <div class="sheet-body addtx-body">
 
-        <div class="amount-input-wrap">
-          <input type="number" inputmode="decimal" class="amount-input" id="amount-input" placeholder="0.00">
-        </div>
-
-        <div class="field-label" data-i18n="field.merchant">Merchant</div>
-        <input type="text" class="text-field" id="merchant-input" data-i18n-ph="merchant.placeholder" placeholder="e.g. Mercadona, Netflix, Amazon…">
-        <div class="logo-results" id="logo-results"></div>
-
-        <div class="field-label" data-i18n="field.description">Description (optional)</div>
-        <input type="text" class="text-field" id="desc-input" data-i18n-ph="desc.placeholder" placeholder="Add a note (optional)" maxlength="60">
-
-        <div class="field-label" data-i18n="field.category">Category</div>
-        <div class="cat-search-wrap">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
-          <input type="text" id="cat-search-input" data-i18n-ph="cat.search" placeholder="Search categories">
-        </div>
-        <div class="chip-grid chip-row-scroll" id="cat-grid"></div>
-
-        <div class="field-label" data-i18n="field.account">Account</div>
-        <div class="chip-grid" id="account-grid"></div>
-
-        <div class="field-label" data-i18n="field.date">Date</div>
-        <div class="date-time-row">
-          <div class="date-time-field">
-            <input type="date" class="text-field" id="date-input">
-            <svg class="dt-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="3" y="5" width="18" height="16" rx="3"/><path d="M8 3v4M16 3v4M3 10h18"/>
-            </svg>
+        <div class="addtx-step active" id="addtx-step-amount">
+          <div class="addtx-step-title" data-i18n="field.amount">Amount</div>
+          <div class="type-toggle" id="addtx-type-toggle">
+            <button type="button" id="type-expense" class="active" data-i18n="type.expense">Expense</button>
+            <button type="button" id="type-income" data-i18n="type.income">Income</button>
           </div>
-          <div class="date-time-field">
-            <input type="time" class="text-field" id="time-input">
-            <svg class="dt-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="12" cy="12" r="8.5"/><path d="M12 7.5v5l3.2 2"/>
-            </svg>
+          <div class="amount-input-wrap">
+            <input type="number" inputmode="decimal" class="amount-input" id="amount-input" placeholder="0.00">
           </div>
         </div>
 
-        <button class="save-btn" id="save-tx" disabled data-i18n="action.save">Save</button>
+        <div class="addtx-step" id="addtx-step-name">
+          <div class="addtx-step-title" data-i18n="field.merchant">Merchant</div>
+          <input type="text" class="text-field" id="merchant-input" data-i18n-ph="merchant.placeholder" placeholder="Establishment">
+          <div class="addtx-step-title addtx-subtitle" data-i18n="field.description">Description (optional)</div>
+          <input type="text" class="text-field" id="desc-input" data-i18n-ph="desc.placeholder" placeholder="Add a note (optional)" maxlength="60">
+        </div>
+
+        <div class="addtx-step" id="addtx-step-logo">
+          <div class="addtx-step-title" data-i18n="field.logo">Logo</div>
+          <div class="logo-results" id="logo-results"></div>
+        </div>
+
+        <div class="addtx-step" id="addtx-step-category">
+          <div class="addtx-step-title" data-i18n="field.category">Category</div>
+          <div class="cat-search-wrap">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+            <input type="text" id="cat-search-input" data-i18n-ph="cat.search" placeholder="Search categories">
+          </div>
+          <div class="chip-grid chip-list-vertical" id="cat-grid"></div>
+        </div>
+
+        <div class="addtx-step" id="addtx-step-account">
+          <div class="addtx-step-title" data-i18n="field.account">Account</div>
+          <div class="chip-grid chip-list-vertical" id="account-grid"></div>
+        </div>
+
+        <div class="addtx-step" id="addtx-step-datetime">
+          <div class="addtx-step-title" data-i18n="field.date">Date</div>
+          <div class="date-time-row">
+            <div class="date-time-field">
+              <input type="date" class="text-field" id="date-input">
+              <svg class="dt-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="5" width="18" height="16" rx="3"/><path d="M8 3v4M16 3v4M3 10h18"/>
+              </svg>
+            </div>
+            <div class="date-time-field">
+              <input type="time" class="text-field" id="time-input">
+              <svg class="dt-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="8.5"/><path d="M12 7.5v5l3.2 2"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="filters-footer">
+        <button class="save-btn" id="save-tx" disabled data-i18n="action.next">Next</button>
       </div>
     </div>
 
