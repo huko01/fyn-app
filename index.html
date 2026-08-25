@@ -261,28 +261,55 @@
       </div>
     </div>
 
-    <div class="sheet-backdrop" id="mv-filter-backdrop"></div>
-    <div class="sheet" id="mv-filter-sheet">
-      <div class="sheet-handle"></div>
-      <div class="sheet-head">
-        <h3 data-i18n="filter.title">Filters</h3>
-        <button class="sheet-close" id="mv-filter-close">✕</button>
+    <div class="page" id="page-stats">
+      <div class="hero plain">
+        <div class="hero-top">
+          <div class="avatar" id="stats-avatar-btn">G</div>
+          <button class="gear-btn" id="stats-gear-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 11-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 11-2.83-2.83l.06-.06A1.65 1.65 0 004.6 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 112.83-2.83l.06.06A1.65 1.65 0 009 4.6a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 112.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+          </button>
+        </div>
+
+        <div class="mv-title-row">
+          <h2 class="mv-title" data-i18n="stats.title">Statistics</h2>
+        </div>
+      </div>
+
+      <div class="content-sheet mv-content-sheet stats-content-sheet">
+        <div class="stats-soon" data-i18n="stats.comingSoon">Coming soon</div>
+      </div>
+    </div>
+
+    <div class="page" id="page-mv-filters">
+      <div class="settings-header">
+        <button class="back-btn" id="mv-filter-back"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg></button>
+        <div class="page-title-inline" data-i18n="filter.title">Filters</div>
       </div>
       <div class="sheet-body">
         <div class="field-label" data-i18n="filter.period">Period</div>
         <div class="chip-grid" id="mv-filter-period"></div>
 
-        <div class="field-label" data-i18n="filter.merchant">Establishment</div>
-        <input type="text" class="text-field" id="mv-filter-merchant-input" data-i18n-ph="merchant.placeholder" placeholder="e.g. Mercadona, Netflix, Amazon…">
-
         <div class="field-label" data-i18n="filter.category">Category</div>
+        <div class="type-toggle mv-cat-type-toggle">
+          <button type="button" id="mv-cat-type-expense" data-i18n="type.expense">Expense</button>
+          <button type="button" id="mv-cat-type-income" data-i18n="type.income">Income</button>
+        </div>
+        <div class="cat-search-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+          <input type="text" id="mv-cat-search-input" data-i18n-ph="cat.search" placeholder="Search categories">
+        </div>
         <div class="chip-grid chip-row-scroll" id="mv-filter-category"></div>
 
         <div class="field-label" data-i18n="filter.account">Account</div>
         <div class="chip-grid" id="mv-filter-account"></div>
+      </div>
 
+      <div class="filters-footer">
         <button type="button" class="save-btn" id="mv-filter-apply" data-i18n="filter.apply">Apply filters</button>
-        <button type="button" class="tx-show-all-btn show" id="mv-filter-clear" data-i18n="filter.clear">Clear filters</button>
+        <button type="button" class="ob-import-btn app-import-btn" id="mv-filter-clear">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 6L5 18M5 6l14 12"/></svg>
+          <span data-i18n="filter.clear">Clear filters</span>
+        </button>
       </div>
     </div>
 
@@ -316,7 +343,7 @@
     <div class="setup-step-standalone" id="accounts-editor">
       <button class="chpin-cancel" id="acce-cancel">✕</button>
       <div class="ob-wrap ob-wrap-scroll">
-        <div class="ob-title" data-i18n="accounts.manageTitle">Add or edit your accounts</div>
+        <div class="ob-title" data-i18n="accounts.manageTitle">Add accounts</div>
         <div class="ob-sub" data-i18n="accounts.manageSub">Manage the accounts you track in Fyn.</div>
 
         <div class="acc-type-row">
@@ -485,6 +512,49 @@
       </div>
     </div>
 
+    <div class="page" id="page-account-details">
+      <div class="settings-header">
+        <button class="back-btn" id="accdetails-back"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg></button>
+        <div class="page-title-inline" data-i18n="accdetails.title">Account details</div>
+      </div>
+
+      <div class="accdetails-hero">
+        <div class="accdetails-icon" id="accdetails-icon"></div>
+        <div class="accdetails-type" id="accdetails-type"></div>
+      </div>
+
+      <div class="txdetail-rows accdetails-rows">
+        <div class="txdetail-row">
+          <span class="txdetail-label" data-i18n="field.name">Name</span>
+          <span class="txdetail-value-edit">
+            <span class="txdetail-value" id="accdetails-name"></span>
+            <button type="button" class="edit-pencil-btn" id="accdetails-name-edit">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.85 2.83 0 114 4L7.5 20.5 2 22l1.5-5.5z"/></svg>
+            </button>
+          </span>
+        </div>
+        <div class="txdetail-row">
+          <span class="txdetail-label" data-i18n="field.descriptionPlain">Description</span>
+          <span class="txdetail-value-edit">
+            <span class="txdetail-value" id="accdetails-desc"></span>
+            <button type="button" class="edit-pencil-btn" id="accdetails-desc-edit">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.85 2.83 0 114 4L7.5 20.5 2 22l1.5-5.5z"/></svg>
+            </button>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-backdrop" id="rename-backdrop"></div>
+    <div class="modal rename-modal" id="rename-modal">
+      <div class="rename-modal-label" id="rename-modal-label"></div>
+      <input type="text" class="text-field" id="rename-modal-input" maxlength="40">
+      <div class="rename-modal-actions">
+        <button type="button" class="modal-btn ghost" id="rename-modal-cancel" data-i18n="delete.cancel">Cancel</button>
+        <button type="button" class="modal-btn primary" id="rename-modal-save" data-i18n="action.save">Save</button>
+      </div>
+    </div>
+
     <div class="page" id="page-addtx">
       <div class="settings-header">
         <button class="back-btn" id="addtx-back"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg></button>
@@ -502,7 +572,7 @@
 
         <div class="field-label" data-i18n="field.merchant">Merchant</div>
         <input type="text" class="text-field" id="merchant-input" data-i18n-ph="merchant.placeholder" placeholder="e.g. Mercadona, Netflix, Amazon…">
-        <div class="logo-preview" id="logo-preview"></div>
+        <div class="logo-results" id="logo-results"></div>
 
         <div class="field-label" data-i18n="field.description">Description (optional)</div>
         <input type="text" class="text-field" id="desc-input" data-i18n-ph="desc.placeholder" placeholder="Add a note (optional)" maxlength="60">

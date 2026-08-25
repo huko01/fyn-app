@@ -9,7 +9,7 @@ const I18N = {
     'currency.title':'Choose your currency','currency.usd':'US Dollar (USD)','currency.eur':'Euro (EUR)',
     'accounts.title':'Add your accounts','accounts.subtitle':'Add at least one account to continue. You can add as many as you like. You can also add more accounts later.',
     'accounts.cash':'Cash','accounts.card':'Debit card','accounts.yours':'Your accounts','accounts.btn':'Accounts','accounts.networth':'Net worth',
-    'accounts.addEdit':'Add or edit accounts','accounts.manageTitle':'Add or edit accounts','accounts.manageSub':'Manage your Fyn accounts.',
+    'accounts.addEdit':'Add accounts','accounts.manageTitle':'Add accounts','accounts.manageSub':'Manage your Fyn accounts.',
     'field.name':'Name','field.description':'Description (optional)','field.descriptionPlain':'Description','field.initialBalance':'Initial balance',
     'theme.title':'Choose your theme','theme.light':'Light','theme.dark':'Dark',
     'hue.title':'Choose your accent tone','hue.subtitle':'Drag to pick the shade for your gradient background.',
@@ -22,7 +22,11 @@ const I18N = {
     'greeting.morning':'Good morning','greeting.afternoon':'Good afternoon','greeting.evening':'Good evening',
     'search.placeholder':'Search','balance.label':'Balance',
     'qa.expense':'Add expense','qa.income':'Add income','qa.details':'Details','qa.more':'More',
+    'accdetails.title':'Account details',
+    'accdetails.selectAccount':'Select an account to see its details',
+    'accdetails.editName':'Edit name','accdetails.editDesc':'Edit description','accdetails.noDesc':'No description',
     'movements.title':'Transactions','movements.showAll':'Show all','movements.all':'All movements',
+    'stats.title':'Statistics','stats.comingSoon':'Coming soon',
     'filter.title':'Filters','filter.period':'Period','filter.all':'All','filter.day':'Day','filter.week':'Week','filter.month':'Month','filter.year':'Year',
     'filter.merchant':'Establishment','filter.category':'Category','filter.allCategories':'All categories',
     'filter.account':'Account','filter.allAccounts':'All accounts',
@@ -35,7 +39,7 @@ const I18N = {
     'field.merchant':'Name','merchant.placeholder':'e.g. Mercadona, Netflix, Amazon…',
     'desc.placeholder':'Note','cat.search':'Search categories',
     'field.category':'Category','field.account':'Account','field.date':'Date','action.save2':'Save',
-    'logo.searching':'Searching logo…','logo.found':'Logo found for {d}','logo.notfound':'No logo found — initials will be used',
+    'logo.searching':'Searching logos…','logo.found':'Logo found for {d}','logo.notfound':'No logos found — initials will be used','logo.pick':'Pick a logo','logo.noToken':'Add your logo.dev key in app.js to enable this',
     'toast.expenseAdded':'Expense added','toast.incomeAdded':'Income added','toast.updated':'Movement updated','toast.deleted':'Transaction deleted','toast.comingSoon':'Coming soon',
     'confirm.delete':'Delete this transaction?',
     'confirm.deleteAccount':'Are you sure you want to delete this account?',
@@ -71,7 +75,7 @@ const I18N = {
     'currency.title':'Elige tu moneda','currency.usd':'Dólar estadounidense (USD)','currency.eur':'Euro (EUR)',
     'accounts.title':'Añade tus cuentas','accounts.subtitle':'Añade al menos una cuenta para continuar. Puedes añadir las que quieras. También puedes añadir más cuentas más tarde.',
     'accounts.cash':'Efectivo','accounts.card':'Tarjeta de débito','accounts.yours':'Tus cuentas','accounts.btn':'Cuentas','accounts.networth':'Patrimonio neto',
-    'accounts.addEdit':'Añadir o editar cuentas','accounts.manageTitle':'Añadir o editar cuentas','accounts.manageSub':'Gestiona tus cuentas de Fyn.',
+    'accounts.addEdit':'Añadir cuentas','accounts.manageTitle':'Añadir cuentas','accounts.manageSub':'Gestiona tus cuentas de Fyn.',
     'field.name':'Nombre','field.description':'Descripción (opcional)','field.descriptionPlain':'Descripción','field.initialBalance':'Saldo inicial',
     'theme.title':'Elige el tema','theme.light':'Claro','theme.dark':'Oscuro',
     'hue.title':'Elige el tono de fondo','hue.subtitle':'Desliza para elegir el tono de tu fondo degradado.',
@@ -84,7 +88,11 @@ const I18N = {
     'greeting.morning':'Buenos días','greeting.afternoon':'Buenas tardes','greeting.evening':'Buenas noches',
     'search.placeholder':'Buscar','balance.label':'Saldo',
     'qa.expense':'Añadir gasto','qa.income':'Añadir ingreso','qa.details':'Detalles','qa.more':'Más',
+    'accdetails.title':'Detalles de cuenta',
+    'accdetails.selectAccount':'Selecciona una cuenta para ver sus detalles',
+    'accdetails.editName':'Editar nombre','accdetails.editDesc':'Editar descripción','accdetails.noDesc':'Sin descripción',
     'movements.title':'Movimientos','movements.showAll':'Mostrar todos','movements.all':'Todos los movimientos',
+    'stats.title':'Estadísticas','stats.comingSoon':'Próximamente',
     'filter.title':'Filtros','filter.period':'Periodo','filter.all':'Todo','filter.day':'Día','filter.week':'Semana','filter.month':'Mes','filter.year':'Año',
     'filter.merchant':'Establecimiento','filter.category':'Categoría','filter.allCategories':'Todas las categorías',
     'filter.account':'Cuenta','filter.allAccounts':'Todas las cuentas',
@@ -97,7 +105,7 @@ const I18N = {
     'field.merchant':'Nombre','merchant.placeholder':'Ej. Mercadona, Netflix, Amazon…',
     'desc.placeholder':'Nota','cat.search':'Buscar categorías',
     'field.category':'Categoría','field.account':'Cuenta','field.date':'Fecha','action.save2':'Guardar',
-    'logo.searching':'Buscando logo…','logo.found':'Logo encontrado para {d}','logo.notfound':'Sin logo — se usarán las iniciales',
+    'logo.searching':'Buscando logos…','logo.found':'Logo encontrado para {d}','logo.notfound':'Sin logos — se usarán las iniciales','logo.pick':'Elige un logo','logo.noToken':'Añade tu clave de logo.dev en app.js para activar esto',
     'toast.expenseAdded':'Gasto añadido','toast.incomeAdded':'Ingreso añadido','toast.updated':'Movimiento actualizado','toast.deleted':'Movimiento eliminado','toast.comingSoon':'Próximamente',
     'confirm.delete':'¿Eliminar este movimiento?',
     'confirm.deleteAccount':'¿Seguro que quieres eliminar esta cuenta?',
@@ -140,7 +148,6 @@ const DB = {
 };
 
 const CATS = [
-  // Gastos
   { id:'supermercado',       type:'expense', key:'cat.supermarket',      color:'#1ec87a', icon:'🛒' },
   { id:'restaurante',        type:'expense', key:'cat.restaurant',       color:'#ff8a3d', icon:'🍽️' },
   { id:'alimentacion',       type:'expense', key:'cat.food',             color:'#eab308', icon:'🍎' },
@@ -158,7 +165,6 @@ const CATS = [
   { id:'regalos-gasto',      type:'expense', key:'cat.gifts',            color:'#f97316', icon:'🎁' },
   { id:'donaciones',         type:'expense', key:'cat.donations',        color:'#ef4444', icon:'🎗️' },
   { id:'otros-gasto',        type:'expense', key:'cat.other',            color:'#8b8b93', icon:'⋯' },
-  // Ingresos
   { id:'salario',            type:'income',  key:'cat.salary',           color:'#1ec87a', icon:'💼' },
   { id:'trabajo-extra',      type:'income',  key:'cat.sideJob',          color:'#0ea5e9', icon:'🛠️' },
   { id:'regalos-ingreso',    type:'income',  key:'cat.gifts',            color:'#f97316', icon:'🎁' },
@@ -169,6 +175,10 @@ const CATS = [
   { id:'otros-ingreso',      type:'income',  key:'cat.other',            color:'#8b8b93', icon:'⋯' },
 ];
 const DEFAULT_HUE = 248;
+
+// ⚠️ Pega aquí tu clave pública (publishable key) de https://logo.dev
+// Regístrate gratis, cópiala del dashboard y sustituye el texto de abajo.
+const LOGO_DEV_TOKEN = 'pk_Cg5fH0NrQhyu_tLTrcgZ4A';
 
 async function sha256(text){
   const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text));
@@ -194,13 +204,12 @@ let lockFailCount = 0;
 let currentType = 'expense';
 let selectedCat = null;
 let selectedAccountForTx = null;
-let logoUrlCache = {};
 let editingTxId = null;
 let sheetReturnPage = 'page-home';
 let settingsReturnPage = 'page-home';
 let searchQuery = '';
 let mvSearchQuery = '';
-let mvFilter = { period:'all', category:'all', account:'all' };
+let mvFilter = { period:'day', category:'all', account:'all' };
 
 const $ = sel => document.querySelector(sel);
 const $$ = sel => document.querySelectorAll(sel);
@@ -228,6 +237,7 @@ window.addEventListener('DOMContentLoaded', () => {
   wireTxDetail();
   wireMovements();
   wireAccountSwitch();
+  wireAccountDetails();
   renderAvatar();
   renderGreeting();
   renderHome();
@@ -433,11 +443,22 @@ function wireBottomNav(){
         renderHome();
       } else if (nav === 'movements') {
         openMovementsPage();
+      } else if (nav === 'stats') {
+        openStatsPage();
       } else {
         showToast(t('toast.comingSoon'));
       }
     });
   });
+  $('#stats-avatar-btn').addEventListener('click', ()=> openProfile(false));
+  $('#stats-gear-btn').addEventListener('click', openSettings);
+}
+function openStatsPage(){
+  $$('.bottom-nav-btn').forEach(b=>b.classList.remove('active'));
+  $('#nav-stats').classList.add('active');
+  $$('.page').forEach(p=>p.classList.remove('active'));
+  $('#page-stats').classList.add('active');
+  updateBottomNav();
 }
 
 let obAccType = null;
@@ -823,7 +844,13 @@ function wireHome(){
   $('#settings-back').addEventListener('click', ()=> closeSettings());
   $('#qa-expense').addEventListener('click', ()=> openSheet('expense'));
   $('#qa-income').addEventListener('click', ()=> openSheet('income'));
-  $('#qa-details').addEventListener('click', ()=> showToast(t('toast.comingSoon')));
+  $('#qa-details').addEventListener('click', ()=>{
+    if (state.selectedAccountView === 'networth' || !accInfo(state.selectedAccountView)) {
+      showToast(t('accdetails.selectAccount'));
+      return;
+    }
+    openAccountDetails(state.selectedAccountView);
+  });
   $('#qa-more').addEventListener('click', ()=> showToast(t('toast.comingSoon')));
   $('#accounts-btn').addEventListener('click', openAccountSwitch);
   $('#search-input').addEventListener('input', (e)=>{
@@ -834,16 +861,19 @@ function wireHome(){
 }
 let profileReturnPage = 'page-home';
 function updateBottomNav(){
-  const navActive = $('#page-home').classList.contains('active') || $('#page-movements').classList.contains('active');
+  const navActive = $('#page-home').classList.contains('active') || $('#page-movements').classList.contains('active') || $('#page-stats').classList.contains('active');
   $('#bottom-nav').classList.toggle('hidden', !navActive);
   $('#bottom-nav-fade').classList.toggle('hidden', !navActive);
 }
 function openProfile(fromSettings){
-  profileReturnPage = fromSettings ? 'page-settings' : ($('#page-movements').classList.contains('active') ? 'page-movements' : 'page-home');
+  profileReturnPage = fromSettings ? 'page-settings'
+    : ($('#page-movements').classList.contains('active') ? 'page-movements'
+    : ($('#page-stats').classList.contains('active') ? 'page-stats' : 'page-home'));
   $('#profile-name-input').value = state.userName || '';
   renderAvatar();
   $('#page-home').classList.remove('active');
   $('#page-movements').classList.remove('active');
+  $('#page-stats').classList.remove('active');
   $('#page-settings').classList.remove('active');
   $('#page-profile').classList.add('active');
   updateBottomNav();
@@ -879,11 +909,13 @@ function onAvatarChange(e){
   e.target.value = '';
 }
 function openSettings(){
-  settingsReturnPage = $('#page-movements').classList.contains('active') ? 'page-movements' : 'page-home';
+  settingsReturnPage = $('#page-movements').classList.contains('active') ? 'page-movements'
+    : ($('#page-stats').classList.contains('active') ? 'page-stats' : 'page-home');
   $('#dark-switch').classList.toggle('on', document.body.classList.contains('dark'));
   refreshPinRows();
   $('#page-home').classList.remove('active');
   $('#page-movements').classList.remove('active');
+  $('#page-stats').classList.remove('active');
   $('#page-settings').classList.add('active');
   updateBottomNav();
 }
@@ -1041,7 +1073,70 @@ function switchAccountView(v){
   }, 170);
 }
 
-let acceAccType = null;
+let accDetailsId = null;
+function openAccountDetails(accId){
+  accDetailsId = accId;
+  renderAccountDetails();
+  $$('.page').forEach(p=>p.classList.remove('active'));
+  $('#page-account-details').classList.add('active');
+  updateBottomNav();
+}
+function closeAccountDetails(){
+  $('#page-account-details').classList.remove('active');
+  $('#page-home').classList.add('active');
+  updateBottomNav();
+}
+function renderAccountDetails(){
+  const acc = accInfo(accDetailsId);
+  if (!acc) { closeAccountDetails(); return; }
+  $('#accdetails-icon').innerHTML = accountIcon(acc.type);
+  $('#accdetails-type').textContent = acc.type === 'cash' ? t('accounts.cash') : t('accounts.card');
+  $('#accdetails-name').textContent = acc.name;
+  $('#accdetails-desc').textContent = acc.description ? acc.description : t('accdetails.noDesc');
+}
+
+let renameField = null;
+function openRenameModal(field){
+  const acc = accInfo(accDetailsId);
+  if (!acc) return;
+  renameField = field;
+  $('#rename-modal-label').textContent = field === 'name' ? t('accdetails.editName') : t('accdetails.editDesc');
+  $('#rename-modal-input').value = field === 'name' ? acc.name : (acc.description || '');
+  $('#rename-backdrop').classList.add('show');
+  $('#rename-modal').classList.add('show');
+  setTimeout(()=> $('#rename-modal-input').focus(), 200);
+}
+function closeRenameModal(){
+  $('#rename-backdrop').classList.remove('show');
+  $('#rename-modal').classList.remove('show');
+  renameField = null;
+}
+function saveRenameModal(){
+  const acc = accInfo(accDetailsId);
+  if (!acc || !renameField) { closeRenameModal(); return; }
+  const val = $('#rename-modal-input').value.trim();
+  if (renameField === 'name') {
+    if (!val) { closeRenameModal(); return; }
+    acc.name = val;
+  } else {
+    acc.description = val;
+  }
+  DB.set('accounts', state.accounts);
+  closeRenameModal();
+  renderAccountDetails();
+  renderHome();
+}
+function wireAccountDetails(){
+  $('#accdetails-back').addEventListener('click', closeAccountDetails);
+  $('#accdetails-name-edit').addEventListener('click', ()=> openRenameModal('name'));
+  $('#accdetails-desc-edit').addEventListener('click', ()=> openRenameModal('description'));
+  $('#rename-modal-cancel').addEventListener('click', closeRenameModal);
+  $('#rename-backdrop').addEventListener('click', closeRenameModal);
+  $('#rename-modal-save').addEventListener('click', saveRenameModal);
+  $('#rename-modal-input').addEventListener('keydown', (e)=>{
+    if (e.key === 'Enter') saveRenameModal();
+  });
+}
 function openAccountsEditor(){
   acceAccType = null;
   $('#acce-form').classList.remove('show');
@@ -1195,12 +1290,8 @@ function openSheet(type, editId){
   $('#date-input').value = tx ? tx.date : now.toISOString().slice(0,10);
   $('#time-input').value = tx ? tx.time : now.toTimeString().slice(0,5);
 
-  if (tx && tx.logo) {
-    logoUrlCache[tx.merchant] = tx.logo;
-    $('#logo-preview').innerHTML = `<img src="${tx.logo}"><span>${t('logo.found',{d:guessDomain(tx.merchant)})}</span>`;
-  } else {
-    $('#logo-preview').innerHTML = '';
-  }
+  selectedLogoUrl = (tx && tx.logo) ? tx.logo : null;
+  renderLogoResultsRow(selectedLogoUrl ? [{ name: tx.merchant, url: selectedLogoUrl }] : [], $('#logo-results'));
 
   $$('#account-grid .chip').forEach(c=>c.classList.remove('active'));
   const viewAcc = (state.selectedAccountView && state.selectedAccountView !== 'networth' && accInfo(state.selectedAccountView))
@@ -1235,32 +1326,52 @@ function validateForm(){
 }
 
 let logoDebounce;
+let selectedLogoUrl = null;
 function debounceLogo(name){
   clearTimeout(logoDebounce);
-  const preview = $('#logo-preview');
-  if (!name.trim()) { preview.innerHTML=''; return; }
-  logoDebounce = setTimeout(()=> fetchLogo(name.trim(), preview), 400);
+  const container = $('#logo-results');
+  if (!name.trim()) { container.innerHTML=''; selectedLogoUrl = null; return; }
+  logoDebounce = setTimeout(()=> searchLogos(name.trim(), container), 400);
 }
-function guessDomain(name){
-  return name.toLowerCase()
-    .normalize('NFD').replace(/[\u0300-\u036f]/g,'')
-    .replace(/[^a-z0-9\s]/g,'')
-    .trim().replace(/\s+/g,'') + '.com';
+function logoUrlForDomain(domain){
+  return `https://img.logo.dev/${encodeURIComponent(domain)}?token=${LOGO_DEV_TOKEN}&size=128&format=png`;
 }
-async function fetchLogo(name, previewEl){
-  const domain = guessDomain(name);
-  const url = `https://logo.clearbit.com/${domain}`;
-  previewEl.innerHTML = `<span>${t('logo.searching')}</span>`;
-  const img = new Image();
-  img.onload = () => {
-    logoUrlCache[name] = url;
-    previewEl.innerHTML = `<img src="${url}"><span>${t('logo.found',{d:domain})}</span>`;
-  };
-  img.onerror = () => {
-    delete logoUrlCache[name];
-    previewEl.innerHTML = `<span>${t('logo.notfound')}</span>`;
-  };
-  img.src = url;
+async function searchLogos(name, container){
+  if (LOGO_DEV_TOKEN === 'PEGA_AQUI_TU_CLAVE_DE_LOGO_DEV') {
+    container.innerHTML = `<span class="logo-results-hint">${t('logo.noToken')}</span>`;
+    return;
+  }
+  container.innerHTML = `<span class="logo-results-hint">${t('logo.searching')}</span>`;
+  try {
+    const res = await fetch(`https://autocomplete.clearbit.com/v1/companies/suggest?query=${encodeURIComponent(name)}`);
+    if (!res.ok) throw new Error('bad response');
+    const data = await res.json();
+    if (!Array.isArray(data) || data.length === 0) {
+      container.innerHTML = `<span class="logo-results-hint">${t('logo.notfound')}</span>`;
+      return;
+    }
+    const items = data.slice(0, 8).map(c => ({ name: c.name || c.domain, url: logoUrlForDomain(c.domain) }));
+    renderLogoResultsRow(items, container, true);
+  } catch(err) {
+    container.innerHTML = `<span class="logo-results-hint">${t('logo.notfound')}</span>`;
+  }
+}
+function renderLogoResultsRow(items, container, showHint){
+  if (items.length === 0) { container.innerHTML = ''; return; }
+  const hint = showHint ? `<span class="logo-results-hint">${t('logo.pick')}</span>` : '';
+  container.innerHTML = hint + items.map((it,i)=>
+    `<button type="button" class="logo-result-btn${i===0 && !showHint ? ' active':''}" data-url="${it.url}" title="${escapeHtml(it.name)}">
+      <img src="${it.url}" alt="" onerror="this.closest('.logo-result-btn').remove()">
+    </button>`
+  ).join('');
+  if (!showHint && items[0]) selectedLogoUrl = items[0].url;
+  container.querySelectorAll('.logo-result-btn').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      container.querySelectorAll('.logo-result-btn').forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      selectedLogoUrl = btn.dataset.url;
+    });
+  });
 }
 
 function saveTransaction(){
@@ -1283,7 +1394,7 @@ function saveTransaction(){
         account: selectedAccountForTx,
         date,
         time,
-        logo: logoUrlCache[merchant] || null,
+        logo: selectedLogoUrl || null,
       };
     }
     DB.set('transactions', state.transactions);
@@ -1304,7 +1415,7 @@ function saveTransaction(){
     account: selectedAccountForTx,
     date,
     time,
-    logo: logoUrlCache[merchant] || null,
+    logo: selectedLogoUrl || null,
   };
   state.transactions.unshift(tx);
   DB.set('transactions', state.transactions);
@@ -1423,26 +1534,42 @@ function renderHome(){
   wireTxRows(list);
 }
 
-function matchesPeriod(tx, period){
-  if (period === 'all') return true;
+function isoWeekInfo(d){
+  const target = new Date(d.getTime());
+  target.setHours(0,0,0,0);
+  const dow = (target.getDay() + 6) % 7; // Monday = 0
+  const monday = new Date(target); monday.setDate(target.getDate() - dow);
+  const sunday = new Date(monday); sunday.setDate(monday.getDate() + 6);
+  return { monday, sunday };
+}
+function groupKeyForPeriod(tx, period){
   const d = new Date(tx.date + 'T00:00:00');
-  const now = new Date(); now.setHours(0,0,0,0);
-  if (period === 'day') {
-    return tx.date === now.toISOString().slice(0,10);
-  }
+  if (period === 'day') return tx.date;
   if (period === 'week') {
-    const dow = (now.getDay() + 6) % 7; // Monday = 0
-    const monday = new Date(now); monday.setDate(now.getDate() - dow);
+    const { monday } = isoWeekInfo(d);
+    return monday.toISOString().slice(0,10);
+  }
+  if (period === 'month') return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}`;
+  if (period === 'year') return `${d.getFullYear()}`;
+  return null;
+}
+function groupLabelForPeriod(key, period){
+  const locale = state.language === 'en' ? 'en-US' : 'es-ES';
+  if (period === 'day') return formatDay(key);
+  if (period === 'week') {
+    const monday = new Date(key + 'T00:00:00');
     const sunday = new Date(monday); sunday.setDate(monday.getDate() + 6);
-    return d >= monday && d <= sunday;
+    const fmt = (dt)=> dt.toLocaleDateString(locale, {day:'numeric', month:'short'});
+    return `${fmt(monday)} – ${fmt(sunday)}`;
   }
   if (period === 'month') {
-    return d.getFullYear() === now.getFullYear() && d.getMonth() === now.getMonth();
+    const [y, m] = key.split('-');
+    const d = new Date(parseInt(y), parseInt(m)-1, 1);
+    const label = d.toLocaleDateString(locale, {month:'long', year:'numeric'});
+    return label.charAt(0).toUpperCase() + label.slice(1);
   }
-  if (period === 'year') {
-    return d.getFullYear() === now.getFullYear();
-  }
-  return true;
+  if (period === 'year') return key;
+  return '';
 }
 
 function renderMovements(){
@@ -1452,7 +1579,6 @@ function renderMovements(){
   if (mvSearchQuery) {
     items = items.filter(tx => tx.merchant.toLowerCase().includes(mvSearchQuery));
   }
-  items = items.filter(tx => matchesPeriod(tx, mvFilter.period));
   if (mvFilter.category !== 'all') {
     items = items.filter(tx => tx.category === mvFilter.category);
   }
@@ -1463,15 +1589,56 @@ function renderMovements(){
   if (items.length === 0) {
     list.innerHTML = `<div class="empty-state">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 10h18M7 15h2m4 0h4M5 6h14a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2z"/></svg>
-      <p>${(mvSearchQuery || mvFilter.period!=='all' || mvFilter.category!=='all' || mvFilter.account!=='all') ? t('empty.noResults') : t('empty.noMovements')}</p>
+      <p>${(mvSearchQuery || mvFilter.category!=='all' || mvFilter.account!=='all') ? t('empty.noResults') : t('empty.noMovements')}</p>
     </div>`;
     return;
   }
   items.sort(compareTxDesc);
-  list.innerHTML = items.map(txRowHTML).join('');
+
+  if (mvFilter.period === 'all') {
+    list.innerHTML = items.map(txRowHTML).join('');
+    wireTxRows(list);
+    return;
+  }
+
+  const groups = [];
+  const groupIndex = {};
+  items.forEach(tx=>{
+    const key = groupKeyForPeriod(tx, mvFilter.period);
+    if (!(key in groupIndex)) {
+      groupIndex[key] = { key, txs: [] };
+      groups.push(groupIndex[key]);
+    }
+    groupIndex[key].txs.push(tx);
+  });
+  groups.sort((a,b)=> b.key.localeCompare(a.key));
+
+  list.innerHTML = groups.map(g=>
+    `<div class="mv-group-header">${escapeHtml(groupLabelForPeriod(g.key, mvFilter.period))}</div>` +
+    g.txs.map(txRowHTML).join('')
+  ).join('');
   wireTxRows(list);
 }
 
+let mvCatType = 'expense';
+let mvCatSearch = '';
+function renderMvCatChips(){
+  const listCats = CATS.filter(c=>c.type===mvCatType);
+  const q = mvCatSearch.trim().toLowerCase();
+  const filtered = q ? listCats.filter(c=> t(c.key).toLowerCase().includes(q)) : listCats;
+  const catOpts = [{id:'all', label:t('filter.allCategories'), icon:null}]
+    .concat(filtered.map(c=>({id:c.id, label:t(c.key), icon:c.icon})));
+  $('#mv-filter-category').innerHTML = catOpts.map(c=>
+    `<button type="button" class="chip ${mvFilter.category===c.id?'active':''}" data-cat="${c.id}">${c.icon?`<span>${c.icon}</span>`:''}${escapeHtml(c.label)}</button>`
+  ).join('');
+  $$('#mv-filter-category .chip').forEach(chip=>{
+    chip.addEventListener('click', ()=>{
+      $$('#mv-filter-category .chip').forEach(c=>c.classList.remove('active'));
+      chip.classList.add('active');
+      mvFilter.category = chip.dataset.cat;
+    });
+  });
+}
 function buildMvFilterChips(){
   const periods = ['all','day','week','month','year'];
   $('#mv-filter-period').innerHTML = periods.map(p=>
@@ -1485,18 +1652,13 @@ function buildMvFilterChips(){
     });
   });
 
-  const catOpts = [{id:'all', label:t('filter.allCategories'), icon:'✦'}]
-    .concat(CATS.map(c=>({id:c.id, label:t(c.key), icon:c.icon})));
-  $('#mv-filter-category').innerHTML = catOpts.map(c=>
-    `<button type="button" class="chip ${mvFilter.category===c.id?'active':''}" data-cat="${c.id}"><span>${c.icon}</span>${escapeHtml(c.label)}</button>`
-  ).join('');
-  $$('#mv-filter-category .chip').forEach(chip=>{
-    chip.addEventListener('click', ()=>{
-      $$('#mv-filter-category .chip').forEach(c=>c.classList.remove('active'));
-      chip.classList.add('active');
-      mvFilter.category = chip.dataset.cat;
-    });
-  });
+  const currentCat = CATS.find(c=>c.id===mvFilter.category);
+  mvCatType = currentCat ? currentCat.type : 'expense';
+  mvCatSearch = '';
+  $('#mv-cat-search-input').value = '';
+  $('#mv-cat-type-expense').classList.toggle('active', mvCatType==='expense');
+  $('#mv-cat-type-income').classList.toggle('active', mvCatType==='income');
+  renderMvCatChips();
 
   const accOpts = [{id:'all', label:t('filter.allAccounts'), icon:''}]
     .concat(state.accounts.map(a=>({id:a.id, label:a.name, icon:accountIcon(a.type)})));
@@ -1512,14 +1674,15 @@ function buildMvFilterChips(){
   });
 }
 function openMvFilter(){
-  $('#mv-filter-merchant-input').value = mvSearchQuery;
   buildMvFilterChips();
-  $('#mv-filter-backdrop').classList.add('show');
-  $('#mv-filter-sheet').classList.add('show');
+  $('#page-movements').classList.remove('active');
+  $('#page-mv-filters').classList.add('active');
+  updateBottomNav();
 }
 function closeMvFilter(){
-  $('#mv-filter-backdrop').classList.remove('show');
-  $('#mv-filter-sheet').classList.remove('show');
+  $('#page-mv-filters').classList.remove('active');
+  $('#page-movements').classList.add('active');
+  updateBottomNav();
 }
 function wireMovements(){
   $('#mv-avatar-btn').addEventListener('click', ()=> openProfile(false));
@@ -1528,19 +1691,37 @@ function wireMovements(){
     mvSearchQuery = e.target.value.trim().toLowerCase();
     renderMovements();
   });
-  $('#mv-filter-close').addEventListener('click', closeMvFilter);
-  $('#mv-filter-backdrop').addEventListener('click', closeMvFilter);
+  $('#mv-filter-back').addEventListener('click', closeMvFilter);
+  $('#mv-cat-type-expense').addEventListener('click', ()=>{
+    mvCatType = 'expense';
+    $('#mv-cat-type-expense').classList.add('active');
+    $('#mv-cat-type-income').classList.remove('active');
+    renderMvCatChips();
+  });
+  $('#mv-cat-type-income').addEventListener('click', ()=>{
+    mvCatType = 'income';
+    $('#mv-cat-type-income').classList.add('active');
+    $('#mv-cat-type-expense').classList.remove('active');
+    renderMvCatChips();
+  });
+  $('#mv-cat-search-input').addEventListener('input', (e)=>{
+    mvCatSearch = e.target.value;
+    renderMvCatChips();
+  });
+  $('#mv-filter-category').addEventListener('wheel', (e)=>{
+    if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+      e.preventDefault();
+      $('#mv-filter-category').scrollLeft += e.deltaY;
+    }
+  }, {passive:false});
   $('#mv-filter-apply').addEventListener('click', ()=>{
-    mvSearchQuery = $('#mv-filter-merchant-input').value.trim().toLowerCase();
-    $('#mv-search-input').value = $('#mv-filter-merchant-input').value;
     closeMvFilter();
     renderMovements();
   });
   $('#mv-filter-clear').addEventListener('click', ()=>{
-    mvFilter = { period:'all', category:'all', account:'all' };
+    mvFilter = { period:'day', category:'all', account:'all' };
     mvSearchQuery = '';
     $('#mv-search-input').value = '';
-    $('#mv-filter-merchant-input').value = '';
     closeMvFilter();
     renderMovements();
   });
