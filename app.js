@@ -35,10 +35,10 @@ const I18N = {
     'empty.noResults':'No results for your search.',
     'day.today':'Today','day.yesterday':'Yesterday',
     'sheet.title':'New transaction','sheet.editTitle':'Edit movement','type.expense':'Expense','type.income':'Income',
-    'action.edit':'Edit','txdetail.date':'Date & time',
+    'action.edit':'Edit','action.delete':'Delete','txdetail.date':'Date & time',
     'field.merchant':'Name','merchant.placeholder':'Establishment',
     'field.amount':'Amount','field.logo':'Logo',
-    'transfer.title':'New transfer','transfer.fromTitle':'Withdraw money from:','transfer.toTitle':'Deposit into:',
+    'transfer.title':'New transfer','transfer.editTitle':'Edit transfer','transfer.plainTitle':'Transfer','transfer.accountsLabel':'Accounts','transfer.fromTitle':'Withdraw money from:','transfer.toTitle':'Deposit into:',
     'transfer.rowFrom':'From','transfer.rowTo':'to',
     'transfer.detailsTitle':'Additional details','transfer.cat.atm':'ATM','transfer.cat.bank':'Bank transfer','transfer.cat.other':'Other',
     'toast.transferSaved':'Transfer saved',
@@ -46,7 +46,7 @@ const I18N = {
     'field.category':'Category','field.account':'Account','field.date':'Date','action.save2':'Save',
     'logo.searching':'Searching logos…','logo.found':'Logo found for {d}','logo.notfound':'No logos found — initials will be used','logo.pick':'Pick a logo','logo.noToken':'Add your logo.dev key in app.js to enable this',
     'toast.expenseAdded':'Expense added','toast.incomeAdded':'Income added','toast.updated':'Movement updated','toast.deleted':'Transaction deleted','toast.comingSoon':'Coming soon',
-    'confirm.delete':'Delete this transaction?',
+    'confirm.delete':'Delete this transaction?','confirm.deleteTx':'Are you sure you want to delete this transaction?','confirm.deleteTransfer':'Are you sure you want to delete this transfer?',
     'confirm.deleteAccount':'Are you sure you want to delete this account?',
     'accounts.needAtLeastOne':'You must have at least one account to continue.',
     'transfer.needTwoAccounts':'Add another account to make a transfer.',
@@ -56,7 +56,7 @@ const I18N = {
     'nav.home':'Home','nav.stats':'Statistics',
     'settings.profile':'Profile settings','profile.title':'Profile','profile.name':'Name',
     'settings.updates':'Updates',
-    'updates.howto':'How to update?','updates.currentVersion':'Your current version: V0.2-beta',
+    'updates.howto':'How to update?','updates.currentVersion':'Your current version: V0.2.1-beta',
     'updates.howtoText':'To update Fyn to the latest version, follow these steps:<br><br>1. Very important: Export your data (.json).<br>2. Clear all browsing data for this website in your browser settings.<br>3. Reopen Fyn and import your data directly by selecting the file you exported earlier.<br><br>And that\u2019s it\u2014you now have the latest version of the app. You can verify that the update was successful by returning to the \u201cUpdates\u201d tab and checking your current version, which is indicated in the text below.',
     'action.gotIt':'Got it',
     'settings.changePin':'Change PIN','settings.change':'Change','settings.createPin':'Create password','settings.createBtn':'Create','settings.deletePin':'Delete password',
@@ -111,10 +111,10 @@ const I18N = {
     'empty.noResults':'Sin resultados para tu búsqueda.',
     'day.today':'Hoy','day.yesterday':'Ayer',
     'sheet.title':'Nuevo movimiento','sheet.editTitle':'Editar movimiento','type.expense':'Gasto','type.income':'Ingreso',
-    'action.edit':'Editar','txdetail.date':'Fecha y hora',
+    'action.edit':'Editar','action.delete':'Eliminar','txdetail.date':'Fecha y hora',
     'field.merchant':'Nombre','merchant.placeholder':'Establecimiento',
     'field.amount':'Cantidad','field.logo':'Logo',
-    'transfer.title':'Nuevo traspaso','transfer.fromTitle':'Retirar dinero desde','transfer.toTitle':'Ingresar en',
+    'transfer.title':'Nuevo traspaso','transfer.editTitle':'Editar traspaso','transfer.plainTitle':'Traspaso','transfer.accountsLabel':'Cuentas','transfer.fromTitle':'Retirar dinero desde','transfer.toTitle':'Ingresar en',
     'transfer.rowFrom':'De','transfer.rowTo':'a',
     'transfer.detailsTitle':'Detalles adicionales','transfer.cat.atm':'Cajero','transfer.cat.bank':'Transferencia bancaria','transfer.cat.other':'Otros',
     'toast.transferSaved':'Traspaso guardado',
@@ -122,7 +122,7 @@ const I18N = {
     'field.category':'Categoría','field.account':'Cuenta','field.date':'Fecha','action.save2':'Guardar',
     'logo.searching':'Buscando logos…','logo.found':'Logo encontrado para {d}','logo.notfound':'Sin logos — se usarán las iniciales','logo.pick':'Elige un logo','logo.noToken':'Añade tu clave de logo.dev en app.js para activar esto',
     'toast.expenseAdded':'Gasto añadido','toast.incomeAdded':'Ingreso añadido','toast.updated':'Movimiento actualizado','toast.deleted':'Movimiento eliminado','toast.comingSoon':'Próximamente',
-    'confirm.delete':'¿Eliminar este movimiento?',
+    'confirm.delete':'¿Eliminar este movimiento?','confirm.deleteTx':'¿Seguro que deseas eliminar este movimiento?','confirm.deleteTransfer':'¿Seguro que deseas eliminar este traspaso?',
     'confirm.deleteAccount':'¿Seguro que quieres eliminar esta cuenta?',
     'accounts.needAtLeastOne':'Debes tener al menos una cuenta para continuar.',
     'transfer.needTwoAccounts':'Añade otra cuenta para poder realizar un traspaso.',
@@ -132,7 +132,7 @@ const I18N = {
     'nav.home':'Inicio','nav.stats':'Estadísticas',
     'settings.profile':'Ajustes de perfil','profile.title':'Perfil','profile.name':'Nombre',
     'settings.updates':'Actualizaciones',
-    'updates.howto':'¿Cómo actualizar?','updates.currentVersion':'Tu versión actual: V0.2-beta',
+    'updates.howto':'¿Cómo actualizar?','updates.currentVersion':'Tu versión actual: V0.2.1-beta',
     'updates.howtoText':'Para actualizar Fyn a la última versión, sigue estos pasos:<br><br>1. Muy importante: exporta tus datos (.json).<br>2. Borra todos los datos de navegación de este sitio web desde los ajustes de tu navegador.<br>3. Vuelve a abrir Fyn e importa tus datos directamente seleccionando el archivo que exportaste antes.<br><br>Y eso es todo: ya tienes la última versión de la aplicación. Puedes comprobar que la actualización se realizó correctamente volviendo a la pestaña "Actualizaciones" y consultando tu versión actual, indicada en el texto de abajo.',
     'action.gotIt':'Entendido',
     'settings.changePin':'Cambiar código PIN','settings.change':'Cambiar','settings.createPin':'Crear contraseña','settings.createBtn':'Crear','settings.deletePin':'Borrar contraseña',
@@ -198,7 +198,14 @@ const DEFAULT_HUE = 248;
 
 const CHANGELOG = [
   {
-    version: 'V0.2-beta (09/13)',
+    version: 'V0.2.1-beta (09/13)',
+    lines: [
+      'A bug related to transfers has been fixed.',
+      'The previous method for deleting transactions has been removed, and a button has been added within the transaction/transfer itself to delete them.',
+    ],
+  },
+  {
+    version: 'V0.2-beta (09/12)',
     lines: [
       'Several bugs related to the profile picture in the upper-left corner and the expense and income categories have been fixed.',
       'A button has been added to create a transfer between accounts, to distinguish these transfers from actual expenses or income.',
@@ -899,7 +906,7 @@ function wireHome(){
     }
     openAccountDetails(state.selectedAccountView);
   });
-  $('#qa-transfer').addEventListener('click', openNewTransfer);
+  $('#qa-transfer').addEventListener('click', ()=> openNewTransfer());
   $('#accounts-btn').addEventListener('click', openAccountSwitch);
   $('#search-input').addEventListener('input', (e)=>{
     searchQuery = e.target.value.trim().toLowerCase();
@@ -1352,7 +1359,7 @@ function buildAccountChips(){
   });
 }
 
-const TRANSFER_STEPS = ['from','to','amount','details'];
+const TRANSFER_STEPS = ['from','to','amount','details','datetime'];
 const TRANSFER_CATS = [
   { id:'cajero', key:'transfer.cat.atm', icon:'🏧' },
   { id:'bancaria', key:'transfer.cat.bank', icon:'🏦' },
@@ -1362,6 +1369,7 @@ let transferStepIndex = 0;
 let transferFromId = null;
 let transferToId = null;
 let transferCategory = null;
+let editingTransferId = null;
 
 function buildTransferAccountGrid(gridId, excludeId, selectedId){
   const grid = $(gridId);
@@ -1410,6 +1418,7 @@ function transferStepValid(){
   if (step === 'to') return !!transferToId;
   if (step === 'amount') return parseFloat($('#transfer-amount-input').value) > 0;
   if (step === 'details') return !!transferCategory;
+  if (step === 'datetime') return !!$('#transfer-date-input').value;
   return true;
 }
 function updateTransferFooter(){
@@ -1426,33 +1435,56 @@ function handleTransferNext(){
   goToTransferStep(transferStepIndex + 1);
 }
 function saveTransfer(){
-  const transfer = {
-    id: Date.now().toString(36) + Math.random().toString(36).slice(2,6),
-    type: 'transfer',
-    from: transferFromId,
-    to: transferToId,
-    amount: Math.abs(parseFloat($('#transfer-amount-input').value)),
-    description: $('#transfer-desc-input').value.trim(),
-    category: transferCategory,
-    date: new Date().toISOString().slice(0,10),
-    time: new Date().toTimeString().slice(0,5),
-  };
   state.transfers = state.transfers || [];
-  state.transfers.push(transfer);
+  if (editingTransferId) {
+    const idx = state.transfers.findIndex(x=>x.id===editingTransferId);
+    if (idx !== -1) {
+      state.transfers[idx] = {
+        ...state.transfers[idx],
+        from: transferFromId,
+        to: transferToId,
+        amount: Math.abs(parseFloat($('#transfer-amount-input').value)),
+        description: $('#transfer-desc-input').value.trim(),
+        category: transferCategory,
+        date: $('#transfer-date-input').value || new Date().toISOString().slice(0,10),
+        time: $('#transfer-time-input').value || new Date().toTimeString().slice(0,5),
+      };
+    }
+  } else {
+    const transfer = {
+      id: Date.now().toString(36) + Math.random().toString(36).slice(2,6),
+      type: 'transfer',
+      from: transferFromId,
+      to: transferToId,
+      amount: Math.abs(parseFloat($('#transfer-amount-input').value)),
+      description: $('#transfer-desc-input').value.trim(),
+      category: transferCategory,
+      date: $('#transfer-date-input').value || new Date().toISOString().slice(0,10),
+      time: $('#transfer-time-input').value || new Date().toTimeString().slice(0,5),
+    };
+    state.transfers.push(transfer);
+  }
   DB.set('transfers', state.transfers);
+  editingTransferId = null;
   closeNewTransfer();
   renderHome();
   showToast(t('toast.transferSaved'));
 }
-function openNewTransfer(){
+function openNewTransfer(editId){
   if (state.accounts.length < 2) { showToast(t('transfer.needTwoAccounts')); return; }
+  const tr = editId ? (state.transfers||[]).find(x=>x.id===editId) : null;
+  editingTransferId = tr ? tr.id : null;
   transferStepIndex = 0;
-  transferFromId = null;
-  transferToId = null;
-  transferCategory = null;
+  transferFromId = tr ? tr.from : null;
+  transferToId = tr ? tr.to : null;
+  transferCategory = tr ? tr.category : null;
   sheetReturnPage = $('#page-movements').classList.contains('active') ? 'page-movements' : 'page-home';
-  $('#transfer-amount-input').value = '';
-  $('#transfer-desc-input').value = '';
+  $('#transfer-amount-input').value = tr ? tr.amount : '';
+  $('#transfer-desc-input').value = tr ? (tr.description || '') : '';
+  const now = new Date();
+  $('#transfer-date-input').value = tr ? tr.date : now.toISOString().slice(0,10);
+  $('#transfer-time-input').value = tr ? tr.time : now.toTimeString().slice(0,5);
+  $('#transfer-page-title').textContent = t(editingTransferId ? 'transfer.editTitle' : 'transfer.title');
   buildTransferCatGrid();
   $('#page-home').classList.remove('active');
   $('#page-movements').classList.remove('active');
@@ -1651,6 +1683,13 @@ function deleteTransaction(id){
   renderMovements();
   showToast(t('toast.deleted'));
 }
+function deleteTransfer(id){
+  state.transfers = (state.transfers||[]).filter(x=>x.id!==id);
+  DB.set('transfers', state.transfers);
+  renderHome();
+  renderMovements();
+  showToast(t('toast.deleted'));
+}
 
 function fmt(n){
   const currency = state.currency || 'EUR';
@@ -1676,8 +1715,7 @@ function transferRowHTML(tr){
     : '—';
   return `<div class="tx-row" data-id="${tr.id}" data-transfer="1">
       <div class="tx-logo-wrap">
-        <div class="tx-logo transfer">T</div>
-        <div class="tx-badge transfer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+        <div class="tx-logo transfer-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
       </div>
       <div class="tx-info">
         <div class="tx-name">${t('transfer.rowFrom')} ${fromLabel} ${t('transfer.rowTo')} ${toLabel}</div>
@@ -1722,21 +1760,11 @@ function txRowHTML(tx){
 }
 function wireTxRows(container){
   container.querySelectorAll('.tx-row').forEach(row=>{
-    if (row.dataset.transfer === '1') return;
-    let pressTimer;
-    let longPressed = false;
-    const start = ()=>{
-      longPressed = false;
-      pressTimer = setTimeout(()=>{ longPressed = true; confirmDelete(row.dataset.id); }, 550);
-    };
-    const cancel = ()=> clearTimeout(pressTimer);
-    row.addEventListener('touchstart', start);
-    row.addEventListener('touchend', cancel);
-    row.addEventListener('mousedown', start);
-    row.addEventListener('mouseup', cancel);
-    row.addEventListener('click', ()=>{
-      if (!longPressed) openTxDetail(row.dataset.id);
-    });
+    if (row.dataset.transfer === '1') {
+      row.addEventListener('click', ()=> openTransferDetail(row.dataset.id));
+    } else {
+      row.addEventListener('click', ()=> openTxDetail(row.dataset.id));
+    }
   });
 }
 
@@ -1998,8 +2026,13 @@ function openMovementsPage(){
   updateBottomNav();
   renderMovements();
 }
-function confirmDelete(id){
-  if (confirm(t('confirm.delete'))) deleteTransaction(id);
+function confirmDelete(id, isTransfer){
+  const msg = isTransfer ? t('confirm.deleteTransfer') : t('confirm.deleteTx');
+  showConfirmModal(msg, ()=>{
+    if (isTransfer) deleteTransfer(id);
+    else deleteTransaction(id);
+    closeTxDetail();
+  });
 }
 
 function openTxDetail(id){
@@ -2015,9 +2048,11 @@ function openTxDetail(id){
     : '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M12 5v14M5 12l7 7 7-7"/></svg>';
 
   $('#txdetail-title').textContent = tx.merchant;
+  $('#txdetail-logo').className = 'tx-logo';
   $('#txdetail-logo').innerHTML = logo;
   $('#txdetail-badge').innerHTML = badgeIcon;
   $('#txdetail-badge').className = 'tx-badge ' + (tx.type==='income' ? 'income' : 'expense');
+  $('#txdetail-badge').style.display = '';
   $('#txdetail-amount').textContent = (tx.type==='income'?'+':'-') + fmt(tx.amount);
   $('#txdetail-amount').className = 'txdetail-amount ' + (tx.type==='income'?'pos':'neg');
   $('#txdetail-date').textContent = `${formatDay(tx.date)}, ${tx.time}`;
@@ -2028,8 +2063,58 @@ function openTxDetail(id){
     $('#txdetail-desc-row').style.display = 'none';
   }
   $('#txdetail-cat').textContent = t(c.key);
+  $('#txdetail-acc-row').style.display = '';
+  $('#txdetail-acc-row').querySelector('.txdetail-label').textContent = t('field.account');
+  $('#txdetail-acc').className = 'txdetail-value';
   $('#txdetail-acc').innerHTML = acc ? `<span class="txdetail-acc-icon">${accountIcon(acc.type)}</span>${escapeHtml(acc.name)}` : '';
+  $('#txdetail-edit-btn').style.display = '';
   $('#txdetail-edit-btn').dataset.id = tx.id;
+  $('#txdetail-edit-btn').dataset.transfer = '0';
+  $('#txdetail-delete-btn').dataset.id = tx.id;
+  $('#txdetail-delete-btn').dataset.transfer = '0';
+
+  $('#txdetail-backdrop').classList.add('show');
+  $('#txdetail-sheet').classList.add('show');
+}
+function openTransferDetail(id){
+  const tr = (state.transfers||[]).find(x=>x.id===id);
+  if (!tr) return;
+  const fromAcc = accInfo(tr.from);
+  const toAcc = accInfo(tr.to);
+  const trCat = TRANSFER_CATS.find(c=>c.id===tr.category);
+  const arrowIcon = '<svg class="txdetail-transfer-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
+  const fromLabel = fromAcc
+    ? `<span class="txdetail-acc-icon">${accountIcon(fromAcc.type)}</span>${escapeHtml(fromAcc.name)}`
+    : '—';
+  const toLabel = toAcc
+    ? `<span class="txdetail-acc-icon">${accountIcon(toAcc.type)}</span>${escapeHtml(toAcc.name)}`
+    : '—';
+
+  $('#txdetail-title').textContent = t('transfer.plainTitle');
+  $('#txdetail-logo').className = 'tx-logo transfer-icon';
+  $('#txdetail-logo').innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
+  $('#txdetail-badge').innerHTML = '';
+  $('#txdetail-badge').className = 'tx-badge';
+  $('#txdetail-badge').style.display = 'none';
+  $('#txdetail-amount').textContent = fmt(tr.amount);
+  $('#txdetail-amount').className = 'txdetail-amount';
+  $('#txdetail-date').textContent = `${formatDay(tr.date)}, ${tr.time}`;
+  if (tr.description) {
+    $('#txdetail-desc-row').style.display = '';
+    $('#txdetail-desc').textContent = tr.description;
+  } else {
+    $('#txdetail-desc-row').style.display = 'none';
+  }
+  $('#txdetail-cat').textContent = trCat ? t(trCat.key) : '';
+  $('#txdetail-acc-row').style.display = '';
+  $('#txdetail-acc-row').querySelector('.txdetail-label').textContent = t('transfer.accountsLabel');
+  $('#txdetail-acc').className = 'txdetail-value transfer-accounts';
+  $('#txdetail-acc').innerHTML = `${fromLabel}${arrowIcon}${toLabel}`;
+  $('#txdetail-edit-btn').style.display = '';
+  $('#txdetail-edit-btn').dataset.id = tr.id;
+  $('#txdetail-edit-btn').dataset.transfer = '1';
+  $('#txdetail-delete-btn').dataset.id = tr.id;
+  $('#txdetail-delete-btn').dataset.transfer = '1';
 
   $('#txdetail-backdrop').classList.add('show');
   $('#txdetail-sheet').classList.add('show');
@@ -2043,8 +2128,15 @@ function wireTxDetail(){
   $('#txdetail-backdrop').addEventListener('click', closeTxDetail);
   $('#txdetail-edit-btn').addEventListener('click', ()=>{
     const id = $('#txdetail-edit-btn').dataset.id;
+    const isTransfer = $('#txdetail-edit-btn').dataset.transfer === '1';
     closeTxDetail();
-    openSheet(null, id);
+    if (isTransfer) openNewTransfer(id);
+    else openSheet(null, id);
+  });
+  $('#txdetail-delete-btn').addEventListener('click', ()=>{
+    const id = $('#txdetail-delete-btn').dataset.id;
+    const isTransfer = $('#txdetail-delete-btn').dataset.transfer === '1';
+    confirmDelete(id, isTransfer);
   });
 }
 function initials(name){
@@ -2111,6 +2203,7 @@ function exportData(){
     pinHash: state.pinHash,
     accounts: state.accounts,
     transactions: state.transactions,
+    transfers: state.transfers || [],
     exportedAt: new Date().toISOString()
   };
   const blob = new Blob([JSON.stringify(payload, null, 2)], {type:'application/json'});
@@ -2124,6 +2217,7 @@ function exportData(){
 }
 function applyImportedData(data){
   state.transactions = Array.isArray(data.transactions) ? data.transactions : [];
+  state.transfers = Array.isArray(data.transfers) ? data.transfers : [];
   if (Array.isArray(data.accounts)) state.accounts = data.accounts;
   if (typeof data.language === 'string') state.language = data.language;
   if (typeof data.userName === 'string') state.userName = data.userName;
@@ -2133,6 +2227,7 @@ function applyImportedData(data){
   if (typeof data.hue === 'number') state.hue = data.hue;
   if ('pinHash' in data) state.pinHash = (typeof data.pinHash === 'string') ? data.pinHash : null;
   DB.set('transactions', state.transactions);
+  DB.set('transfers', state.transfers);
   DB.set('accounts', state.accounts);
   DB.set('language', state.language);
   DB.set('userName', state.userName);

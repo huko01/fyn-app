@@ -326,7 +326,7 @@ input{font-family:inherit;}
 .gear-btn:active{transform:scale(.9);}
 .gear-btn svg{width:18px;height:18px;color:#fff;}
 
-.greeting{font-size:14.5px;font-weight:500;color:rgba(255,255,255,.85);margin-bottom:14px;position:relative;z-index:1;}
+.greeting{font-size:26px;font-weight:700;letter-spacing:-.3px;color:rgba(255,255,255,.85);margin-bottom:14px;position:relative;z-index:1;}
 .greeting b{font-weight:700;color:#fff;}
 
 .search-bar{
@@ -436,10 +436,10 @@ input{font-family:inherit;}
 .tx-amount.neg{color:var(--ink);}
 .tx-account{font-size:11.5px;color:var(--ink-faint);margin-top:2px;display:flex;align-items:center;justify-content:flex-end;gap:3px;}
 .tx-account-icon{display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-.tx-logo.transfer{background:var(--accent);color:#eeecfd;}
-.tx-badge.transfer{background:var(--accent);}
-.tx-transfer-acc{display:inline-flex;align-items:center;gap:4px;padding:2px 9px 2px 6px;border-radius:999px;background:var(--row-hover);color:var(--ink);font-weight:600;vertical-align:middle;}
-.tx-transfer-acc svg{width:12px;height:12px;flex-shrink:0;}
+.tx-logo.transfer-icon{background:var(--accent);color:#fff;}
+.tx-logo.transfer-icon svg{width:20px;height:20px;}
+.tx-transfer-acc{display:inline-flex;align-items:center;gap:3px;padding:2px 8px 2px 5px;border-radius:999px;background:rgba(142,142,150,.28);color:var(--ink);font-weight:700;font-size:12.5px;vertical-align:middle;}
+.tx-transfer-acc svg{width:9px;height:9px;flex-shrink:0;}
 .tx-account-icon svg{width:11px;height:11px;display:block;}
 
 .empty-state{text-align:center;padding:60px 30px;color:var(--ink-soft);}
@@ -521,6 +521,7 @@ input{font-family:inherit;}
 
 .txdetail-top{display:flex;flex-direction:column;align-items:center;gap:10px;padding:6px 0 22px;}
 .tx-logo-wrap.large .tx-logo{width:64px;height:64px;font-size:20px;}
+.tx-logo-wrap.large .tx-logo.transfer-icon svg{width:28px;height:28px;}
 .tx-logo-wrap.large .tx-badge{width:24px;height:24px;right:-2px;bottom:-2px;}
 .tx-logo-wrap.large .tx-badge svg{width:13px;height:13px;}
 .txdetail-amount{font-size:28px;font-weight:700;}
@@ -554,12 +555,15 @@ input{font-family:inherit;}
 .modal-btn.primary{background:var(--accent);color:#fff;}
 .txdetail-acc-icon{display:flex;align-items:center;justify-content:center;flex-shrink:0;color:inherit;}
 .txdetail-acc-icon svg{width:13px;height:13px;display:block;}
+.txdetail-value.transfer-accounts{display:inline-flex;align-items:center;gap:6px;white-space:normal;text-align:right;justify-content:flex-end;flex-wrap:wrap;}
+.txdetail-transfer-arrow{width:13px;height:13px;flex-shrink:0;color:var(--ink-faint);}
 .edit-tx-btn{
   width:100%;display:flex;align-items:center;justify-content:center;gap:8px;
   background:var(--accent);color:#fff;border:none;border-radius:16px;
   padding:15px;font-size:15px;font-weight:700;font-family:inherit;
 }
 .edit-tx-btn svg{width:17px;height:17px;}
+.edit-tx-btn.delete-tx-btn{background:var(--row-hover);color:var(--red);margin-top:10px;}
 
 .modal-backdrop{position:absolute;inset:0;background:rgba(10,10,15,.5);opacity:0;visibility:hidden;transition:opacity .25s var(--ease);z-index:160;}
 .modal-backdrop.show{opacity:1;visibility:visible;}
