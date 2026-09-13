@@ -56,7 +56,7 @@ const I18N = {
     'nav.home':'Home','nav.stats':'Statistics',
     'settings.profile':'Profile settings','profile.title':'Profile','profile.name':'Name',
     'settings.updates':'Updates',
-    'updates.howto':'How to update?','updates.currentVersion':'Your current version: v2',
+    'updates.howto':'How to update?','updates.currentVersion':'Your current version: V0.2-beta',
     'updates.howtoText':'To update Fyn to the latest version, follow these steps:<br><br>1. Very important: Export your data (.json).<br>2. Clear all browsing data for this website in your browser settings.<br>3. Reopen Fyn and import your data directly by selecting the file you exported earlier.<br><br>And that\u2019s it\u2014you now have the latest version of the app. You can verify that the update was successful by returning to the \u201cUpdates\u201d tab and checking your current version, which is indicated in the text below.',
     'action.gotIt':'Got it',
     'settings.changePin':'Change PIN','settings.change':'Change','settings.createPin':'Create password','settings.createBtn':'Create','settings.deletePin':'Delete password',
@@ -132,7 +132,7 @@ const I18N = {
     'nav.home':'Inicio','nav.stats':'Estadísticas',
     'settings.profile':'Ajustes de perfil','profile.title':'Perfil','profile.name':'Nombre',
     'settings.updates':'Actualizaciones',
-    'updates.howto':'¿Cómo actualizar?','updates.currentVersion':'Tu versión actual: v2',
+    'updates.howto':'¿Cómo actualizar?','updates.currentVersion':'Tu versión actual: V0.2-beta',
     'updates.howtoText':'Para actualizar Fyn a la última versión, sigue estos pasos:<br><br>1. Muy importante: exporta tus datos (.json).<br>2. Borra todos los datos de navegación de este sitio web desde los ajustes de tu navegador.<br>3. Vuelve a abrir Fyn e importa tus datos directamente seleccionando el archivo que exportaste antes.<br><br>Y eso es todo: ya tienes la última versión de la aplicación. Puedes comprobar que la actualización se realizó correctamente volviendo a la pestaña "Actualizaciones" y consultando tu versión actual, indicada en el texto de abajo.',
     'action.gotIt':'Entendido',
     'settings.changePin':'Cambiar código PIN','settings.change':'Cambiar','settings.createPin':'Crear contraseña','settings.createBtn':'Crear','settings.deletePin':'Borrar contraseña',
@@ -196,6 +196,33 @@ const CATS = [
 ];
 const DEFAULT_HUE = 248;
 
+const CHANGELOG = [
+  {
+    version: 'V0.2-beta (09/13)',
+    lines: [
+      'Several bugs related to the profile picture in the upper-left corner and the expense and income categories have been fixed.',
+      'A button has been added to create a transfer between accounts, to distinguish these transfers from actual expenses or income.',
+      "A button has been added to the Settings (Updates) menu to view the app's changelog.",
+    ],
+  },
+  {
+    version: 'V0.1-beta (08/21)',
+    lines: [
+      'The Fyn repository is now available on GitHub.',
+    ],
+  },
+];
+function renderChangelog(){
+  const el = document.getElementById('updates-changelog');
+  if (!el) return;
+  el.innerHTML = CHANGELOG.map(entry => `
+    <div class="changelog-entry">
+      <div class="changelog-version">${entry.version}</div>
+      ${entry.lines.map(l => `<p class="changelog-line">${l}</p>`).join('')}
+    </div>
+  `).join('');
+}
+
 const LOGO_DEV_TOKEN = 'pk_Cg5fH0NrQhyu_tLTrcgZ4A';
 
 async function sha256(text){
@@ -238,6 +265,7 @@ window.addEventListener('DOMContentLoaded', () => {
   applyTheme();
   applyHue(state.hue);
   buildCategoryChips();
+  renderChangelog();
   wireKeypad('#lock-keypad', onLockDigit);
   wireForgotPin();
   wireKeypad('#setup-keypad', onSetupDigit);
