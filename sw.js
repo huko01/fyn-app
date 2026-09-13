@@ -1,4 +1,4 @@
-const CACHE = 'fyn-v1';
+const CACHE = 'fyn-v2';
 const ASSETS = [
   './',
   './index.html',
@@ -23,12 +23,20 @@ self.addEventListener('activate', e => {
 
 self.addEventListener('fetch', e => {
   const url = new URL(e.request.url);
-  // Los logos (Clearbit) siempre van a la red; el resto, cache-first.
+  // Los logos (Clearbit) y las fuentes siempre van a la red.
   if (url.hostname.includes('logo.clearbit.com') || url.hostname.includes('fonts.g')) {
     e.respondWith(fetch(e.request).catch(() => new Response('', {status: 404})));
     return;
   }
+  // Red primero para los archivos propios de la app: siempre trae la última
+  // versión publicada cuando hay conexión, y solo usa la caché si no hay red.
   e.respondWith(
-    caches.match(e.request).then(cached => cached || fetch(e.request))
+    fetch(e.request)
+      .then(resp => {
+        const copy = resp.clone();
+        caches.open(CACHE).then(c => c.put(e.request, copy));
+        return resp;
+      })
+      .catch(() => caches.match(e.request))
   );
 });
