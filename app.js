@@ -56,7 +56,7 @@ const I18N = {
     'nav.home':'Home','nav.stats':'Statistics',
     'settings.profile':'Profile settings','profile.title':'Profile','profile.name':'Name',
     'settings.updates':'Updates',
-    'updates.howto':'How to update?','updates.currentVersion':'Your current version: V0.2.1-beta',
+    'updates.howto':'How to update?','updates.currentVersion':'Your current version: V0.2-beta',
     'updates.howtoText':'To update Fyn to the latest version, follow these steps:<br><br>1. Very important: Export your data (.json).<br>2. Clear all browsing data for this website in your browser settings.<br>3. Reopen Fyn and import your data directly by selecting the file you exported earlier.<br><br>And that\u2019s it\u2014you now have the latest version of the app. You can verify that the update was successful by returning to the \u201cUpdates\u201d tab and checking your current version, which is indicated in the text below.',
     'action.gotIt':'Got it',
     'settings.changePin':'Change PIN','settings.change':'Change','settings.createPin':'Create password','settings.createBtn':'Create','settings.deletePin':'Delete password',
@@ -132,7 +132,7 @@ const I18N = {
     'nav.home':'Inicio','nav.stats':'Estadísticas',
     'settings.profile':'Ajustes de perfil','profile.title':'Perfil','profile.name':'Nombre',
     'settings.updates':'Actualizaciones',
-    'updates.howto':'¿Cómo actualizar?','updates.currentVersion':'Tu versión actual: V0.2.1-beta',
+    'updates.howto':'¿Cómo actualizar?','updates.currentVersion':'Tu versión actual: V0.2-beta',
     'updates.howtoText':'Para actualizar Fyn a la última versión, sigue estos pasos:<br><br>1. Muy importante: exporta tus datos (.json).<br>2. Borra todos los datos de navegación de este sitio web desde los ajustes de tu navegador.<br>3. Vuelve a abrir Fyn e importa tus datos directamente seleccionando el archivo que exportaste antes.<br><br>Y eso es todo: ya tienes la última versión de la aplicación. Puedes comprobar que la actualización se realizó correctamente volviendo a la pestaña "Actualizaciones" y consultando tu versión actual, indicada en el texto de abajo.',
     'action.gotIt':'Entendido',
     'settings.changePin':'Cambiar código PIN','settings.change':'Cambiar','settings.createPin':'Crear contraseña','settings.createBtn':'Crear','settings.deletePin':'Borrar contraseña',
@@ -198,14 +198,7 @@ const DEFAULT_HUE = 248;
 
 const CHANGELOG = [
   {
-    version: 'V0.2.1-beta (09/13)',
-    lines: [
-      'A bug related to transfers has been fixed.',
-      'The previous method for deleting transactions has been removed, and a button has been added within the transaction/transfer itself to delete them.',
-    ],
-  },
-  {
-    version: 'V0.2-beta (09/12)',
+    version: 'V0.2-beta (09/13)',
     lines: [
       'Several bugs related to the profile picture in the upper-left corner and the expense and income categories have been fixed.',
       'A button has been added to create a transfer between accounts, to distinguish these transfers from actual expenses or income.',
@@ -306,6 +299,7 @@ window.addEventListener('DOMContentLoaded', () => {
     } else if (!state.pinHash) {
       $('#app').classList.add('show');
       renderGreeting();
+      playGreetingIntro();
       buildAccountChips();
     } else {
       $('#lock-title').textContent = t('welcome.' + (state.pronoun || 'unspecified'));
@@ -716,6 +710,7 @@ function unlockApp(){
   $('#lock').classList.add('hidden');
   $('#app').classList.add('show');
   renderGreeting();
+  playGreetingIntro();
   buildAccountChips();
 }
 let pendingImportData = null;
@@ -878,6 +873,17 @@ function renderGreeting(){
   else if (h >= 20 || h < 6) key = 'greeting.evening';
   const name = state.userName ? `, <b>${escapeHtml(state.userName)}</b>` : '';
   $('#greeting').innerHTML = `${t(key)}${name}`;
+}
+let greetingHideTimer = null;
+function playGreetingIntro(){
+  const el = $('#greeting');
+  clearTimeout(greetingHideTimer);
+  el.classList.remove('greeting-hide', 'greeting-enter');
+  void el.offsetWidth; // reiniciar animación si ya se había jugado
+  el.classList.add('greeting-enter');
+  greetingHideTimer = setTimeout(()=>{
+    el.classList.add('greeting-hide');
+  }, 5000);
 }
 function renderAvatar(){
   const initial = state.userName ? state.userName.trim()[0].toUpperCase() : 'F';
