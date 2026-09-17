@@ -198,6 +198,13 @@ const DEFAULT_HUE = 248;
 
 const CHANGELOG = [
   {
+    version: 'V0.2.1-beta (09/17)',
+    lines: [
+      'The welcome animation text has been improved, and now displays the text “Home”.',
+      'The option to press and hold a move to delete it has been removed. Now, you\'ll have to tap the move and select “Delete”.',
+    ],
+  },
+  {
     version: 'V0.2-beta (09/13)',
     lines: [
       'Several bugs related to the profile picture in the upper-left corner and the expense and income categories have been fixed.',
