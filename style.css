@@ -326,18 +326,8 @@ input{font-family:inherit;}
 .gear-btn:active{transform:scale(.9);}
 .gear-btn svg{width:18px;height:18px;color:#fff;}
 
-.greeting{
-  font-size:14px;font-weight:500;letter-spacing:normal;color:rgba(255,255,255,.75);
-  margin-bottom:14px;position:relative;z-index:1;
-  overflow:hidden;max-height:24px;
-  transition:opacity .5s var(--ease),max-height .5s var(--ease),margin-bottom .5s var(--ease),transform .5s var(--ease);
-}
-.greeting.greeting-enter{animation:greetingPopIn .45s var(--ease) both;}
-@keyframes greetingPopIn{
-  from{opacity:0;transform:translateY(-6px);}
-  to{opacity:1;transform:translateY(0);}
-}
-.greeting.greeting-hide{opacity:0;max-height:0;margin-bottom:0;transform:translateY(-6px);}
+.greeting{font-size:26px;font-weight:700;letter-spacing:-.3px;color:rgba(255,255,255,.85);margin-bottom:14px;position:relative;z-index:1;transition:opacity .35s var(--ease);}
+.greeting.fading{opacity:0;}
 .greeting b{font-weight:700;color:#fff;}
 
 .search-bar{

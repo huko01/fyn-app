@@ -299,7 +299,6 @@ window.addEventListener('DOMContentLoaded', () => {
     } else if (!state.pinHash) {
       $('#app').classList.add('show');
       renderGreeting();
-      playGreetingIntro();
       buildAccountChips();
     } else {
       $('#lock-title').textContent = t('welcome.' + (state.pronoun || 'unspecified'));
@@ -710,7 +709,6 @@ function unlockApp(){
   $('#lock').classList.add('hidden');
   $('#app').classList.add('show');
   renderGreeting();
-  playGreetingIntro();
   buildAccountChips();
 }
 let pendingImportData = null;
@@ -866,24 +864,24 @@ function wireKeypad(sel, handler){
   });
 }
 
+let greetingTimer = null;
 function renderGreeting(){
   const h = new Date().getHours();
   let key = 'greeting.morning';
   if (h >= 12 && h < 20) key = 'greeting.afternoon';
   else if (h >= 20 || h < 6) key = 'greeting.evening';
   const name = state.userName ? `, <b>${escapeHtml(state.userName)}</b>` : '';
-  $('#greeting').innerHTML = `${t(key)}${name}`;
-}
-let greetingHideTimer = null;
-function playGreetingIntro(){
   const el = $('#greeting');
-  clearTimeout(greetingHideTimer);
-  el.classList.remove('greeting-hide', 'greeting-enter');
-  void el.offsetWidth; // reiniciar animación si ya se había jugado
-  el.classList.add('greeting-enter');
-  greetingHideTimer = setTimeout(()=>{
-    el.classList.add('greeting-hide');
-  }, 5000);
+  clearTimeout(greetingTimer);
+  el.classList.remove('fading');
+  el.innerHTML = `${t(key)}${name}`;
+  greetingTimer = setTimeout(()=>{
+    el.classList.add('fading');
+    setTimeout(()=>{
+      el.textContent = t('nav.home');
+      el.classList.remove('fading');
+    }, 350);
+  }, 3000);
 }
 function renderAvatar(){
   const initial = state.userName ? state.userName.trim()[0].toUpperCase() : 'F';
