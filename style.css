@@ -731,3 +731,7 @@ input[type="time"]::-webkit-datetime-edit-fields-wrapper{
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
 
 input[type=file]{display:none;}
+
+.settings-row .settings-value{margin-left:auto;margin-right:8px;color:var(--ink-soft);font-size:13px;font-weight:500;max-width:48%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.backup-modal-title{font-size:18px;font-weight:700;margin-bottom:10px;}
+.backup-modal .modal-text{margin-bottom:20px;}

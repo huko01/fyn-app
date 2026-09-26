@@ -52,6 +52,8 @@ const I18N = {
     'transfer.needTwoAccounts':'Add another account to make a transfer.',
     'settings.title':'Settings','settings.darkMode':'Dark mode',
     'settings.language':'Language','settings.pronoun':'Pronouns','settings.accentTone':'Accent tone',
+    'settings.backupReminder':'Backup reminder','settings.backupReminderHint':'Choose when Fyn should remind you to export a backup.','settings.backupReminderSheet':'Backup reminder','settings.backupAfterMovement':'After every movement','settings.backupEveryOpen':'Every time you open the app','settings.backupEveryN':'Every {n} times you open the app',
+    'backup.title':'Backup your data','backup.text':'To keep your data safe, export a backup of your Fyn data (.json).','backup.download':'Download .json',
     'settings.languageHint':'To fully apply the language change, reload the web page.',
     'nav.home':'Home','nav.stats':'Statistics',
     'settings.profile':'Profile settings','profile.title':'Profile','profile.name':'Name',
@@ -128,6 +130,8 @@ const I18N = {
     'transfer.needTwoAccounts':'Añade otra cuenta para poder realizar un traspaso.',
     'settings.title':'Ajustes','settings.darkMode':'Modo oscuro',
     'settings.language':'Idioma','settings.pronoun':'Pronombres','settings.accentTone':'Tono de acento',
+    'settings.backupReminder':'Recordatorio de copia de seguridad','settings.backupReminderHint':'Elige cuándo quieres que Fyn te recuerde exportar una copia de seguridad.','settings.backupReminderSheet':'Recordatorio de copia de seguridad','settings.backupAfterMovement':'Después de cada movimiento','settings.backupEveryOpen':'Cada vez que abres la aplicación','settings.backupEveryN':'Cada {n} veces que abres la aplicación',
+    'backup.title':'Haz una copia de seguridad','backup.text':'Para mantener tus datos a salvo, exporta una copia de seguridad de tus datos de Fyn (.json).','backup.download':'Descargar .json',
     'settings.languageHint':'Para aplicar completamente el cambio de idioma, recarga la web.',
     'nav.home':'Inicio','nav.stats':'Estadísticas',
     'settings.profile':'Ajustes de perfil','profile.title':'Perfil','profile.name':'Nombre',
@@ -251,6 +255,8 @@ let state = {
   transfers: DB.get('transfers', []),
   onboardingDone: DB.get('onboardingDone', false),
   transactions: DB.get('transactions', []),
+  backupReminder: DB.get('backupReminder', 'open:10'),
+  backupOpenCount: DB.get('backupOpenCount', 0),
 };
 let enteredPin = '';
 let lockFailCount = 0;
@@ -263,6 +269,7 @@ let settingsReturnPage = 'page-home';
 let searchQuery = '';
 let mvSearchQuery = '';
 let mvFilter = { period:'day', category:'all', account:'all' };
+let appOpenRegistered = false;
 
 const $ = sel => document.querySelector(sel);
 const $$ = sel => document.querySelectorAll(sel);
@@ -307,6 +314,7 @@ window.addEventListener('DOMContentLoaded', () => {
       $('#app').classList.add('show');
       renderGreeting();
       buildAccountChips();
+      registerAppOpen();
     } else {
       $('#lock-title').textContent = t('welcome.' + (state.pronoun || 'unspecified'));
       $('#lock').classList.remove('hidden');
@@ -717,6 +725,7 @@ function unlockApp(){
   $('#app').classList.add('show');
   renderGreeting();
   buildAccountChips();
+  registerAppOpen();
 }
 let pendingImportData = null;
 let pendingImportContext = null;
@@ -991,6 +1000,7 @@ function openSettings(){
     : ($('#page-stats').classList.contains('active') ? 'page-stats' : 'page-home');
   $('#dark-switch').classList.toggle('on', document.body.classList.contains('dark'));
   refreshPinRows();
+  refreshBackupReminderRow();
   $('#page-home').classList.remove('active');
   $('#page-movements').classList.remove('active');
   $('#page-stats').classList.remove('active');
@@ -1012,6 +1022,7 @@ function wireSettingsSheets(){
   $('#lang-open-btn').addEventListener('click', openLangSheet);
   $('#lang-sheet-close').addEventListener('click', closeSettingsSheets);
   $('#pronoun-sheet-close').addEventListener('click', closeSettingsSheets);
+  $('#backup-reminder-sheet-close').addEventListener('click', closeSettingsSheets);
   $('#settings-sheet-backdrop').addEventListener('click', closeSettingsSheets);
   $('#hue-open-btn').addEventListener('click', openHueEditor);
   $('#accent-hue-done').addEventListener('click', closeHueEditor);
@@ -1020,6 +1031,7 @@ function closeSettingsSheets(){
   $('#settings-sheet-backdrop').classList.remove('show');
   $('#lang-sheet').classList.remove('show');
   $('#pronoun-sheet').classList.remove('show');
+  $('#backup-reminder-sheet').classList.remove('show');
 }
 function openLangSheet(){
   const opts = [['en','English'],['es','Español']];
@@ -1480,6 +1492,7 @@ function saveTransfer(){
   closeNewTransfer();
   renderHome();
   showToast(t('toast.transferSaved'));
+  maybeShowBackupAfterMovement();
 }
 function openNewTransfer(editId){
   if (state.accounts.length < 2) { showToast(t('transfer.needTwoAccounts')); return; }
@@ -1664,6 +1677,7 @@ function saveTransaction(){
     renderHome();
     renderMovements();
     showToast(t('toast.updated'));
+    maybeShowBackupAfterMovement();
     return;
   }
 
@@ -1685,6 +1699,7 @@ function saveTransaction(){
   renderHome();
   renderMovements();
   showToast(currentType==='expense' ? t('toast.expenseAdded') : t('toast.incomeAdded'));
+  maybeShowBackupAfterMovement();
 }
 
 function deleteTransaction(id){
@@ -2172,6 +2187,7 @@ function wireSettings(){
   $('#import-btn').addEventListener('click', ()=> $('#import-file').click());
   $('#import-file').addEventListener('change', importData);
   $('#reset-btn').addEventListener('click', openDeleteWarning);
+  $('#backup-reminder-open-btn').addEventListener('click', openBackupReminderSheet);
   $('#delete-cancel-btn').addEventListener('click', closeDeleteModals);
   $('#delete-backdrop').addEventListener('click', closeDeleteModals);
   $('#delete-continue-btn').addEventListener('click', openDeletePinConfirm);
@@ -2190,6 +2206,8 @@ function wireSettings(){
     $('#page-updates').classList.remove('active');
     $('#page-settings').classList.add('active');
   });
+  $('#backup-download-btn').addEventListener('click', downloadBackupFromReminder);
+  $('#backup-backdrop').addEventListener('click', closeBackupReminder);
   $('#updates-howto-btn').addEventListener('click', ()=>{
     $('#howto-backdrop').classList.add('show');
     $('#howto-modal').classList.add('show');
@@ -2203,6 +2221,74 @@ function wireSettings(){
     $('#howto-modal').classList.remove('show');
   });
 }
+function refreshBackupReminderRow(){
+  const el = $('#backup-reminder-value');
+  if (!el) return;
+  const mode = state.backupReminder || 'open:10';
+  if (mode === 'movement') el.textContent = t('settings.backupAfterMovement');
+  else if (mode === 'open:1') el.textContent = t('settings.backupEveryOpen');
+  else {
+    const n = parseInt(mode.split(':')[1], 10) || 10;
+    el.textContent = t('settings.backupEveryN', {n});
+  }
+}
+function openBackupReminderSheet(){
+  const opts = [
+    ['movement', t('settings.backupAfterMovement')],
+    ['open:1', t('settings.backupEveryOpen')],
+    ['open:2', t('settings.backupEveryN', {n:2})],
+    ['open:3', t('settings.backupEveryN', {n:3})],
+    ['open:5', t('settings.backupEveryN', {n:5})],
+    ['open:10', t('settings.backupEveryN', {n:10})],
+  ];
+  $('#backup-reminder-list').innerHTML = opts.map(([value,label]) =>
+    `<button type="button" class="sheet-option-row${state.backupReminder===value?' active':''}" data-backup-reminder="${value}"><span>${label}</span><span class="check"></span></button>`
+  ).join('');
+  $$('#backup-reminder-list .sheet-option-row').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      state.backupReminder = btn.dataset.backupReminder;
+      state.backupOpenCount = 0;
+      DB.set('backupReminder', state.backupReminder);
+      DB.set('backupOpenCount', state.backupOpenCount);
+      refreshBackupReminderRow();
+      closeSettingsSheets();
+    });
+  });
+  $('#settings-sheet-backdrop').classList.add('show');
+  $('#backup-reminder-sheet').classList.add('show');
+}
+function registerAppOpen(){
+  if (appOpenRegistered || !state.onboardingDone) return;
+  appOpenRegistered = true;
+  const mode = state.backupReminder || 'open:10';
+  if (!mode.startsWith('open:')) return;
+  const n = parseInt(mode.split(':')[1], 10) || 10;
+  state.backupOpenCount = (state.backupOpenCount || 0) + 1;
+  if (state.backupOpenCount >= n) {
+    state.backupOpenCount = 0;
+    DB.set('backupOpenCount', state.backupOpenCount);
+    setTimeout(showBackupReminder, 250);
+  } else {
+    DB.set('backupOpenCount', state.backupOpenCount);
+  }
+}
+function maybeShowBackupAfterMovement(){
+  if ((state.backupReminder || 'open:10') !== 'movement') return;
+  setTimeout(showBackupReminder, 250);
+}
+function showBackupReminder(){
+  $('#backup-backdrop').classList.add('show');
+  $('#backup-modal').classList.add('show');
+}
+function closeBackupReminder(){
+  $('#backup-backdrop').classList.remove('show');
+  $('#backup-modal').classList.remove('show');
+}
+function downloadBackupFromReminder(){
+  closeBackupReminder();
+  exportData();
+}
+
 function exportData(){
   const payload = {
     language: state.language,
@@ -2215,6 +2301,8 @@ function exportData(){
     accounts: state.accounts,
     transactions: state.transactions,
     transfers: state.transfers || [],
+    backupReminder: state.backupReminder,
+    backupOpenCount: state.backupOpenCount,
     exportedAt: new Date().toISOString()
   };
   const blob = new Blob([JSON.stringify(payload, null, 2)], {type:'application/json'});
@@ -2237,6 +2325,8 @@ function applyImportedData(data){
   if (typeof data.themeMode === 'string') state.themeMode = data.themeMode;
   if (typeof data.hue === 'number') state.hue = data.hue;
   if ('pinHash' in data) state.pinHash = (typeof data.pinHash === 'string') ? data.pinHash : null;
+  if (typeof data.backupReminder === 'string') state.backupReminder = data.backupReminder;
+  if (typeof data.backupOpenCount === 'number') state.backupOpenCount = data.backupOpenCount;
   DB.set('transactions', state.transactions);
   DB.set('transfers', state.transfers);
   DB.set('accounts', state.accounts);
@@ -2247,6 +2337,8 @@ function applyImportedData(data){
   DB.set('themeMode', state.themeMode);
   DB.set('hue', state.hue);
   if ('pinHash' in data) DB.set('pinHash', state.pinHash);
+  DB.set('backupReminder', state.backupReminder);
+  DB.set('backupOpenCount', state.backupOpenCount);
 }
 function importData(e){
   const file = e.target.files[0];

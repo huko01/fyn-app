@@ -407,6 +407,16 @@
       <div class="sheet-body" id="pronoun-sheet-list"></div>
     </div>
 
+    <div class="sheet" id="backup-reminder-sheet">
+      <div class="sheet-handle"></div>
+      <div class="sheet-head">
+        <h3 data-i18n="settings.backupReminderSheet">Backup reminder</h3>
+        <button class="sheet-close" id="backup-reminder-sheet-close" type="button">✕</button>
+      </div>
+      <div class="sheet-hint" data-i18n="settings.backupReminderHint">Choose when Fyn should remind you to export a backup.</div>
+      <div class="sheet-body" id="backup-reminder-list"></div>
+    </div>
+
     <div class="sheet-backdrop" id="txdetail-backdrop"></div>
     <div class="sheet" id="txdetail-sheet">
       <div class="sheet-handle"></div>
@@ -470,6 +480,11 @@
       </div>
       <div class="settings-group">
         <div class="settings-row"><span data-i18n="settings.darkMode">Dark mode</span><div class="switch" id="dark-switch"></div></div>
+        <button type="button" class="settings-row settings-nav" id="backup-reminder-open-btn">
+          <span data-i18n="settings.backupReminder">Backup reminder</span>
+          <span class="settings-value" id="backup-reminder-value"></span>
+          <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
+        </button>
         <button type="button" class="settings-row settings-nav" id="hue-open-btn">
           <span data-i18n="settings.accentTone">Accent tone</span>
           <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
@@ -807,6 +822,16 @@
       <button class="key" data-k="del">⌫</button>
     </div>
     <button class="modal-btn ghost" id="deletepin-pin-cancel" data-i18n="delete.cancel">Cancel</button>
+  </div>
+
+  <div class="modal-backdrop" id="backup-backdrop"></div>
+  <div class="modal backup-modal" id="backup-modal">
+    <div class="modal-icon">💾</div>
+    <div class="backup-modal-title" data-i18n="backup.title">Backup your data</div>
+    <p class="modal-text" data-i18n="backup.text">To keep your data safe, export a backup of your Fyn data (.json).</p>
+    <div class="modal-actions">
+      <button class="modal-btn primary" id="backup-download-btn" data-i18n="backup.download">Download .json</button>
+    </div>
   </div>
 
   <div class="toast" id="toast"></div>
