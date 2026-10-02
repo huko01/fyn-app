@@ -20,39 +20,53 @@
 <div id="viewport">
 
     <div id="splash">
-    <div class="splash-logo" id="splash-logo"><img src="assets/fyn-logo-white.png" alt="Fyn"></div>
+    <div class="splash-logo" id="splash-logo"><img src="assets/fyn-logo-white.png" alt="Fynance"></div>
     <div class="splash-copyright">© 2026 Huko. All rights reserved.</div>
   </div>
 
     <div id="setup">
       <div class="ob-progress" id="ob-progress"><div class="ob-progress-fill" id="ob-progress-fill"></div></div>
+      <button type="button" class="setup-back" id="setup-back" aria-label="Back">←</button>
 
         <div class="setup-step active" id="step-lang">
       <div class="ob-wrap">
-        <div class="ob-title">Choose your language</div>
-        <div class="ob-sub">You can change this later in settings.</div>
-        <div class="ob-options">
-          <button class="ob-card" data-lang="en">
-            <span class="ob-card-emoji">🇬🇧</span>
-            <span class="ob-card-label">English</span>
-          </button>
-          <button class="ob-card" data-lang="es">
-            <span class="ob-card-emoji">🇪🇸</span>
-            <span class="ob-card-label">Español</span>
+        <div class="ob-title" data-i18n="language.title">Application language</div>
+        <div class="ob-sub" id="language-detected"></div>
+        <div class="ob-list language-list">
+          <button type="button" class="ob-row" data-lang="en"><span>English</span><span class="check"></span></button>
+          <button type="button" class="ob-row" data-lang="es"><span>Español</span><span class="check"></span></button>
+        </div>
+        <button class="continue-btn" id="language-continue" data-i18n="action.continue">Continue</button>
+      </div>
+    </div>
+
+    <div class="setup-step" id="step-welcome">
+      <div class="welcome-stories" id="welcome-stories" aria-live="polite">
+        <div class="welcome-story-art" aria-hidden="true"><img src="assets/fyn-logo-mark.png" alt=""></div>
+        <div class="welcome-copy">
+          <div class="welcome-eyebrow" id="welcome-counter">1 / 4</div>
+          <h1 id="welcome-title"></h1>
+        </div>
+        <div class="welcome-dots" id="welcome-dots" aria-label="Welcome slides"></div>
+        <div class="welcome-actions">
+          <button type="button" class="welcome-start" id="welcome-start"></button>
+          <button type="button" class="welcome-import" id="welcome-import">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M12 17V10m0 0l-3 3m3-3l3 3"/></svg>
+            <span id="welcome-import-label"></span>
           </button>
         </div>
-        <button type="button" class="ob-import-btn" id="ob-import-btn">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 21h16"/></svg>
-          <span id="ob-import-btn-label">Import data directly (.json)</span>
-        </button>
         <input type="file" id="ob-import-file" accept="application/json">
       </div>
     </div>
 
         <div class="setup-step" id="step-name">
       <div class="ob-wrap">
-        <div class="ob-title solo" data-i18n="name.title">What's your name?</div>
-        <input type="text" class="name-field" id="name-input" data-i18n-ph="name.placeholder" placeholder="Your name" maxlength="20">
+        <div class="ob-title" data-i18n="name.title">Your first and last name</div>
+        <div class="ob-sub" data-i18n="name.subtitle">Fynance stores your data locally in this browser. It never goes anywhere; we only use your name to personalise the app for you.</div>
+        <div class="name-fields">
+          <input type="text" class="name-field" id="first-name-input" data-i18n-ph="name.firstPlaceholder" placeholder="First name" maxlength="20">
+          <input type="text" class="name-field" id="last-name-input" data-i18n-ph="name.lastPlaceholder" placeholder="Last name" maxlength="30">
+        </div>
         <button class="continue-btn" id="name-continue" disabled data-i18n="action.continue">Continue</button>
       </div>
     </div>
@@ -60,7 +74,7 @@
         <div class="setup-step" id="step-pronoun">
       <div class="ob-wrap">
         <div class="ob-title" data-i18n="pronoun.title">What is your gender?</div>
-        <div class="ob-sub" data-i18n="pronoun.subtitle">This helps Fyn personalize your profile.</div>
+        <div class="ob-sub" data-i18n="pronoun.subtitle">This helps Fynance personalize your profile.</div>
         <div class="ob-list" id="pronoun-list"></div>
         <button class="continue-btn" id="pronoun-continue" disabled data-i18n="action.continue">Continue</button>
       </div>
@@ -84,13 +98,15 @@
             <span class="acc-type-icon">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="3"/></svg>
             </span>
-            <span data-i18n="accounts.cash">Cash</span>
+            <span class="acc-type-copy"><strong data-i18n="accounts.cash">Cash</strong><small data-i18n="accounts.cashHint">Add the cash you carry with you</small></span>
+            <span class="acc-type-arrow">›</span>
           </button>
           <button class="acc-type-btn" id="acc-type-card">
             <span class="acc-type-icon">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
             </span>
-            <span data-i18n="accounts.card">Debit card</span>
+            <span class="acc-type-copy"><strong data-i18n="accounts.card">Debit card</strong><small data-i18n="accounts.cardHint">Add a bank card you use every day</small></span>
+            <span class="acc-type-arrow">›</span>
           </button>
         </div>
 
@@ -140,6 +156,10 @@
     </div>
 
         <div class="setup-step" id="step-pin">
+      <div class="setup-pin-heading">
+        <div class="ob-title" data-i18n="pin.createTitle">Create a 4-digit code</div>
+        <div class="ob-sub" data-i18n="pin.createSubtitle">So no one can enter Fynance without your permission.</div>
+      </div>
       <div class="lock-sub" id="setup-sub" data-i18n="pin.create">Create a 4-digit code</div>
       <div class="pin-dots" id="setup-dots">
         <div class="pin-dot"></div><div class="pin-dot"></div><div class="pin-dot"></div><div class="pin-dot"></div>
@@ -151,7 +171,6 @@
         <button class="key ghost"></button><button class="key" data-k="0">0</button>
         <button class="key" data-k="del">⌫</button>
       </div>
-      <button type="button" class="skip-pin-btn" id="skip-pin-btn" data-i18n="action.skip">Skip</button>
     </div>
   </div>
 
@@ -185,7 +204,7 @@
     <div id="app">
 
         <div class="page active" id="page-home">
-      <div class="hero">
+      <div class="hero" id="home-hero">
         <div class="hero-top">
           <div class="avatar" id="avatar-btn">G</div>
           <input type="file" id="avatar-file" accept="image/*">
@@ -344,7 +363,7 @@
       <button class="chpin-cancel" id="acce-cancel">✕</button>
       <div class="ob-wrap ob-wrap-scroll">
         <div class="ob-title" data-i18n="accounts.manageTitle">Add accounts</div>
-        <div class="ob-sub" data-i18n="accounts.manageSub">Manage the accounts you track in Fyn.</div>
+        <div class="ob-sub" data-i18n="accounts.manageSub">Manage the accounts you track in Fynance.</div>
 
         <div class="acc-type-row">
           <button class="acc-type-btn" id="acce-type-cash">
@@ -413,7 +432,7 @@
         <h3 data-i18n="settings.backupReminderSheet">Backup reminder</h3>
         <button class="sheet-close" id="backup-reminder-sheet-close" type="button">✕</button>
       </div>
-      <div class="sheet-hint" data-i18n="settings.backupReminderHint">Choose when Fyn should remind you to export a backup.</div>
+      <div class="sheet-hint" data-i18n="settings.backupReminderHint">Choose when Fynance should remind you to export a backup.</div>
       <div class="sheet-body" id="backup-reminder-list"></div>
     </div>
 
@@ -528,7 +547,7 @@
     <div class="modal-backdrop" id="howto-backdrop"></div>
     <div class="modal howto-modal" id="howto-modal">
       <div class="modal-icon">🔄</div>
-      <p class="modal-text howto-text" id="howto-modal-text" data-i18n="updates.howtoText">To update Fyn to the latest version, follow these steps:</p>
+      <p class="modal-text howto-text" id="howto-modal-text" data-i18n="updates.howtoText">To update Fynance to the latest version, follow these steps:</p>
       <div class="modal-actions">
         <button type="button" class="modal-btn primary" id="howto-close-btn" data-i18n="action.gotIt">Got it</button>
       </div>
@@ -591,6 +610,29 @@
             </button>
           </span>
         </div>
+        <div class="txdetail-row accdetails-background-row">
+          <span class="txdetail-label" data-i18n="accdetails.background">Background</span>
+          <button type="button" class="account-background-open" id="accdetails-background-open">
+            <span class="account-background-preview" id="accdetails-background-preview"></span>
+            <span class="txdetail-value" id="accdetails-background-value"></span>
+            <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="setup-step-standalone" id="account-background-editor">
+      <div class="ob-wrap">
+        <div class="ob-title" data-i18n="accdetails.backgroundTitle">Choose account background</div>
+        <div class="ob-sub" data-i18n="accdetails.backgroundSubtitle">Choose a tone like your current Fynance background, or use a custom image.</div>
+        <div class="hue-preview" id="account-bg-preview"></div>
+        <div class="field-label" data-i18n="accdetails.backgroundTone">Tone</div>
+        <input type="range" min="0" max="360" value="248" class="hue-slider" id="account-bg-slider">
+        <div class="field-label account-bg-image-label" data-i18n="accdetails.backgroundImage">Custom image</div>
+        <input type="file" accept="image/*" id="account-bg-image" class="account-bg-file">
+        <label for="account-bg-image" class="ob-import-btn app-import-btn account-bg-file-btn" data-i18n="accdetails.backgroundImageBtn">Choose image</label>
+        <button type="button" class="hue-reset" id="account-bg-reset" data-i18n="accdetails.backgroundDefault">Use default background</button>
+        <button type="button" class="continue-btn" id="account-bg-done" data-i18n="action.done">Done</button>
       </div>
     </div>
 
@@ -785,7 +827,7 @@
 
   <div class="modal danger-modal" id="delete-warning-modal">
     <div class="modal-icon">⚠️</div>
-    <p class="modal-text" data-i18n="delete.warning">When you clear all data, you will delete all activity, accounts, and everything related to Fyn in this browser. Export your data (.json) before clearing all data, just in case. To completely clear all data, clear this website's data from your browser settings.</p>
+    <p class="modal-text" data-i18n="delete.warning">When you clear all data, you will delete all activity, accounts, and everything related to Fynance in this browser. Export your data (.json) before clearing all data, just in case. To completely clear all data, clear this website's data from your browser settings.</p>
     <div class="modal-actions">
       <button class="modal-btn ghost" id="delete-cancel-btn" data-i18n="delete.cancel">Cancel</button>
       <button class="modal-btn danger" id="delete-continue-btn" data-i18n="delete.continue">Continue</button>
@@ -828,7 +870,7 @@
   <div class="modal backup-modal" id="backup-modal">
     <div class="modal-icon">💾</div>
     <div class="backup-modal-title" data-i18n="backup.title">Backup your data</div>
-    <p class="modal-text" data-i18n="backup.text">To keep your data safe, export a backup of your Fyn data (.json).</p>
+    <p class="modal-text" data-i18n="backup.text">To keep your data safe, export a backup of your Fynance data (.json).</p>
     <div class="modal-actions">
       <button class="modal-btn primary" id="backup-download-btn" data-i18n="backup.download">Download .json</button>
     </div>

@@ -3,17 +3,21 @@ const I18N = {
   en: {
     'lang.title':'Choose your language','lang.subtitle':'You can change this later in settings.',
     'action.continue':'Continue','action.add':'Add','action.save':'Save','action.resetDefault':'Reset to default','action.done':'Done','action.skip':'Skip','action.next':'Next',
-    'name.title':"What's your name?",'name.placeholder':'Your name',
-    'pronoun.title':'What is your gender?','pronoun.subtitle':'This helps Fyn personalize your profile.',
+    'welcome.start':'Start from scratch','welcome.import':'Import .json file',
+    'welcome.brand':'Welcome to Fynance',
+    'welcome.story1':'Keep track of all your expenses and income.','welcome.story2':'Beautiful, easy-to-use interface.','welcome.story3':'Check your recent statistics and keep track of your subscriptions.','welcome.story4':'Customize the app to your liking.',
+    'language.title':'Application language','language.detected':'We have automatically detected that your browser language is {language}. If this is incorrect, please select one from the list.',
+    'name.title':'Your first and last name','name.subtitle':'Fynance stores all your data locally in this browser. Your data never goes anywhere; we only ask for it to personalise the app for you.','name.firstPlaceholder':'First name','name.lastPlaceholder':'Last name',
+    'pronoun.title':'What is your gender?','pronoun.subtitle':'This helps Fynance personalise your profile.',
     'pronoun.he':'Man','pronoun.she':'Woman','pronoun.they':'Non-binary','pronoun.unspecified':'Prefer not to say',
     'currency.title':'Choose your currency','currency.usd':'US Dollar (USD)','currency.eur':'Euro (EUR)',
     'accounts.title':'Add your accounts','accounts.subtitle':'Add at least one account to continue. You can add as many as you like. You can also add more accounts later.',
-    'accounts.cash':'Cash','accounts.card':'Debit card','accounts.yours':'Your accounts','accounts.btn':'Accounts','accounts.networth':'Net worth',
-    'accounts.addEdit':'Add accounts','accounts.manageTitle':'Add accounts','accounts.manageSub':'Manage your Fyn accounts.',
+    'accounts.cash':'Cash','accounts.cashHint':'Add the cash you carry with you','accounts.card':'Debit card','accounts.cardHint':'Add a bank card you use every day','accounts.yours':'Your accounts','accounts.btn':'Accounts','accounts.networth':'Net worth',
+    'accounts.addEdit':'Add accounts','accounts.manageTitle':'Add accounts','accounts.manageSub':'Manage your Fynance accounts.',
     'field.name':'Name','field.description':'Description (optional)','field.descriptionPlain':'Description','field.initialBalance':'Initial balance',
     'theme.title':'Choose your theme','theme.light':'Light','theme.dark':'Dark',
     'hue.title':'Choose your accent tone','hue.subtitle':'Drag to pick the shade for your gradient background.',
-    'pin.create':'Create a 4-digit code','pin.repeat':'Repeat your code','pin.enterCurrent':'Enter your current code','pin.enterImport':'Enter this backup\'s code',
+    'pin.createTitle':'Create a 4-digit code','pin.createSubtitle':'So no one can enter Fynance without your permission.','pin.create':'Create a 4-digit code','pin.repeat':'Repeat your code','pin.enterCurrent':'Enter your current code','pin.enterImport':'Enter this backup\'s code',
     'lock.subtitle':'Enter your code','lock.error':'Incorrect code',
     'lock.forgotPin':'Forgot your PIN?',
     'lock.forgotWarning':'If you forgot your PIN, you now have to clear all app data to get back in. This will permanently delete all your transactions and accounts in this browser.',
@@ -24,7 +28,7 @@ const I18N = {
     'qa.expense':'Add expense','qa.income':'Add income','qa.details':'Details','qa.transfer':'Transfer',
     'accdetails.title':'Account details',
     'accdetails.selectAccount':'Select an account to see its details',
-    'accdetails.editName':'Edit name','accdetails.editDesc':'Edit description','accdetails.noDesc':'No description',
+    'accdetails.editName':'Edit name','accdetails.editDesc':'Edit description','accdetails.noDesc':'No description','accdetails.background':'Background','accdetails.backgroundTitle':'Choose account background','accdetails.backgroundSubtitle':'Choose a tone like your current Fynance background, or use a custom image.','accdetails.backgroundTone':'Tone','accdetails.backgroundImage':'Custom image','accdetails.backgroundImageBtn':'Choose image','accdetails.backgroundRemoveImage':'Remove image','accdetails.backgroundDefault':'Use default background',
     'movements.title':'Transactions','movements.showAll':'Show all','movements.all':'All movements',
     'stats.title':'Statistics','stats.comingSoon':'Coming soon',
     'filter.title':'Filters','filter.period':'Period','filter.all':'All','filter.day':'Day','filter.week':'Week','filter.month':'Month','filter.year':'Year',
@@ -52,14 +56,14 @@ const I18N = {
     'transfer.needTwoAccounts':'Add another account to make a transfer.',
     'settings.title':'Settings','settings.darkMode':'Dark mode',
     'settings.language':'Language','settings.pronoun':'Gender','settings.accentTone':'Accent tone',
-    'settings.backupReminder':'Backup reminder','settings.backupReminderHint':'Choose when Fyn should remind you to export a backup.','settings.backupReminderSheet':'Backup reminder','settings.backupAfterMovement':'After every movement','settings.backupEveryOpen':'Every time you open the app','settings.backupEveryN':'Every {n} times you open the app',
-    'backup.title':'Backup your data','backup.text':'To keep your data safe, export a backup of your Fyn data (.json).','backup.download':'Download .json',
+    'settings.backupReminder':'Backup reminder','settings.backupReminderHint':'Choose when Fynance should remind you to export a backup.','settings.backupReminderSheet':'Backup reminder','settings.backupAfterMovement':'After every movement','settings.backupEveryOpen':'Every time you open the app','settings.backupEveryN':'Every {n} times you open the app',
+    'backup.title':'Backup your data','backup.text':'To keep your data safe, export a backup of your Fynance data (.json).','backup.download':'Download .json',
     'settings.languageHint':'To fully apply the language change, reload the web page.',
     'nav.home':'Home','nav.stats':'Statistics',
     'settings.profile':'Profile settings','profile.title':'Profile','profile.name':'Name',
     'settings.updates':'Updates',
     'updates.howto':'How to update?','updates.currentVersion':'Your current version: V0.2-beta',
-    'updates.howtoText':'To update Fyn to the latest version, follow these steps:<br><br>1. Very important: Export your data (.json).<br>2. Clear all browsing data for this website in your browser settings.<br>3. Reopen Fyn and import your data directly by selecting the file you exported earlier.<br><br>And that\u2019s it\u2014you now have the latest version of the app. You can verify that the update was successful by returning to the \u201cUpdates\u201d tab and checking your current version, which is indicated in the text below.',
+    'updates.howtoText':'To update Fynance to the latest version, follow these steps:<br><br>1. Very important: Export your data (.json).<br>2. Clear all browsing data for this website in your browser settings.<br>3. Reopen Fynance and import your data directly by selecting the file you exported earlier.<br><br>And that\u2019s it\u2014you now have the latest version of the app. You can verify that the update was successful by returning to the \u201cUpdates\u201d tab and checking your current version, which is indicated in the text below.',
     'action.gotIt':'Got it',
     'settings.changePin':'Change PIN','settings.change':'Change','settings.createPin':'Create password','settings.createBtn':'Create','settings.deletePin':'Delete password',
     'settings.export':'Export data (.json)','settings.exportBtn':'Export',
@@ -69,7 +73,7 @@ const I18N = {
     'confirm.import':'This will import {n} transactions. Replace current data?',
     'error.invalidBackup':'This file is not a valid backup.',
     'confirm.reset':'This will delete all transactions saved on this device. Continue?',
-    'delete.warning':'When you clear all data, you will delete all activity, accounts, and everything related to Fyn in this browser. Export your data (.json) before clearing all data, just in case. To completely clear all data, clear this website\'s data from your browser settings.',
+    'delete.warning':'When you clear all data, you will delete all activity, accounts, and everything related to Fynance in this browser. Export your data (.json) before clearing all data, just in case. To completely clear all data, clear this website\'s data from your browser settings.',
     'delete.cancel':'Cancel','delete.continue':'Continue','delete.pinPrompt':'Enter your PIN to confirm',
     'cat.supermarket':'Supermarket','cat.restaurant':'Restaurant','cat.salary':'Salary','cat.transport':'Transport',
     'cat.leisure':'Leisure','cat.housing':'Housing','cat.shopping':'Shopping','cat.clothing':'Clothing',
@@ -81,17 +85,21 @@ const I18N = {
   es: {
     'lang.title':'Elige tu idioma','lang.subtitle':'Podrás cambiarlo más tarde en ajustes.',
     'action.continue':'Continuar','action.add':'Añadir','action.save':'Guardar','action.resetDefault':'Restaurar por defecto','action.done':'Listo','action.skip':'Omitir','action.next':'Siguiente',
-    'name.title':'¿Cómo te llamas?','name.placeholder':'Tu nombre',
-    'pronoun.title':'¿Cuál es tu género?','pronoun.subtitle':'Esto ayuda a Fyn a personalizar tu perfil.',
+    'welcome.start':'Empezar de cero','welcome.import':'Importar archivo .json',
+    'welcome.brand':'Bienvenido a Fynance',
+    'welcome.story1':'Controla todos tus gastos e ingresos.','welcome.story2':'Una interfaz bonita y fácil de usar.','welcome.story3':'Consulta tus estadísticas recientes y controla tus suscripciones.','welcome.story4':'Personaliza la aplicación a tu gusto.',
+    'language.title':'Idioma de la aplicación','language.detected':'Hemos detectado automáticamente que el idioma de tu navegador es {language}. Si no es correcto, selecciona uno de la lista.',
+    'name.title':'Tu nombre y apellidos','name.subtitle':'Fynance guarda todos tus datos localmente en este navegador. No irán a ningún sitio; solo te los pedimos para personalizar la aplicación para ti.','name.firstPlaceholder':'Nombre','name.lastPlaceholder':'Apellidos',
+    'pronoun.title':'¿Cuál es tu género?','pronoun.subtitle':'Esto ayuda a Fynance a personalizar tu perfil.',
     'pronoun.he':'Hombre','pronoun.she':'Mujer','pronoun.they':'No binario','pronoun.unspecified':'Prefiero no decirlo',
     'currency.title':'Elige tu moneda','currency.usd':'Dólar estadounidense (USD)','currency.eur':'Euro (EUR)',
     'accounts.title':'Añade tus cuentas','accounts.subtitle':'Añade al menos una cuenta para continuar. Puedes añadir las que quieras. También puedes añadir más cuentas más tarde.',
-    'accounts.cash':'Efectivo','accounts.card':'Tarjeta de débito','accounts.yours':'Tus cuentas','accounts.btn':'Cuentas','accounts.networth':'Patrimonio neto',
-    'accounts.addEdit':'Añadir cuentas','accounts.manageTitle':'Añadir cuentas','accounts.manageSub':'Gestiona tus cuentas de Fyn.',
+    'accounts.cash':'Efectivo','accounts.cashHint':'Añade el efectivo que llevas contigo','accounts.card':'Tarjeta de débito','accounts.cardHint':'Añade una tarjeta bancaria que uses a diario','accounts.yours':'Tus cuentas','accounts.btn':'Cuentas','accounts.networth':'Patrimonio neto',
+    'accounts.addEdit':'Añadir cuentas','accounts.manageTitle':'Añadir cuentas','accounts.manageSub':'Gestiona tus cuentas de Fynance.',
     'field.name':'Nombre','field.description':'Descripción (opcional)','field.descriptionPlain':'Descripción','field.initialBalance':'Saldo inicial',
     'theme.title':'Elige el tema','theme.light':'Claro','theme.dark':'Oscuro',
     'hue.title':'Elige el tono de fondo','hue.subtitle':'Desliza para elegir el tono de tu fondo degradado.',
-    'pin.create':'Crea un código de 4 dígitos','pin.repeat':'Repite tu código','pin.enterCurrent':'Introduce tu código actual','pin.enterImport':'Introduce el código de esta copia',
+    'pin.createTitle':'Crea un código de 4 dígitos','pin.createSubtitle':'Para que nadie entre en Fynance sin tu permiso.','pin.create':'Crea un código de 4 dígitos','pin.repeat':'Repite tu código','pin.enterCurrent':'Introduce tu código actual','pin.enterImport':'Introduce el código de esta copia',
     'lock.subtitle':'Introduce tu código','lock.error':'Código incorrecto',
     'lock.forgotPin':'¿Olvidaste tu PIN?',
     'lock.forgotWarning':'Si olvidaste tu PIN, ahora tienes que borrar todos los datos de la app para poder entrar. Esto eliminará permanentemente todos tus movimientos y cuentas en este navegador.',
@@ -102,7 +110,7 @@ const I18N = {
     'qa.expense':'Añadir gasto','qa.income':'Añadir ingreso','qa.details':'Detalles','qa.transfer':'Traspaso',
     'accdetails.title':'Detalles de cuenta',
     'accdetails.selectAccount':'Selecciona una cuenta para ver sus detalles',
-    'accdetails.editName':'Editar nombre','accdetails.editDesc':'Editar descripción','accdetails.noDesc':'Sin descripción',
+    'accdetails.editName':'Editar nombre','accdetails.editDesc':'Editar descripción','accdetails.noDesc':'Sin descripción','accdetails.background':'Fondo','accdetails.backgroundTitle':'Elige el fondo de la cuenta','accdetails.backgroundSubtitle':'Elige un tono como el fondo actual de Fynance o usa una imagen personalizada.','accdetails.backgroundTone':'Tono','accdetails.backgroundImage':'Imagen personalizada','accdetails.backgroundImageBtn':'Elegir imagen','accdetails.backgroundRemoveImage':'Eliminar imagen','accdetails.backgroundDefault':'Usar fondo predeterminado',
     'movements.title':'Movimientos','movements.showAll':'Mostrar todos','movements.all':'Todos los movimientos',
     'stats.title':'Estadísticas','stats.comingSoon':'Próximamente',
     'filter.title':'Filtros','filter.period':'Periodo','filter.all':'Todo','filter.day':'Día','filter.week':'Semana','filter.month':'Mes','filter.year':'Año',
@@ -130,14 +138,14 @@ const I18N = {
     'transfer.needTwoAccounts':'Añade otra cuenta para poder realizar un traspaso.',
     'settings.title':'Ajustes','settings.darkMode':'Modo oscuro',
     'settings.language':'Idioma','settings.pronoun':'Género','settings.accentTone':'Tono de acento',
-    'settings.backupReminder':'Recordatorio de copia de seguridad','settings.backupReminderHint':'Elige cuándo quieres que Fyn te recuerde exportar una copia de seguridad.','settings.backupReminderSheet':'Recordatorio de copia de seguridad','settings.backupAfterMovement':'Después de cada movimiento','settings.backupEveryOpen':'Cada vez que abres la aplicación','settings.backupEveryN':'Cada {n} veces que abres la aplicación',
-    'backup.title':'Haz una copia de seguridad','backup.text':'Para mantener tus datos a salvo, exporta una copia de seguridad de tus datos de Fyn (.json).','backup.download':'Descargar .json',
+    'settings.backupReminder':'Recordatorio de copia de seguridad','settings.backupReminderHint':'Elige cuándo quieres que Fynance te recuerde exportar una copia de seguridad.','settings.backupReminderSheet':'Recordatorio de copia de seguridad','settings.backupAfterMovement':'Después de cada movimiento','settings.backupEveryOpen':'Cada vez que abres la aplicación','settings.backupEveryN':'Cada {n} veces que abres la aplicación',
+    'backup.title':'Haz una copia de seguridad','backup.text':'Para mantener tus datos a salvo, exporta una copia de seguridad de tus datos de Fynance (.json).','backup.download':'Descargar .json',
     'settings.languageHint':'Para aplicar completamente el cambio de idioma, recarga la web.',
     'nav.home':'Inicio','nav.stats':'Estadísticas',
     'settings.profile':'Ajustes de perfil','profile.title':'Perfil','profile.name':'Nombre',
     'settings.updates':'Actualizaciones',
     'updates.howto':'¿Cómo actualizar?','updates.currentVersion':'Tu versión actual: V0.2-beta',
-    'updates.howtoText':'Para actualizar Fyn a la última versión, sigue estos pasos:<br><br>1. Muy importante: exporta tus datos (.json).<br>2. Borra todos los datos de navegación de este sitio web desde los ajustes de tu navegador.<br>3. Vuelve a abrir Fyn e importa tus datos directamente seleccionando el archivo que exportaste antes.<br><br>Y eso es todo: ya tienes la última versión de la aplicación. Puedes comprobar que la actualización se realizó correctamente volviendo a la pestaña "Actualizaciones" y consultando tu versión actual, indicada en el texto de abajo.',
+    'updates.howtoText':'Para actualizar Fynance a la última versión, sigue estos pasos:<br><br>1. Muy importante: exporta tus datos (.json).<br>2. Borra todos los datos de navegación de este sitio web desde los ajustes de tu navegador.<br>3. Vuelve a abrir Fynance e importa tus datos directamente seleccionando el archivo que exportaste antes.<br><br>Y eso es todo: ya tienes la última versión de la aplicación. Puedes comprobar que la actualización se realizó correctamente volviendo a la pestaña "Actualizaciones" y consultando tu versión actual, indicada en el texto de abajo.',
     'action.gotIt':'Entendido',
     'settings.changePin':'Cambiar código PIN','settings.change':'Cambiar','settings.createPin':'Crear contraseña','settings.createBtn':'Crear','settings.deletePin':'Borrar contraseña',
     'settings.export':'Exportar datos (.json)','settings.exportBtn':'Exportar',
@@ -147,7 +155,7 @@ const I18N = {
     'confirm.import':'Se importarán {n} movimientos. ¿Reemplazar los datos actuales?',
     'error.invalidBackup':'El archivo no es un backup válido.',
     'confirm.reset':'Esto borrará todos los movimientos guardados en este dispositivo. ¿Continuar?',
-    'delete.warning':'Al borrar todos los datos, eliminarás toda la actividad, cuentas y todo lo relacionado con Fyn en este navegador. Exporta tus datos (.json) antes de borrar todo, por si acaso. Para borrar completamente todos los datos, borra los datos de este sitio web desde los ajustes de tu navegador.',
+    'delete.warning':'Al borrar todos los datos, eliminarás toda la actividad, cuentas y todo lo relacionado con Fynance en este navegador. Exporta tus datos (.json) antes de borrar todo, por si acaso. Para borrar completamente todos los datos, borra los datos de este sitio web desde los ajustes de tu navegador.',
     'delete.cancel':'Cancelar','delete.continue':'Continuar','delete.pinPrompt':'Introduce tu PIN para confirmar',
     'cat.supermarket':'Supermercado','cat.restaurant':'Restaurante','cat.salary':'Salario','cat.transport':'Transporte',
     'cat.leisure':'Ocio','cat.housing':'Vivienda','cat.shopping':'Compras','cat.clothing':'Ropa',
@@ -170,6 +178,12 @@ const DB = {
   },
   set(key, val) { localStorage.setItem(key, JSON.stringify(val)); }
 };
+
+function detectBrowserLanguage(){
+  const languages = navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language];
+  const preferred = languages.find(language => /^(es|en)(-|$)/i.test(language || '')) || '';
+  return /^es(-|$)/i.test(preferred) ? 'es' : 'en';
+}
 
 const CATS = [
   { id:'supermercado',       type:'expense', key:'cat.supermarket',      color:'#1ec87a', icon:'🛒' },
@@ -219,7 +233,7 @@ const CHANGELOG = [
   {
     version: 'V0.1-beta (08/21)',
     lines: [
-      'The Fyn repository is now available on GitHub.',
+      'The Fynance repository is now available on GitHub.',
     ],
   },
 ];
@@ -242,7 +256,7 @@ async function sha256(text){
 }
 
 let state = {
-  language: DB.get('language', 'en'),
+  language: DB.get('language', detectBrowserLanguage()),
   userName: DB.get('userName', ''),
   pronoun: DB.get('pronoun', null),
   currency: DB.get('currency', null),
@@ -278,12 +292,12 @@ window.addEventListener('DOMContentLoaded', () => {
   applyTranslations();
   applyTheme();
   applyHue(state.hue);
+  applyAccountBackground(state.selectedAccountView);
   buildCategoryChips();
   renderChangelog();
   wireKeypad('#lock-keypad', onLockDigit);
   wireForgotPin();
   wireKeypad('#setup-keypad', onSetupDigit);
-  $('#skip-pin-btn').addEventListener('click', skipPinSetup);
   wireKeypad('#chpin-keypad', onChangePinDigit);
   wireKeypad('#importverify-keypad', onImportVerifyDigit);
   wireImportVerify();
@@ -319,7 +333,7 @@ window.addEventListener('DOMContentLoaded', () => {
       $('#lock-title').textContent = t('welcome.' + (state.pronoun || 'unspecified'));
       $('#lock').classList.remove('hidden');
     }
-  }, 1300);
+  }, 3500);
 });
 
 function applyTranslations(){
@@ -334,7 +348,6 @@ function applyTheme(){
   if (!mode) mode = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
   document.body.classList.toggle('dark', mode === 'dark');
   const isLight = mode === 'light';
-  $('#setup').classList.toggle('light-mode', isLight);
   $('#lock').classList.toggle('light-mode', isLight);
 }
 function toggleTheme(){
@@ -357,18 +370,42 @@ function applyHue(h){
   document.documentElement.style.setProperty('--card-b', c.b);
   document.documentElement.style.setProperty('--card-c', c.c);
 }
+function applyAccountBackground(accountId){
+  const hero = $('#home-hero');
+  if (!hero) return;
+  const acc = accountId && accountId !== 'networth' ? accInfo(accountId) : null;
+  const bg = acc && acc.background ? acc.background : null;
+  if (bg && bg.image) {
+    hero.style.backgroundImage = `linear-gradient(rgba(0,0,0,.16),rgba(0,0,0,.16)), url(\"${bg.image}\")`;
+    hero.style.backgroundSize = 'cover';
+    hero.style.backgroundPosition = 'center';
+    applyHue(typeof bg.hue === 'number' ? bg.hue : state.hue);
+  } else if (bg && typeof bg.hue === 'number') {
+    hero.style.backgroundImage = '';
+    hero.style.backgroundSize = '';
+    hero.style.backgroundPosition = '';
+    applyHue(bg.hue);
+  } else {
+    hero.style.backgroundImage = '';
+    hero.style.backgroundSize = '';
+    hero.style.backgroundPosition = '';
+    applyHue(state.hue);
+  }
+}
 
-const OB_STEPS = ['step-lang','step-name','step-pronoun','step-currency','step-accounts','step-theme','step-hue','step-pin'];
+const OB_STEPS = ['step-welcome','step-lang','step-name','step-pronoun','step-currency','step-accounts','step-pin'];
 function goToStep(id){
+  if (id !== 'step-welcome') {
+    clearTimeout(welcomeAutoplayTimer);
+    clearTimeout(welcomeTransitionTimer);
+    welcomeIsTransitioning = false;
+  }
   OB_STEPS.forEach(s => $('#'+s).classList.toggle('active', s===id));
+  $('#setup-back').classList.toggle('show', id !== 'step-welcome');
   const idx = OB_STEPS.indexOf(id);
   const total = OB_STEPS.length - 1;
-  if (idx <= 0) {
-    $('#ob-progress').classList.remove('show');
-  } else {
-    $('#ob-progress').classList.add('show');
-    $('#ob-progress-fill').style.width = (idx / total * 100) + '%';
-  }
+  $('#ob-progress-fill').style.width = (idx / total * 100) + '%';
+  if (id === 'step-welcome') scheduleWelcomeAutoplay();
 }
 function startOnboarding(){
   wireLangStep();
@@ -378,22 +415,117 @@ function startOnboarding(){
   wireAccountsStep();
   wireThemeStep();
   wireHueStep();
-  goToStep('step-lang');
+  wireWelcomeStep();
+  wireSetupNavigation();
+  DB.set('language', state.language);
+  goToStep('step-welcome');
 }
 
 function wireLangStep(){
-  $$('#step-lang .ob-card').forEach(card=>{
+  const detected = detectBrowserLanguage();
+  const languageName = detected === 'es' ? 'Español' : 'English';
+  $('#language-detected').textContent = t('language.detected', {language: languageName});
+  let selectedLanguage = state.language;
+  const updateSelected = () => {
+    $$('#step-lang .ob-row').forEach(row => row.classList.toggle('selected', row.dataset.lang === selectedLanguage));
+  };
+  updateSelected();
+  $$('#step-lang .ob-row').forEach(card=>{
     card.addEventListener('click', ()=>{
-      state.language = card.dataset.lang;
-      DB.set('language', state.language);
-      $$('#step-lang .ob-card').forEach(c=>c.classList.remove('selected'));
-      card.classList.add('selected');
-      applyTranslations();
-      setTimeout(()=> goToStep('step-name'), 280);
+      selectedLanguage = card.dataset.lang;
+      updateSelected();
     });
   });
-  $('#ob-import-btn').addEventListener('click', ()=> $('#ob-import-file').click());
+  $('#language-continue').addEventListener('click', ()=>{
+    state.language = selectedLanguage;
+    DB.set('language', state.language);
+    applyTranslations();
+    $('#language-detected').textContent = t('language.detected', {language: languageName});
+    goToStep('step-name');
+  });
   $('#ob-import-file').addEventListener('change', onObImportFile);
+}
+
+function wireSetupNavigation(){
+  $('#setup-back').addEventListener('click', () => {
+    const current = OB_STEPS.findIndex(step => $('#'+step).classList.contains('active'));
+    if (current > 0) goToStep(OB_STEPS[current - 1]);
+  });
+}
+
+const WELCOME_STORIES = ['welcome.story1','welcome.story2','welcome.story3','welcome.story4'];
+let welcomeStoryIndex = 0;
+let welcomeAutoplayTimer = null;
+let welcomeTransitionTimer = null;
+let welcomeIsTransitioning = false;
+let welcomeDirection = 1;
+const WELCOME_STORY_DURATION = 5000;
+function renderWelcomeStory(){
+  const stories = $('#welcome-stories');
+  stories.classList.remove('story-enter');
+  stories.classList.toggle('story-backward', welcomeDirection < 0);
+  stories.dataset.story = String(welcomeStoryIndex + 1);
+  void stories.offsetWidth;
+  stories.classList.add('story-enter');
+  $('#welcome-title').textContent = t(WELCOME_STORIES[welcomeStoryIndex]);
+  $('#welcome-counter').textContent = `${welcomeStoryIndex + 1} / ${WELCOME_STORIES.length}`;
+  $('#welcome-dots').innerHTML = WELCOME_STORIES.map((_, i) =>
+    `<button type="button" class="welcome-dot ${i === welcomeStoryIndex ? 'active' : ''}" data-story="${i}" aria-label="${i + 1}"></button>`
+  ).join('');
+  $$('.welcome-dot').forEach(dot => dot.addEventListener('click', () => {
+    transitionWelcomeStory(Number(dot.dataset.story));
+  }));
+  $('#welcome-start').textContent = t('welcome.start');
+  $('#welcome-import-label').textContent = t('welcome.import');
+  scheduleWelcomeAutoplay();
+}
+function scheduleWelcomeAutoplay(){
+  clearTimeout(welcomeAutoplayTimer);
+  const activeDot = $('.welcome-dot.active');
+  if (activeDot) {
+    activeDot.classList.remove('progressing');
+    void activeDot.offsetWidth;
+    requestAnimationFrame(() => requestAnimationFrame(() => activeDot.classList.add('progressing')));
+  }
+  welcomeAutoplayTimer = setTimeout(() => {
+    transitionWelcomeStory((welcomeStoryIndex + 1) % WELCOME_STORIES.length);
+  }, WELCOME_STORY_DURATION);
+}
+function transitionWelcomeStory(nextIndex){
+  if (welcomeIsTransitioning || nextIndex === welcomeStoryIndex) {
+    if (nextIndex === welcomeStoryIndex) scheduleWelcomeAutoplay();
+    return;
+  }
+  clearTimeout(welcomeAutoplayTimer);
+  welcomeIsTransitioning = true;
+  welcomeDirection = (nextIndex - welcomeStoryIndex + WELCOME_STORIES.length) % WELCOME_STORIES.length === 1 ? 1 : -1;
+  const stories = $('#welcome-stories');
+  stories.classList.toggle('story-backward', welcomeDirection < 0);
+  stories.classList.add('story-exit');
+  welcomeTransitionTimer = setTimeout(() => {
+    welcomeStoryIndex = nextIndex;
+    stories.classList.remove('story-exit');
+    welcomeIsTransitioning = false;
+    renderWelcomeStory();
+  }, 180);
+}
+function wireWelcomeStep(){
+  let touchStartX = null;
+  $('#welcome-start').addEventListener('click', () => goToStep('step-lang'));
+  $('#welcome-import').addEventListener('click', () => $('#ob-import-file').click());
+  $('#welcome-stories').addEventListener('click', event => {
+    if (event.target.closest('button, input')) return;
+    transitionWelcomeStory((welcomeStoryIndex + 1) % WELCOME_STORIES.length);
+  });
+  $('#welcome-stories').addEventListener('touchstart', event => { touchStartX = event.changedTouches[0].clientX; }, {passive:true});
+  $('#welcome-stories').addEventListener('touchend', event => {
+    if (touchStartX === null) return;
+    const delta = event.changedTouches[0].clientX - touchStartX;
+    touchStartX = null;
+    if (Math.abs(delta) < 35) return;
+    transitionWelcomeStory((welcomeStoryIndex + (delta < 0 ? 1 : WELCOME_STORIES.length - 1)) % WELCOME_STORIES.length);
+  }, {passive:true});
+  renderWelcomeStory();
 }
 function onObImportFile(e){
   const file = e.target.files[0];
@@ -417,11 +549,14 @@ function onObImportFile(e){
 }
 
 function wireNameStep(){
-  const input = $('#name-input');
+  const firstName = $('#first-name-input');
+  const lastName = $('#last-name-input');
   const btn = $('#name-continue');
-  input.addEventListener('input', ()=> { btn.disabled = input.value.trim().length === 0; });
+  const validate = () => { btn.disabled = !firstName.value.trim() || !lastName.value.trim(); };
+  firstName.addEventListener('input', validate);
+  lastName.addEventListener('input', validate);
   btn.addEventListener('click', ()=>{
-    state.userName = input.value.trim();
+    state.userName = `${firstName.value.trim()} ${lastName.value.trim()}`;
     DB.set('userName', state.userName);
     renderPronounList();
     goToStep('step-pronoun');
@@ -531,8 +666,10 @@ function wireAccountsStep(){
   $('#acc-save-btn').addEventListener('click', saveObAccount);
   $('#accounts-continue').addEventListener('click', ()=>{
     DB.set('accounts', state.accounts);
-    renderThemeDefault();
-    goToStep('step-theme');
+    if (!state.themeMode) state.themeMode = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    DB.set('themeMode', state.themeMode);
+    applyTheme();
+    goToStep('step-pin');
   });
   renderObAccountList();
 }
@@ -1088,6 +1225,7 @@ function openHueEditor(){
 }
 function closeHueEditor(){
   DB.set('hue', state.hue);
+  applyAccountBackground(state.selectedAccountView);
   $('#hue-editor').classList.remove('show');
 }
 function closeSettings(){
@@ -1161,6 +1299,7 @@ function switchAccountView(v){
   setTimeout(()=>{
     state.selectedAccountView = v;
     DB.set('selectedAccountView', v);
+    applyAccountBackground(v);
     renderHome();
     requestAnimationFrame(()=>{
       label.classList.remove('balance-switching');
@@ -1189,8 +1328,75 @@ function renderAccountDetails(){
   $('#accdetails-type').textContent = acc.type === 'cash' ? t('accounts.cash') : t('accounts.card');
   $('#accdetails-name').textContent = acc.name;
   $('#accdetails-desc').textContent = acc.description ? acc.description : t('accdetails.noDesc');
+  const bg = acc.background || {};
+  const bgPreview = $('#accdetails-background-preview');
+  const bgValue = $('#accdetails-background-value');
+  if (bg.image) {
+    bgPreview.style.backgroundImage = `url(\"${bg.image}\")`;
+    bgPreview.style.backgroundSize = 'cover';
+    bgValue.textContent = t('accdetails.backgroundImage');
+  } else if (typeof bg.hue === 'number') {
+    const c = hueColors(bg.hue);
+    bgPreview.style.backgroundImage = `linear-gradient(150deg,${c.a},${c.b} 55%,${c.c})`;
+    bgValue.textContent = t('accdetails.backgroundTone');
+  } else {
+    bgPreview.style.backgroundImage = '';
+    bgValue.textContent = t('accdetails.backgroundDefault');
+  }
 }
 
+let accountBackgroundImageData = null;
+function openAccountBackgroundEditor(){
+  const acc = accInfo(accDetailsId);
+  if (!acc) return;
+  const bg = acc.background || {};
+  const slider = $('#account-bg-slider');
+  const preview = $('#account-bg-preview');
+  accountBackgroundImageData = bg.image || null;
+  slider.value = typeof bg.hue === 'number' ? bg.hue : state.hue;
+  $('#account-bg-image').value = '';
+  const update = (h)=>{
+    const c = hueColors(h);
+    preview.style.backgroundImage = `linear-gradient(150deg,${c.a},${c.b} 55%,${c.c})`;
+    preview.style.backgroundSize = 'cover';
+  };
+  update(parseInt(slider.value,10));
+  if (accountBackgroundImageData) preview.style.backgroundImage = `url(\"${accountBackgroundImageData}\")`;
+  slider.oninput = ()=>{ accountBackgroundImageData = null; update(parseInt(slider.value,10)); };
+  $('#account-background-editor').classList.add('show');
+}
+function resetAccountBackground(){
+  const acc = accInfo(accDetailsId);
+  if (!acc) return;
+  delete acc.background;
+  DB.set('accounts', state.accounts);
+  accountBackgroundImageData = null;
+  $('#account-bg-image').value = '';
+  applyAccountBackground(state.selectedAccountView);
+  renderAccountDetails();
+  $('#account-background-editor').classList.remove('show');
+}
+function handleAccountBackgroundImage(e){
+  const file = e.target.files && e.target.files[0];
+  if (!file || !file.type.startsWith('image/')) return;
+  const reader = new FileReader();
+  reader.onload = ()=>{
+    accountBackgroundImageData = reader.result;
+    $('#account-bg-preview').style.backgroundImage = `url(\"${accountBackgroundImageData}\")`;
+  };
+  reader.readAsDataURL(file);
+}
+function saveAccountBackground(){
+  const acc = accInfo(accDetailsId);
+  if (!acc) return;
+  const hue = parseInt($('#account-bg-slider').value,10);
+  if (accountBackgroundImageData) acc.background = { hue, image: accountBackgroundImageData };
+  else acc.background = { hue };
+  DB.set('accounts', state.accounts);
+  applyAccountBackground(state.selectedAccountView);
+  renderAccountDetails();
+  $('#account-background-editor').classList.remove('show');
+}
 let renameField = null;
 function openRenameModal(field){
   const acc = accInfo(accDetailsId);
@@ -1226,6 +1432,10 @@ function wireAccountDetails(){
   $('#accdetails-back').addEventListener('click', closeAccountDetails);
   $('#accdetails-name-edit').addEventListener('click', ()=> openRenameModal('name'));
   $('#accdetails-desc-edit').addEventListener('click', ()=> openRenameModal('description'));
+  $('#accdetails-background-open').addEventListener('click', openAccountBackgroundEditor);
+  $('#account-bg-done').addEventListener('click', saveAccountBackground);
+  $('#account-bg-reset').addEventListener('click', resetAccountBackground);
+  $('#account-bg-image').addEventListener('change', handleAccountBackgroundImage);
   $('#rename-modal-cancel').addEventListener('click', closeRenameModal);
   $('#rename-backdrop').addEventListener('click', closeRenameModal);
   $('#rename-modal-save').addEventListener('click', saveRenameModal);
@@ -2309,7 +2519,7 @@ function exportData(){
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
   a.href = url;
-  a.download = `fyn-backup-${new Date().toISOString().slice(0,10)}.json`;
+  a.download = `fynance-backup-${new Date().toISOString().slice(0,10)}.json`;
   a.click();
   URL.revokeObjectURL(url);
   showToast(t('toast.exported'));

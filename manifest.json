@@ -1,6 +1,6 @@
 {
-  "name": "Fyn. Balance",
-  "short_name": "Fyn.",
+  "name": "Fynance",
+  "short_name": "Fynance",
   "description": "Gestión personal de ingresos y gastos, 100% local",
   "start_url": "./index.html",
   "scope": "./",

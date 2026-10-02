@@ -1,4 +1,4 @@
-const CACHE = 'fyn-v2';
+const CACHE = 'fynance-v1';
 const ASSETS = [
   './',
   './index.html',
@@ -7,6 +7,8 @@ const ASSETS = [
   './manifest.json',
   './icons/icon-192.png',
   './icons/icon-512.png',
+  './assets/fyn-logo-white.png',
+  './assets/fyn-logo-mark.png',
 ];
 
 self.addEventListener('install', e => {
